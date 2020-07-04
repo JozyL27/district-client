@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch} from 'react-router-dom';
 import {Route} from 'react-router-dom';
-import Landing from '../Landing/Lnding';
+import Landing from '../Landing/Landing';
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
 
