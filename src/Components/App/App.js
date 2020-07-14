@@ -3,7 +3,8 @@ import {Switch} from 'react-router-dom';
 import {Route} from 'react-router-dom';
 import Landing from '../Landing/Landing';
 import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
+// import SignUp from '../SignUp/SignUp';
+import SignupPage from '../../Routes/SignupPage/SignupPage'
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Route 
         exact
         path='/signup'
-        component={SignUp}
+        component={SignupPage}
         />
       </Switch>
     </div>
