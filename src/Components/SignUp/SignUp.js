@@ -12,17 +12,17 @@ export default class SignUp extends Component {
         this.firstInput.focus()
         this.setState({
             error: null,
-            email: null,
-            password: null,
-            username: null,
+            email: '',
+            password: '',
+            username: '',
         })
     }
 
     state = {
         error: null,
-        email: null,
-        username: null,
-        password: null,
+        email: '',
+        username: '',
+        password: '',
     }
 
     render() {
