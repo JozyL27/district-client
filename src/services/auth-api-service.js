@@ -1,6 +1,6 @@
 import config from '../config'
-import TokenService from './token-service'
-import axios from 'axios'
+// import TokenService from './token-service'
+// import axios from 'axios'
 
 const AuthApiService = {
     postUser(user) {
