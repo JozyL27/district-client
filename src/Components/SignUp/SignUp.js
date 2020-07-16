@@ -3,6 +3,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css' // optional for styling
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import AuthApiService from '../../services/auth-api-service'
 
 
 export default class SignUp extends Component {
@@ -29,7 +30,6 @@ export default class SignUp extends Component {
     }
 
     handleChange = (event) => {
-        console.log(event.target.value)
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -39,10 +39,23 @@ export default class SignUp extends Component {
         event.preventDefault()
         this.setState({ error: null })
         const { email, password, username, validate } = this.state
-        const values = { email, password, username, validate }
+        const newUser = { email, password, username }
 
-        values.password.trim() === values.validate.trim() ?
-        console.log(values) : this.setState({ error: 'Passwords do not match' })
+        if (password.trim() === validate.trim()) {
+            AuthApiService.postUser(newUser)
+                .then(() => {
+                    this.setState({
+                        email: '',
+                        password: '',
+                        username: '',
+                        validate: '',
+                    })
+                    this.props.onRegistrationSuccess()
+                })
+                .catch(res => this.setState({ error: res.error }))
+        } else if(password.trim() !== validate.trim()) {
+            this.setState({ error: 'Passwords do not match.'})
+        }
     }
 
     render() {
@@ -50,7 +63,7 @@ export default class SignUp extends Component {
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
-                    {error && <p>uh oh error!</p>}
+                    {error && <p>{error || error.message}</p>}
                     <TextField 
                     id='username' 
                     label='username'
