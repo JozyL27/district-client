@@ -1,14 +1,15 @@
-import React from 'react';
-import {Switch} from 'react-router-dom';
-import {Route} from 'react-router-dom';
-import Landing from '../Landing/Landing';
-import Login from '../Login/Login';
-// import SignUp from '../SignUp/SignUp';
+import React from 'react'
+import {Switch} from 'react-router-dom'
+import {Route} from 'react-router-dom'
+import Landing from '../Landing/Landing'
 import SignupPage from '../../Routes/SignupPage/SignupPage'
+import LoginPage from '../../Routes/LoginPage/LoginPage'
+import Header from '../Header/Header'
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Switch>
         <Route 
         exact
@@ -18,7 +19,7 @@ function App() {
         <Route 
         exact
         path='/login'
-        component={Login}
+        component={LoginPage}
         />
         <Route 
         exact
