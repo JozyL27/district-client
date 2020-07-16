@@ -41,8 +41,8 @@ export default class SignUp extends Component {
         const { email, password, username, validate } = this.state
         const values = { email, password, username, validate }
 
-        values.password === values.validate ?
-        console.log(values) : this.setState({ error: 'Uh oh error!' })
+        values.password.trim() === values.validate.trim() ?
+        console.log(values) : this.setState({ error: 'Passwords do not match' })
     }
 
     render() {
@@ -77,6 +77,7 @@ export default class SignUp extends Component {
                     delay={100}
                     interactive={true}
                     interactiveBorder={20}
+                    appendTo={() => document.body}
                     >
                         <TextField 
                         id='password' 
