@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'; // optional for styling
+import 'tippy.js/dist/tippy.css' // optional for styling
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import AuthApiService from '../../services/auth-api-service'
 
 
 export default class SignUp extends Component {
@@ -9,12 +12,12 @@ export default class SignUp extends Component {
     }
 
     componentDidMount() {
-        this.firstInput.focus()
         this.setState({
             error: null,
             email: '',
             password: '',
             username: '',
+            validate: '',
         })
     }
 
@@ -23,18 +26,63 @@ export default class SignUp extends Component {
         email: '',
         username: '',
         password: '',
+        validate: '',
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.setState({ error: null })
+        const { email, password, username, validate } = this.state
+        const newUser = { email, password, username }
+
+        if (password.trim() === validate.trim()) {
+            AuthApiService.postUser(newUser)
+                .then(() => {
+                    this.setState({
+                        email: '',
+                        password: '',
+                        username: '',
+                        validate: '',
+                    })
+                    this.props.onRegistrationSuccess()
+                })
+                .catch(res => this.setState({ error: res.error }))
+        } else if(password.trim() !== validate.trim()) {
+            this.setState({ error: 'Passwords do not match.'})
+        }
     }
 
     render() {
+        const { username, email, password, validate, error } = this.state
         return (
             <>
-                <form>
-                    <label htmlFor='username'>username</label>
-                    <input id='username' ref={(input) => 
-                        { this.firstInput = input}}></input>
-                    <label htmlFor='email'>email</label>
-                    <input id='email'></input>
-                    <label htmlFor='password'>password</label>
+                <form onSubmit={this.handleSubmit}>
+                    {error && <p>{error || error.message}</p>}
+                    <TextField 
+                    id='username' 
+                    label='username'
+                    variant='outlined'
+                    onChange={(event) => {this.handleChange(event)}}
+                    required
+                    value={username}
+                    name='username'
+                    />
+                    <TextField 
+                    id='email' 
+                    label='email'
+                    variant='outlined'
+                    onChange={(event) => {this.handleChange(event)}}
+                    required
+                    value={email}
+                    name='email'
+                    type='email'
+                    />
                     <Tippy
                     content='Requires an uppercase letter, 
                     special character, and 
@@ -42,11 +90,34 @@ export default class SignUp extends Component {
                     delay={100}
                     interactive={true}
                     interactiveBorder={20}
+                    appendTo={() => document.body}
                     >
-                        <input id='password'></input>
+                        <TextField 
+                        id='password' 
+                        label='password'
+                        variant='outlined'
+                        onChange={(event) => {this.handleChange(event)}}
+                        required
+                        value={password}
+                        type='password'
+                        name='password'
+                        />
                     </Tippy>
-                    <label htmlFor='password'>validate password</label>
-                    <input id='validatePassword'></input>
+                    <TextField 
+                    id='validate' 
+                    label='validate password'
+                    variant='outlined'
+                    onChange={(event) => {this.handleChange(event)}}
+                    required
+                    value={validate}
+                    name='validate'
+                    type='password'
+                    />
+                    <Button 
+                    variant='contained' 
+                    color='secondary'
+                    type='submit'
+                    >Submit</Button>
                 </form>
             </>
         )

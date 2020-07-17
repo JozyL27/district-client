@@ -1,25 +1,83 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Header from '../Header/Header'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import UserContext from '../../Context/UserContext'
+import AuthApiService from '../../services/auth-api-service'
 
 
 export default class Login extends Component {
+    static defaultProps = {
+        onLoginSuccess: () => {}
+    }
+
+    static contextType = UserContext
+
+    state = { error: null, username: '', password: '' }
+
+    componentDidMount() {
+        this.setState({ error: null, username: '', password: '' })
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault()
+        const { username, password } = this.state
+
+        this.setState({ error: null })
+        AuthApiService.postLogin({
+            username: username,
+            password: password,
+        })
+        .then(res => {
+            this.setState({
+                username: '',
+                password: ''
+            })
+            this.context.processLogin(res.authToken)
+            this.props.onLoginSuccess()
+        })
+        .catch(res => {
+            this.setState({ error: res.error })
+        })
+    }
+
     render() {
+        const { username, password, error } = this.state
         return (
             <>
-                <Header />
-                <section>
-                    <form>
-                        <label htmlFor='email'>email</label>
-                        <input id='email'></input>
-                        <label htmlFor='password'>password</label>
-                        <input id='password'></input>
-                    </form>
-                    <p>Need an account?</p>
-                    <Link to='/signup'>
-                        Register
-                    </Link>
-                </section>
+                <form onSubmit={this.onSubmit}>
+                    {error && <p>{error || error.message}</p>}
+                    <TextField 
+                    id='username' 
+                    label='username'
+                    variant='outlined'
+                    onChange={(event) => {this.handleChange(event)}}
+                    required
+                    value={username}
+                    name='username'
+                    type='text'
+                    />
+                    <TextField 
+                    id='password' 
+                    label='password'
+                    variant='outlined'
+                    onChange={(event) => {this.handleChange(event)}}
+                    required
+                    value={password}
+                    type='password'
+                    name='password'
+                    />
+                    <Button 
+                    variant='contained' 
+                    color='secondary'
+                    type='submit'
+                    >Submit</Button>
+                </form>
             </>
         )
     }
