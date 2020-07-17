@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
 import UserContext from '../../Context/UserContext'
+import { Link } from 'react-router-dom'
 
 
 export default class Main extends Component {
@@ -14,11 +15,15 @@ export default class Main extends Component {
         return (
             <>
                 <h2>I am the main component!</h2>
-                <Button
-                onClick={this.handleClick}
+                <Link
+                to='/login'
                 >
-                    Log me out turbo
-                </Button>
+                    <Button
+                    onClick={this.handleClick}
+                    >
+                        Log me out turbo
+                    </Button>
+                </Link>
             </>
         )
     }
