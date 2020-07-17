@@ -4,29 +4,42 @@ import Button from '@material-ui/core/Button'
 
 
 export default class Login extends Component {
-    state = { error: null, email: '', password: '' }
+    static defaultProps = {
+        onLoginSuccess: () => {}
+    }
+
+    state = { error: null, username: '', password: '' }
+
+    componentDidMount() {
+        this.setState({ error: null, username: '', password: '' })
+    }
 
     handleChange = (event) => {
-        console.log(event.target.value)
         this.setState({
             [event.target.name]: event.target.value
         })
     }
 
+    onSubmit = (event) => {
+        event.preventDefault()
+        console.log(this.state)
+    }
+
     render() {
-        const { email, password } = this.state
+        const { username, password, error } = this.state
         return (
             <>
-                <form>
+                <form onSubmit={this.onSubmit}>
+                    {error && <p>{error || error.message}</p>}
                     <TextField 
-                    id='email' 
-                    label='email'
+                    id='username' 
+                    label='username'
                     variant='outlined'
                     onChange={(event) => {this.handleChange(event)}}
                     required
-                    value={email}
-                    name='email'
-                    type='email'
+                    value={username}
+                    name='username'
+                    type='text'
                     />
                     <TextField 
                     id='password' 
