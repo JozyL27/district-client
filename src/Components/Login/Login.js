@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import UserContext from '../../Context/UserContext'
+import AuthApiService from '../../services/auth-api-service'
 
 
 export default class Login extends Component {
     static defaultProps = {
         onLoginSuccess: () => {}
     }
+
+    static contextType = UserContext
 
     state = { error: null, username: '', password: '' }
 
@@ -22,7 +26,24 @@ export default class Login extends Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        console.log(this.state)
+        const { username, password } = this.state
+
+        this.setState({ error: null })
+        AuthApiService.postLogin({
+            username: username,
+            password: password,
+        })
+        .then(res => {
+            this.setState({
+                username: '',
+                password: ''
+            })
+            this.context.processLogin(res.authToken)
+            this.props.onLoginSuccess()
+        })
+        .catch(res => {
+            this.setState({ error: res.error })
+        })
     }
 
     render() {
