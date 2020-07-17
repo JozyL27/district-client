@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button'
+import UserContext from '../../Context/UserContext'
 
 
 export default class Main extends Component {
+    static contextType = UserContext
+
     handleClick = () => {
-        console.log('ive been clicked!')
+        this.context.processLogout()
     }
+
     render() {
         return (
             <>
