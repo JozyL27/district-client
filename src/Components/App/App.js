@@ -5,6 +5,7 @@ import Landing from '../Landing/Landing'
 import SignupPage from '../../Routes/SignupPage/SignupPage'
 import LoginPage from '../../Routes/LoginPage/LoginPage'
 import Header from '../Header/Header'
+import Main from '../Main/Main'
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
         exact
         path='/signup'
         component={SignupPage}
+        />
+        <Route 
+        exact
+        path='/main'
+        component={Main}
         />
       </Switch>
     </div>
