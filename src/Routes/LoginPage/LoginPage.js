@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Login from '../../Components/Login/Login'
 
 export default class LoginPage extends Component {
@@ -23,10 +22,6 @@ export default class LoginPage extends Component {
                 <Login 
                 onLoginSuccess={this.handleLoginSuccess} 
                 />
-                <p>Need an account?</p>
-                <Link to='/signup'>
-                    Register
-                </Link>
             </section>
             </>
         )

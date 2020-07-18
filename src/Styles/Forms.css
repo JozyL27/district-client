@@ -1,0 +1,29 @@
+.regForm, .loginForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 30%;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 20px 20px 50px rgb(228, 227, 227), 
+            -30px -30px 60px rgb(228, 227, 227);
+}
+
+.regPara, .loginPara {
+    text-align: center;
+    font-weight: bold;
+    color: rgb(201, 201, 201);
+}
+
+.formLink {
+    text-decoration: none;
+    color: dimgray;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.formPara {
+    text-align: center;
+}

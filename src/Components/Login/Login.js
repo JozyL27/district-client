@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import UserContext from '../../Context/UserContext'
 import AuthApiService from '../../services/auth-api-service'
+import { Link } from 'react-router-dom'
 
 
 export default class Login extends Component {
@@ -50,7 +51,8 @@ export default class Login extends Component {
         const { username, password, error } = this.state
         return (
             <>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} className='loginForm'>
+                    <p className='loginPara'>Login</p>
                     {error && <p>{error || error.message}</p>}
                     <TextField 
                     id='username' 
@@ -61,6 +63,7 @@ export default class Login extends Component {
                     value={username}
                     name='username'
                     type='text'
+                    margin='normal'
                     />
                     <TextField 
                     id='password' 
@@ -71,12 +74,18 @@ export default class Login extends Component {
                     value={password}
                     type='password'
                     name='password'
+                    margin='normal'
                     />
                     <Button 
                     variant='contained' 
                     color='secondary'
                     type='submit'
                     >Submit</Button>
+
+                    <p className='formPara'>Need an account?</p>
+                    <Link to='/signup' className='formLink'>
+                        Register
+                    </Link>
                 </form>
             </>
         )
