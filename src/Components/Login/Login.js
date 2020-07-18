@@ -50,7 +50,8 @@ export default class Login extends Component {
         const { username, password, error } = this.state
         return (
             <>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} className='loginForm'>
+                    <p className='loginPara'>Login</p>
                     {error && <p>{error || error.message}</p>}
                     <TextField 
                     id='username' 
@@ -61,6 +62,7 @@ export default class Login extends Component {
                     value={username}
                     name='username'
                     type='text'
+                    margin='normal'
                     />
                     <TextField 
                     id='password' 
@@ -71,6 +73,7 @@ export default class Login extends Component {
                     value={password}
                     type='password'
                     name='password'
+                    margin='normal'
                     />
                     <Button 
                     variant='contained' 

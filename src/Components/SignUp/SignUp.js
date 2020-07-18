@@ -4,6 +4,8 @@ import 'tippy.js/dist/tippy.css' // optional for styling
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import AuthApiService from '../../services/auth-api-service'
+import '../../Styles/Forms.css'
+import { Link } from 'react-router-dom'
 
 
 export default class SignUp extends Component {
@@ -62,7 +64,8 @@ export default class SignUp extends Component {
         const { username, email, password, validate, error } = this.state
         return (
             <>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className='regForm'>
+                    <p className='regPara'>Register</p>
                     {error && <p>{error || error.message}</p>}
                     <TextField 
                     id='username' 
@@ -72,6 +75,7 @@ export default class SignUp extends Component {
                     required
                     value={username}
                     name='username'
+                    margin='normal'
                     />
                     <TextField 
                     id='email' 
@@ -82,6 +86,7 @@ export default class SignUp extends Component {
                     value={email}
                     name='email'
                     type='email'
+                    margin='normal'
                     />
                     <Tippy
                     content='Requires an uppercase letter, 
@@ -101,6 +106,7 @@ export default class SignUp extends Component {
                         value={password}
                         type='password'
                         name='password'
+                        margin='normal'
                         />
                     </Tippy>
                     <TextField 
@@ -112,12 +118,18 @@ export default class SignUp extends Component {
                     value={validate}
                     name='validate'
                     type='password'
+                    margin='normal'
                     />
                     <Button 
                     variant='contained' 
                     color='secondary'
                     type='submit'
                     >Submit</Button>
+                    
+                    <p className='formPara'>Already have an account?</p>
+                    <Link to='/login' className='formLink'>
+                        Login
+                    </Link>
                 </form>
             </>
         )
