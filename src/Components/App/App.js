@@ -6,6 +6,7 @@ import SignupPage from '../../Routes/SignupPage/SignupPage'
 import LoginPage from '../../Routes/LoginPage/LoginPage'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
+import NotFoundPage from '../../Routes/NotFoundPage/NotFoundPage'
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         exact
         path='/main'
         component={Main}
+        />
+        <Route 
+        component={NotFoundPage}
         />
       </Switch>
     </div>
