@@ -5,5 +5,11 @@
 
 .h1Header {
     color: black;
-    text-align: center;
+    text-align: left;
+    margin-left: 8px;
+}
+
+.headContainer {
+    display: flex;
+    align-items: center;
 }

@@ -1,0 +1,34 @@
+.landingImg {
+    width: auto;
+    max-height: 400px;
+    margin-top: 50px;
+}
+
+.landingDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.landingPara {
+    max-width: 80%;
+    line-height: 1.4;
+    text-align: center;
+}
+
+@media screen and (min-width: 900px) {
+    .landingDiv {
+        flex-direction: row;
+    }
+
+    .landingPara {
+        max-width: 50%;
+    }
+
+    .landingImg {
+        max-height: 600px;
+    }
+}
