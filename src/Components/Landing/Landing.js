@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import imageOne from '../../illustrations/04.png'
 import '../../Styles/Landing.css'
 
@@ -18,16 +17,6 @@ export default function Landing() {
                 occaecat cupidatat non proident, sunt in culpa qui officia 
                 deserunt mollit anim id est laborum.
             </p>
-        </div>
-
-
-        <div className='registerDiv'>
-        <p>Need an account?</p>
-        <Link 
-        to='/signup'
-        >
-        register
-        </Link>
         </div>
         </>
     )

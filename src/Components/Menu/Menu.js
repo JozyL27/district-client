@@ -8,12 +8,12 @@ export default function Menu() {
             <ul className='navContainer'>
                 <li className='navLink'>Explore</li>
                 <li className='navLink'>
-                    <Link to='/login'>
+                    <Link to='/login' className='menuLink'>
                         login
                     </Link>
                 </li>
                 <li className='navLink'>
-                    <Link to='/signup'>
+                    <Link to='/signup' className='menuLink'>
                         Register
                     </Link>
                 </li>
