@@ -1,13 +1,13 @@
 .regForm, .loginForm {
     display: flex;
     flex-direction: column;
-    max-width: 80%;
-    margin: 0 auto;
+    margin: 50px auto 50px auto;
     padding: 20px;
     border-radius: 30px;
     background: #ffffff;
     box-shadow:  20px 20px 60px #d9d9d9, 
                 -20px -20px 60px #ffffff;
+    max-width: 400px;
 }
 
 .regPara, .loginPara {
@@ -33,32 +33,6 @@
     text-align: center;
 }
 
-@media screen and (min-width: 480px) {
-    .regForm, .loginForm {
-        max-width: 70%;
-    }
-}
-
-@media screen and (min-width: 720px) {
-    .regForm, .loginForm {
-        max-width: 60%;
-    }
-}
-
-@media screen and (min-width: 920px) {
-    .regForm, .loginForm {
-        max-width: 50%;
-    }
-}
-
-@media screen and (min-width: 1140px) {
-    .regForm, .loginForm {
-        max-width: 40%;
-    }
-}
-
-@media screen and (min-width: 1440px) {
-    .regForm, .loginForm {
-        max-width: 30%;
-    }
+.formSection {
+    padding: 10px;
 }
