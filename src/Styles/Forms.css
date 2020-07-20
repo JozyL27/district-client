@@ -1,18 +1,19 @@
 .regForm, .loginForm {
     display: flex;
     flex-direction: column;
-    max-width: 30%;
+    max-width: 80%;
     margin: 0 auto;
-    border-radius: 8px;
     padding: 20px;
-    box-shadow: 20px 20px 50px rgb(228, 227, 227), 
-            -30px -30px 60px rgb(228, 227, 227);
+    border-radius: 30px;
+    background: #ffffff;
+    box-shadow:  20px 20px 60px #d9d9d9, 
+                -20px -20px 60px #ffffff;
 }
 
 .regPara, .loginPara {
     text-align: center;
     font-weight: bold;
-    color: rgb(201, 201, 201);
+    color: dimgray;
 }
 
 .formLink {
@@ -26,4 +27,38 @@
 
 .formPara {
     text-align: center;
+}
+
+.formSpan {
+    text-align: center;
+}
+
+@media screen and (min-width: 480px) {
+    .regForm, .loginForm {
+        max-width: 70%;
+    }
+}
+
+@media screen and (min-width: 720px) {
+    .regForm, .loginForm {
+        max-width: 60%;
+    }
+}
+
+@media screen and (min-width: 920px) {
+    .regForm, .loginForm {
+        max-width: 50%;
+    }
+}
+
+@media screen and (min-width: 1140px) {
+    .regForm, .loginForm {
+        max-width: 40%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .regForm, .loginForm {
+        max-width: 30%;
+    }
 }

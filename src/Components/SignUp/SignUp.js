@@ -122,14 +122,17 @@ export default class SignUp extends Component {
                     />
                     <Button 
                     variant='contained' 
-                    color='secondary'
+                    color='primary'
                     type='submit'
                     >Submit</Button>
-                    
+
                     <p className='formPara'>Already have an account?</p>
-                    <Link to='/login' className='formLink'>
-                        Login
-                    </Link>
+                    <span className='formSpan'>
+                        <Link to='/login' className='formLink'>
+                            Login
+                        </Link>
+                    </span>
+
                 </form>
             </>
         )

@@ -1,0 +1,13 @@
+.navContainer {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.navLink {
+    list-style: none;
+    padding: 5px;
+}

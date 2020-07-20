@@ -78,14 +78,17 @@ export default class Login extends Component {
                     />
                     <Button 
                     variant='contained' 
-                    color='secondary'
+                    color='primary'
                     type='submit'
                     >Submit</Button>
 
                     <p className='formPara'>Need an account?</p>
-                    <Link to='/signup' className='formLink'>
-                        Register
-                    </Link>
+                    <span className='formSpan'>
+                        <Link to='/signup' className='formLink'>
+                            Register
+                        </Link>
+                    </span>
+
                 </form>
             </>
         )
