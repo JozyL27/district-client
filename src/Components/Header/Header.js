@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Menu from '../Menu/Menu'
 import { Link } from 'react-router-dom'
-import { slide as BurgerMenu } from 'react-burger-menu'
+import BurgerMenu from '../BurgerMenu/BurgerMenu'
 import '../../Styles/Header.css'
 
 export default class Header extends Component {
@@ -14,15 +14,7 @@ export default class Header extends Component {
                             Havior
                         </Link>
                     </h1>
-
-                    <BurgerMenu 
-                    right 
-                    outerContainerId={"outer-container"}
-                    width={ '280px' }
-                    noOverlay
-                    >
-
-                    </BurgerMenu>
+                    <BurgerMenu />
                     <Menu />
                 </header>
             </>
