@@ -14,7 +14,7 @@
 }
 
 .landingPara {
-    max-width: 80%;
+    max-width: 600px;
     line-height: 1.4;
     text-align: center;
 }
@@ -22,10 +22,6 @@
 @media screen and (min-width: 900px) {
     .landingDiv {
         flex-direction: row;
-    }
-
-    .landingPara {
-        max-width: 50%;
     }
 
     .landingImg {
