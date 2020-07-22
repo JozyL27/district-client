@@ -76,7 +76,15 @@ export default class BurgerMenu extends Component {
                     onStateChange={(state) => this.handleStateChange(state)}
                     >
                         <ul className='burgerUl'>
-                            <li className='burgerLi'>explore</li>
+                            <li className='burgerLi'>
+                                <Link
+                                to='/explore'
+                                className='burgerLink'
+                                onClick={this.handleLinkClick}
+                                >
+                                    explore
+                                </Link>
+                            </li>
                             {TokenService.hasAuthToken() ? 
                             this.renderLogoutLink() : 
                             this.renderLoginLink()}

@@ -1,0 +1,13 @@
+.exploreContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exploreH2 {
+    text-align: center;
+}
+
+.filterContainer {
+    width: 150px;
+}

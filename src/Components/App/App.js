@@ -7,6 +7,7 @@ import LoginPage from '../../Routes/LoginPage/LoginPage'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import NotFoundPage from '../../Routes/NotFoundPage/NotFoundPage'
+import Explore from '../Explore/Explore'
 
 function App() {
   return (
@@ -32,6 +33,11 @@ function App() {
         exact
         path='/main'
         component={Main}
+        />
+        <Route 
+        exact
+        path='/explore'
+        component={Explore}
         />
         <Route 
         component={NotFoundPage}
