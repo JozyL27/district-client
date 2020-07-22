@@ -26,7 +26,7 @@ export default class BurgerMenu extends Component {
     renderLoginLink = () => {
         return (
             <>
-                <li className='burgerUl'>
+                <li className='burgerLi'>
                     <Link 
                     to='/login' 
                     className='burgerLink'
@@ -35,7 +35,7 @@ export default class BurgerMenu extends Component {
                         Login
                     </Link>
                 </li>
-                <li className='burgerUl'>
+                <li className='burgerLi'>
                     <Link 
                     to='/signup' 
                     className='burgerLink'
@@ -51,7 +51,7 @@ export default class BurgerMenu extends Component {
     renderLogoutLink = () => {
         return (
             <>
-                <li className='burgerUl'>
+                <li className='burgerLi'>
                     <Link 
                     to='/login' 
                     className='burgerLink'
@@ -76,7 +76,7 @@ export default class BurgerMenu extends Component {
                     onStateChange={(state) => this.handleStateChange(state)}
                     >
                         <ul className='burgerUl'>
-                            <li className='burgerLink'>explore</li>
+                            <li className='burgerLi'>explore</li>
                             {TokenService.hasAuthToken() ? 
                             this.renderLogoutLink() : 
                             this.renderLoginLink()}
