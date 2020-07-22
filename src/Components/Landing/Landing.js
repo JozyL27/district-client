@@ -22,24 +22,25 @@ export default function Landing() {
                 A blogsite for
                 {' '}
                 <span>
-                    fashion
+                    avant garde
+                </span>
+                <Typist.Backspace count={11} delay={1000} />
+                <span>
+                    minimalist
+                </span>
+                <Typist.Backspace count={10} delay={1000} />
+                <span>
+                    vintage
                 </span>
                 <Typist.Backspace count={7} delay={1000} />
-                <span>
-                    sneaker
-                </span>
-                <Typist.Backspace count={7} delay={1000} />
-                <span>
-                    music
-                </span>
-                <Typist.Backspace count={5} delay={1000} />
                 <span>
                     streetwear
                 </span>
-                {' '}
-                enthusiasts.
-                <Typist.Backspace count={23} delay={2000} />
-                creatives.
+                <Typist.Backspace count={10} delay={1000} />
+                    luxury
+                <Typist.Backspace count={7} delay={2000} />
+                    {' '}
+                    menswear.
             </Typist>
         </div>
         </>

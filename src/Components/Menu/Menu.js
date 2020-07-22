@@ -47,7 +47,14 @@ export default function Menu() {
     return (
         <>
             <ul className='navContainer'>
-                <li className='navLink'>Explore</li>
+                <li className='navLink'>
+                    <Link
+                    to='/explore'
+                    className='menuLink'
+                    >
+                        Explore
+                    </Link>
+                </li>
                 {TokenService.hasAuthToken() ? renderLogoutLink()
                 : renderLoginLink()}
             </ul>
