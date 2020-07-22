@@ -1,3 +1,25 @@
+.burgerUl {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.burgerUl:focus {
+    outline: none;
+}
+
+.burgerLi {
+    padding: 5px;
+    color: black;
+    font-weight: 500;
+}
+
+.burgerLink {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
 /* burger menu */
 
 /* Position and sizing of burger button */
