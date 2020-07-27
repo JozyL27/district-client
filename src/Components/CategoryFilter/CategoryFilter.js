@@ -8,23 +8,23 @@ import '../../Styles/Explore.css'
 
 
 export default class CategoryFilter extends Component {
-    state = { category: '', categoryValues: [] }
+    static defaultProps = {
+        handleCategoryChange: () => {},
+    }
 
-    // add category to context and on change call api to retrieve articles
-    // with category filter
+    state = { categoryValues: [] }
 
     handleChange = (event) => {
-        this.setState({ category: event.target.value })
+        this.props.handleCategoryChange(event.target.value)
     }
 
     componentDidMount() {
-        ArticlesService.getArticles()
+        ArticlesService.getArticleCategories()
         .then(data => this.setState({ categoryValues: data }))
     }
 
     render() {
         const { categoryValues } = this.state
-        console.log(this.state.category)
         return (
             <>
                 <FormControl variant='outlined' fullWidth>
@@ -32,13 +32,10 @@ export default class CategoryFilter extends Component {
                     <Select 
                     labelId='category'
                     id='categorySelect'
-                    value={this.state.category}
+                    value={this.props.category}
                     onChange={this.handleChange}
                     label='Category'
                     >
-                        <MenuItem value='Latest'>
-                            Latest
-                        </MenuItem>
                         {categoryValues.map((el, idx) => 
                         <MenuItem 
                         value={el.category}
