@@ -8,6 +8,7 @@ import Header from '../Header/Header'
 import Main from '../Main/Main'
 import NotFoundPage from '../../Routes/NotFoundPage/NotFoundPage'
 import Explore from '../Explore/Explore'
+import ArticlePage from '../ArticlePage/ArticlePage'
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
         exact
         path='/explore'
         component={Explore}
+        />
+        <Route 
+        path='/article/:articleId'
+        component={ArticlePage}
         />
         <Route 
         component={NotFoundPage}
