@@ -12,10 +12,10 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
-    async getLatestArticles() {
+    async getPopularArticles(pageNumber) {
         try {
             let res = 
-            await fetch(`${config.API_ENDPOINT}/articles/latest`)
+            await fetch(`${config.API_ENDPOINT}/articles/popular?page=${pageNumber}`)
 
             let data = await res.json()
             return data

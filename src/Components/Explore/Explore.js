@@ -3,7 +3,7 @@ import CategoryFilter from '../CategoryFilter/CategoryFilter'
 import '../../Styles/Explore.css'
 import ArticlesService from '../../services/article-service'
 
-
+// add next button that calls the category and page number
 export default class Explore extends Component {
     state = { category: '', articles: [], page: 1, error: null }
 
@@ -12,7 +12,7 @@ export default class Explore extends Component {
     }
 
     componentDidMount() {
-        ArticlesService.getLatestArticles()
+        ArticlesService.getPopularArticles()
         .then(data => this.setState({ articles: data }))
     }
 
@@ -36,8 +36,8 @@ export default class Explore extends Component {
         return (
             <section className='exploreContainer'>
                 <h2 className='exploreH2'>
-                    {category.length > 1 ? `Most Recent ${category}` 
-                    : 'Most Recent'} Articles</h2>
+                    {category.length > 1 ? `Most Popular ${category}` 
+                    : 'Most Popular'} Articles</h2>
                 <div className='filterContainer'>
                     <CategoryFilter 
                     handleCategoryChange={this.setCategory}
@@ -45,6 +45,9 @@ export default class Explore extends Component {
                     />
                     {articles.error && <p>{articles.error}</p>}
                 </div>
+                <ul className='articlesContainer'>
+
+                </ul>
             </section>
         )
     }
