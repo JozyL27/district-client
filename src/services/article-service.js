@@ -34,6 +34,17 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
+    async GetArticleById(id) {
+        try {
+            let res = 
+            await fetch(`${config.API_ENDPOINT}/articles/${id}`)
+
+            let data = res.json()
+            return data
+        } catch(error) {
+            Promise.reject(error)
+        }
+    },
 }
 
 export default ArticlesService

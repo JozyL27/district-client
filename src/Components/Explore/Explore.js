@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CategoryFilter from '../CategoryFilter/CategoryFilter'
 import '../../Styles/Explore.css'
 import ArticlesService from '../../services/article-service'
+import ArticleCard from '../ArticleCard/ArticleCard'
 
 // add next button that calls the category and page number
 export default class Explore extends Component {
@@ -46,7 +47,15 @@ export default class Explore extends Component {
                     {articles.error && <p>{articles.error}</p>}
                 </div>
                 <ul className='articlesContainer'>
-
+                    {articles.length > 0 && articles.map(article => 
+                    <ArticleCard 
+                    id={article.id}
+                    key={article.id}
+                    title={article.title}
+                    content={article.content}
+                    style={article.style}
+                    upvotes={article.upvotes}
+                    />)}
                 </ul>
             </section>
         )
