@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import avatar from '../../illustrations/01.png'
 import '../../Styles/ArticleCard.css'
-import upArrow from '../../illustrations/up-arrow.svg'
+import Upvote from '../Upvote/Upvote'
 
 export default function ArticleCard(props) {
     return (
@@ -19,19 +19,9 @@ export default function ArticleCard(props) {
                     <span className='cardUsername'>By {props.username}</span>
                 </div>
                 <div className='articleLinkDiv'>
-                    <div className='upvoteContainer'>
-                        <img 
-                        src={upArrow} 
-                        alt='arrow'
-                        className='upArrow'
-                        />
-                        <span>{props.upvotes}</span>
-                        <img 
-                        src={upArrow} 
-                        alt='arrow'
-                        className='downArrow' 
-                        />
-                    </div>
+                    <Upvote 
+                    upvotes={props.upvotes}
+                    />
                     <Link 
                     to={`/article/${props.id}`} 
                     className='articleLink'
