@@ -36,7 +36,9 @@ export default class CategoryFilter extends Component {
                     onChange={this.handleChange}
                     label='Category'
                     >
-                        {categoryValues.map((el, idx) => 
+                        {categoryValues.length > 
+                        0 && 
+                        categoryValues.map((el, idx) => 
                         <MenuItem 
                         value={el.category}
                         key={idx}

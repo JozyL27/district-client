@@ -3,6 +3,7 @@ import CategoryFilter from '../CategoryFilter/CategoryFilter'
 import '../../Styles/Explore.css'
 import ArticlesService from '../../services/article-service'
 import ArticleCard from '../ArticleCard/ArticleCard'
+import art from '../../illustrations/01.png'
 
 // add next button that calls the category and page number
 export default class Explore extends Component {
@@ -10,6 +11,15 @@ export default class Explore extends Component {
 
     setCategory = (value) => {
         this.setState({ category: value })
+    }
+
+    handleResetClick = () => {
+        this.setState({ category: '', 
+        articles: [], page: 1, 
+        error: null })
+
+        ArticlesService.getPopularArticles()
+        .then(data => this.setState({ articles: data }))
     }
 
     componentDidMount() {
@@ -20,7 +30,7 @@ export default class Explore extends Component {
     componentDidUpdate(prevProps, prevState) {
         let { category, page } = this.state
         
-        if (prevState.category !== this.state.category) {
+        if (prevState.category !== category && category.length > 0) {
             ArticlesService.getArticlesByCategory(category, page)
             .then(data => this.setState({ articles: data }))
         }
@@ -36,16 +46,29 @@ export default class Explore extends Component {
         console.log(this.state.articles)
         return (
             <section className='exploreContainer'>
+                <div className='exploreImgContainer'>
+                    <img 
+                    src={art} 
+                    alt='art'
+                    className='exploreArt'
+                    />
+                </div>
                 <h2 className='exploreH2'>
-                    {category.length > 1 ? `Most Popular ${category}` 
-                    : 'Most Popular'} Articles</h2>
+                    {category.length > 1 ? `Explore The Most Popular ${category}` 
+                    : 'Explore The Most Popular'} Articles</h2>
                 <div className='filterContainer'>
                     <CategoryFilter 
                     handleCategoryChange={this.setCategory}
                     category={this.state.category}
                     />
-                    {articles.error && <p>{articles.error}</p>}
+                    <button
+                    className='resetButton'
+                    onClick={this.handleResetClick}
+                    >
+                    Reset
+                    </button>
                 </div>
+                {articles.error && <p>{articles.error}</p>}
                 <ul className='articlesContainer'>
                     {articles.length > 0 && articles.map(article => 
                     <ArticleCard 
@@ -55,6 +78,7 @@ export default class Explore extends Component {
                     content={article.content}
                     style={article.style}
                     upvotes={article.upvotes}
+                    username={article.username}
                     />)}
                 </ul>
             </section>
