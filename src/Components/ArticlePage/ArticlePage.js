@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ArticlesService from '../../services/article-service'
+import avatar from '../../illustrations/01.png'
+import Upvote from '../Upvote/Upvote'
+import '../../Styles/ArticlePage.css'
 
 
 export default function ArticlePage(props) {
@@ -13,9 +16,21 @@ export default function ArticlePage(props) {
     return (
         <section className='articlePageContainer'>
             <h2>{Article.title}</h2>
-            <p>{Article.content}</p>
-            <span>{Article.upvotes}</span>
-            <span>{Article.style}</span>
+            <div className='authorInfo'>
+                <img 
+                src={avatar}
+                alt='avatar'
+                className='articlePageAvatar'
+                />
+                <span>{Article.username}</span>
+            </div>
+            <p className='pageContent'>{Article.content}</p>
+            <div className='pageVoteContainer'>
+                <Upvote 
+                upvotes={Article.upvotes}
+                />
+                <span>Category: {Article.style}</span>
+            </div>
         </section>
     )
 }

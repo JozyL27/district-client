@@ -1,0 +1,24 @@
+.upvoteContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.upArrow {
+    min-height: 13px;
+    min-width: 13px;
+
+    max-width: 15px;
+    max-height: 12px;
+}
+
+.downArrow {
+    min-height: 13px;
+    min-width: 13px;
+
+    max-width: 15px;
+    max-height: 12px;
+    transform: scaleY(-1);
+}
