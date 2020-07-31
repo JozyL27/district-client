@@ -25,10 +25,12 @@ export default function ArticlePage(props) {
                 <span>{Article.username}</span>
             </div>
             <p className='pageContent'>{Article.content}</p>
-            <Upvote 
-            upvotes={Article.upvotes}
-            />
-            <span>{Article.style}</span>
+            <div className='pageVoteContainer'>
+                <Upvote 
+                upvotes={Article.upvotes}
+                />
+                <span>Category: {Article.style}</span>
+            </div>
         </section>
     )
 }
