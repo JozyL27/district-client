@@ -4,14 +4,23 @@ import UserContext from '../../Context/UserContext'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css' // optional for styling
 import TokenService from '../../services/token-service'
+import UpvoteService from '../../services/upvote-service'
 
 export default function Upvote(props) {
-    const userInfo = useContext(UserContext)
+    const userContext = useContext(UserContext)
 
     const handleUpvoteClick = () => {
-
+        const { user } = userContext
         console.log('clicked!')
-        console.log(userInfo)
+        console.log(user.id)
+        console.log(props.articleId)
+        const newUpvote = {
+            user_id: user.id,
+            article_id: props.articleId
+        }
+
+        UpvoteService.addUpvote(newUpvote)
+        .then(res => console.log(res))
     }
     return (
         <>

@@ -28,6 +28,7 @@ export default function ArticlePage(props) {
             <div className='pageVoteContainer'>
                 <Upvote 
                 upvotes={Article.upvotes}
+                articleId={Article.id}
                 />
                 <span>Category: {Article.style}</span>
             </div>
