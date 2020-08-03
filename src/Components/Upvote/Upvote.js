@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import upArrow from '../../illustrations/up-arrow.svg'
 import UserContext from '../../Context/UserContext'
 import Tippy from '@tippyjs/react'
@@ -8,20 +8,24 @@ import UpvoteService from '../../services/upvote-service'
 
 export default function Upvote(props) {
     const userContext = useContext(UserContext)
+    const [ response, setResponse ] = useState({})
+    const [ upvotes, setUpvotes ] = useState(props.upvotes)
 
     const handleUpvoteClick = () => {
         const { user } = userContext
-        console.log('clicked!')
-        console.log(user.id)
-        console.log(props.articleId)
         const newUpvote = {
             user_id: user.id,
             article_id: props.articleId
         }
 
         UpvoteService.addUpvote(newUpvote)
-        .then(res => console.log(res))
+        .then(() => {
+            UpvoteService.getArticleUpvotes(props.articleId)
+            .then(votes => setUpvotes(votes.upvotes))
+        })
+        .catch(error => setResponse(error))
     }
+
     return (
         <>
             <div className={'upvoteContainer ' + ( props.styleName || '')}>
@@ -45,7 +49,11 @@ export default function Upvote(props) {
                     className='upArrow'
                     />
                 </Tippy>}
-                <span>{props.upvotes}</span>
+                <span>{upvotes}</span>
+
+                {response.error && <p 
+                className='error'>
+                {response.error}</p>}
             </div>
         </>
     )

@@ -15,6 +15,17 @@ const UpvoteService  = {
             : res.json()
             )
     },
+    async getArticleUpvotes(articleId) {
+        try {
+            let upvotes = await 
+            fetch(`${config.API_ENDPOINT}/upvotes/${articleId}`)
+
+            let data = upvotes.json()
+            return data
+        }catch(error) {
+            Promise.reject(error)
+        }
+    },
 }
 
 export default UpvoteService
