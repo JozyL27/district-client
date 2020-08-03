@@ -11,7 +11,7 @@ export default class Header extends Component {
                 <header id="outer-container">
                     <h1 className='h1Header'>
                         <Link to='/' className='routerLink'>
-                            Havior
+                            Cardigan
                         </Link>
                     </h1>
                     <BurgerMenu />
