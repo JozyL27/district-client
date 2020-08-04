@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import upArrow from '../../illustrations/up-arrow.svg'
 import UserContext from '../../Context/UserContext'
 import Tippy from '@tippyjs/react'
@@ -17,7 +17,6 @@ export default function Upvote(props) {
             user_id: user.id,
             article_id: props.articleId
         }
-
         UpvoteService.addUpvote(newUpvote)
         .then(() => {
             UpvoteService.getArticleUpvotes(props.articleId)
@@ -25,6 +24,12 @@ export default function Upvote(props) {
         })
         .catch(error => setResponse(error))
     }
+
+    useEffect(() => {
+        UpvoteService.getArticleUpvotes(props.articleId)
+        .then(votes => setUpvotes(votes.upvotes))
+        .catch(error => setResponse(error))
+    })
 
     return (
         <>
