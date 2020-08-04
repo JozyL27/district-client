@@ -21,6 +21,7 @@ export default function ArticleCard(props) {
                 <div className='articleLinkDiv'>
                     <Upvote 
                     upvotes={props.upvotes}
+                    articleId={props.id}
                     styleName='cardUpvote'
                     />
                     <Link 

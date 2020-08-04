@@ -66,6 +66,10 @@
     max-height: 12px;
 }
 
+.upArrow:hover {
+    cursor: pointer;
+}
+
 .articleLinkDiv {
     display: flex;
     align-items: center;
@@ -76,4 +80,9 @@
     text-decoration: none;
     color: rgb(31, 73, 75);
     padding: 10px;
+}
+
+.error {
+    max-width: 100px;
+    color: maroon;
 }

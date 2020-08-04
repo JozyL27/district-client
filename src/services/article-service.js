@@ -6,7 +6,7 @@ const ArticlesService = {
             let res = 
             await fetch(`${config.API_ENDPOINT}/articles/categories`)
 
-            let data  = await res.json()
+            let data = await res.json()
             return data
         } catch (error) {
             Promise.reject(error)
