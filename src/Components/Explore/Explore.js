@@ -4,6 +4,7 @@ import '../../Styles/Explore.css'
 import ArticlesService from '../../services/article-service'
 import ArticleCard from '../ArticleCard/ArticleCard'
 import art from '../../illustrations/01.png'
+import NavArrows from '../NavArrows/NavArrows'
 
 // add next button that calls the category and page number
 export default class Explore extends Component {
@@ -81,6 +82,9 @@ export default class Explore extends Component {
                     username={article.username}
                     />)}
                 </ul>
+                <NavArrows 
+                styleName='exploreNavArrows'
+                />
             </section>
         )
     }
