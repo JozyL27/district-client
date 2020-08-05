@@ -27,6 +27,12 @@
 .pageVoteContainer {
     display: flex;
     align-items: center;
+    margin-bottom: 40px;
+    flex-direction: column;
+}
+
+.pageUpvote {
+    margin-bottom: 15px;
 }
 
 @media screen and (min-width: 768px) {

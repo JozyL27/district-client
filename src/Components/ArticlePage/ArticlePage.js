@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ArticlesService from '../../services/article-service'
 import avatar from '../../illustrations/01.png'
 import Upvote from '../Upvote/Upvote'
+import Button from '@material-ui/core/Button';
 import '../../Styles/ArticlePage.css'
 
 
@@ -31,8 +32,16 @@ export default function ArticlePage(props) {
                 <Upvote 
                 upvotes={Article.upvotes}
                 articleId={Article.id || 1}
+                styleName='pageUpvote'
                 />
+                <Button 
+                variant='contained'
+                color="primary"
+                >View Comments</Button>
             </div>
+            <ul className='commentsContainer'>
+
+            </ul>
         </section>
     )
 }
