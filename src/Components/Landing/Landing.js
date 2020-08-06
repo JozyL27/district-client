@@ -10,14 +10,12 @@ export default function Landing() {
         <div className='landingDiv'>
             <img src={imageOne} alt='glasses' className='landingImg' />
             <Typist>
-                A blogsite for
-                {' '}
                 <span>
                     avant garde
                 </span>
                 <Typist.Backspace count={11} delay={1000} />
                 <span>
-                    minimalist
+                    minimalism
                 </span>
                 <Typist.Backspace count={10} delay={1000} />
                 <span>
