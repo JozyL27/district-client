@@ -6,16 +6,22 @@
 .commentContainer {
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+    padding: 10px;
+    max-width: 370px;
+    max-height: 165px;
+    margin: 10px auto 10px auto;
+
+    border-radius: 20px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow:  20px 20px 55px #bfbfbf, 
+                 -20px -20px 55px #ffffff;
 }
 
 .avatarCommentContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 10px;
     margin-right: 45px;
-    margin-top: 15px;
-
     display: none;
 }
 
@@ -29,12 +35,8 @@
 
 .buttonsAndContent {
     display: flex;
+    align-items: center;
     padding: 10px;
-
-    border-radius: 20px;
-    background: linear-gradient(145deg, #ffffff, #e6e6e6);
-    box-shadow:  20px 20px 55px #bfbfbf, 
-                 -20px -20px 55px #ffffff;
 }
 
 .commentContent {
@@ -43,8 +45,18 @@
     padding: 15px;
 }
 
+.commentSpan {
+    padding: 10px;
+}
+
 @media screen and (min-width: 768px) {
     .avatarCommentContainer {
-        display: initial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .commentSpan {
+        display: none;
     }
 }

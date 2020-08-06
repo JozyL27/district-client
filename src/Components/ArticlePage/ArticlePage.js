@@ -13,6 +13,7 @@ export default function ArticlePage(props) {
     const [ Article, setArticle ] = useState({})
     const [ Comments, setComments ] = useState([])
     const [ Page, setPage ] = useState(1)
+    const [ touched, setTouched ] = useState(false)
 
     useEffect(() => {
         const { articleId } = props.match.params
@@ -26,9 +27,16 @@ export default function ArticlePage(props) {
     }, [Comments])
 
     const onViewCommentsClick = () => {
+        setTouched(!touched)
+
         const { articleId } = props.match.params
         CommentsService.getArticleComments(articleId, Page)
         .then(res => setComments(res))
+    }
+
+    const onCloseCommentsClick = () => {
+        setTouched(!touched)
+        setComments([])
     }
     
     return (
@@ -49,11 +57,17 @@ export default function ArticlePage(props) {
                 articleId={Article.id || 1}
                 styleName='pageUpvote'
                 />
+                {!touched ?
                 <Button 
                 variant='contained'
                 color="primary"
                 onClick={onViewCommentsClick}
-                >View Comments</Button>
+                >View Comments</Button> :
+                <Button 
+                variant='contained'
+                color="secondary"
+                onClick={onCloseCommentsClick}
+                >Close Comments</Button> }
             </div>
             {Comments.error && 
             <p className='pageError'>
@@ -66,6 +80,7 @@ export default function ArticlePage(props) {
                 <CommentCard 
                 key={element.id}
                 username={element.username}
+                user_id={element.user_id}
                 text={element.text}
                 id={element.id}
                 />)}
