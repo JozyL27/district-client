@@ -1,0 +1,65 @@
+.commentAvatar {
+    max-height: 40px;
+    width: auto;
+}
+
+.commentContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    margin: 10px auto 10px auto;
+    
+    border-radius: 20px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow:  20px 20px 14px #bfbfbf;
+}
+
+.avatarCommentContainer {
+    padding: 10px;
+    margin-right: 45px;
+    display: none;
+}
+
+.commentButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-left: 45px;
+}
+
+.buttonsAndContent {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.commentContent {
+    text-align: center;
+    padding: 15px;
+    max-width: 200px;
+    overflow-y: auto;
+    max-height: 100px;
+    line-height: 1.4;
+}
+
+.commentSpan {
+    padding: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .avatarCommentContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .commentSpan {
+        display: none;
+    }
+
+    .commentContent {
+        max-width: 350px;
+    }
+}

@@ -10,7 +10,7 @@
     text-align: center;
     line-height: 1.5;
     margin-top: 60px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     padding: 15px;
 }
@@ -33,6 +33,25 @@
 
 .pageUpvote {
     margin-bottom: 25px;
+}
+
+.pageError {
+    color: rgb(201, 10, 10);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.commentsContainer {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    padding: 10px;
+    max-width: 90%;
+    margin: 0px auto 50px auto;
 }
 
 @media screen and (min-width: 768px) {
