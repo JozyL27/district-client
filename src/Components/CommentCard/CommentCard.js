@@ -17,7 +17,7 @@ const CommentCard = (props) => {
                     alt='avatar' 
                     className='commentAvatar'
                     />
-                    <span>{props.username}</span>
+                    <span className='commentUsername'>{props.username}</span>
                 </div>
                 <div className='buttonsAndContent'>
                     <p className='commentContent'>{props.text}</p>
@@ -32,7 +32,7 @@ const CommentCard = (props) => {
                     </div> : 
                     <span 
                     className='commentSpan'>
-                        {props.username}
+                    {props.username}
                     </span>}
                 </div>
             </li>
