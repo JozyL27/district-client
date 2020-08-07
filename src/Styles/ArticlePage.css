@@ -51,7 +51,11 @@
     
     padding: 10px;
     max-width: 90%;
-    margin: 0px auto 50px auto;
+    margin: 0px auto 40px auto;
+}
+
+.moreComments {
+    margin-bottom: 70px;
 }
 
 @media screen and (min-width: 768px) {

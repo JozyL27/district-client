@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 import UserContext from '../../Context/UserContext'
 import avatar from '../../illustrations/01.png'
 import Button from '@material-ui/core/Button'
+import moment from 'moment'
 import './CommentCard.css'
 
 const CommentCard = (props) => {
     const Context = useContext(UserContext)
     const { user } = Context
+    console.log(moment.utc(`${props.date_commented}`).format('MMMM Do YYYY'))
 
     return (
         <>
@@ -17,10 +19,13 @@ const CommentCard = (props) => {
                     alt='avatar' 
                     className='commentAvatar'
                     />
-                    <span>{props.username}</span>
+                    <span className='commentUsername'>{props.username}</span>
                 </div>
                 <div className='buttonsAndContent'>
-                    <p className='commentContent'>{props.text}</p>
+                    <div>
+                        <p className='commentContent'>{props.text}</p>
+                        {/* <span>{moment(props.date_commented)}</span> */}
+                    </div>
                     { user.id === props.user_id ? 
                     <div className='commentButtons'>
                         <Button 
@@ -32,7 +37,7 @@ const CommentCard = (props) => {
                     </div> : 
                     <span 
                     className='commentSpan'>
-                        {props.username}
+                    {props.username}
                     </span>}
                 </div>
             </li>

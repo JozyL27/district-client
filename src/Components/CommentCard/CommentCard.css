@@ -44,8 +44,14 @@
     line-height: 1.4;
 }
 
+.commentUsername {
+    padding: 10px;
+    font-weight: 500;
+}
+
 .commentSpan {
     padding: 10px;
+    font-weight: 500;
 }
 
 @media screen and (min-width: 768px) {

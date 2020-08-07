@@ -12,7 +12,7 @@ import '../../Styles/ArticlePage.css'
 export default function ArticlePage(props) {
     const [ Article, setArticle ] = useState({})
     const [ Comments, setComments ] = useState([])
-    const [ Page, setPage ] = useState(1)
+    let [ Page, setPage ] = useState(1)
     const [ touched, setTouched ] = useState(false)
 
     useEffect(() => {
@@ -21,10 +21,6 @@ export default function ArticlePage(props) {
         .then(article => setArticle(article))
         .catch(error => console.log(error))
     }, [])
-
-    useEffect(() => {
-
-    }, [Comments])
 
     const onViewCommentsClick = () => {
         setTouched(!touched)
@@ -37,7 +33,18 @@ export default function ArticlePage(props) {
     const onCloseCommentsClick = () => {
         setTouched(!touched)
         setComments([])
+        setPage(1)
     }
+
+    const onViewMoreClick = () => {
+        setPage(Page += 1)
+
+        const { articleId } = props.match.params
+        CommentsService.getArticleComments(articleId, Page)
+        .then(res => setComments([...Comments, ...res]))
+        .catch(error => console.log(error))
+    }
+    console.log(Comments)
     
     return (
         <section className='articlePageContainer'>
@@ -72,19 +79,29 @@ export default function ArticlePage(props) {
             {Comments.error && 
             <p className='pageError'>
             {Comments.error}</p>}
-
             <ul className='commentsContainer'>
-                {console.log(Comments)}
                 {Comments.length > 0 
                 && Comments.map(element => 
                 <CommentCard 
                 key={element.id}
                 username={element.username}
+                date_commented={element.date_commented}
                 user_id={element.user_id}
                 text={element.text}
                 id={element.id}
                 />)}
             </ul>
+            {Comments.length % 12 === 0 
+            && Comments.length > 0 ?
+            <div className='moreComments'>
+                <Button 
+                variant='contained'
+                color='primary'
+                onClick={onViewMoreClick}
+                >
+                    View More
+                </Button>
+            </div> : null}
         </section>
     )
 }
