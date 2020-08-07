@@ -9,17 +9,20 @@ import '../../Styles/ArticlePage.css'
 
 // view more comments: use spread operator and add existing to new
 // sending in 12 comments per page, render button if array length is 12
+// add comments button, create edit comment component
+
 export default function ArticlePage(props) {
     const [ Article, setArticle ] = useState({})
     const [ Comments, setComments ] = useState([])
     let [ Page, setPage ] = useState(1)
     const [ touched, setTouched ] = useState(false)
+    const [ error, setError ] = useState(null)
 
     useEffect(() => {
         const { articleId } = props.match.params
         ArticlesService.GetArticleById(articleId)
         .then(article => setArticle(article))
-        .catch(error => console.log(error))
+        .catch(error => setError(error))
     }, [])
 
     const onViewCommentsClick = () => {
@@ -27,13 +30,16 @@ export default function ArticlePage(props) {
 
         const { articleId } = props.match.params
         CommentsService.getArticleComments(articleId, Page)
-        .then(res => setComments(res))
+        .then(res => res.error ? 
+            setError(res) : 
+            setComments(res))
     }
 
     const onCloseCommentsClick = () => {
         setTouched(!touched)
         setComments([])
         setPage(1)
+        setError(null)
     }
 
     const onViewMoreClick = () => {
@@ -41,11 +47,17 @@ export default function ArticlePage(props) {
 
         const { articleId } = props.match.params
         CommentsService.getArticleComments(articleId, Page)
-        .then(res => setComments([...Comments, ...res]))
-        .catch(error => console.log(error))
+        .then(res => res.error ? 
+            setError(res) : 
+            setComments([...Comments, ...res]))
     }
+
+    const arrOfChecks = 
+    [Comments.length > 0, Comments.length % 12 === 0, !error]
+    .every(element => element === true)
+
     console.log(Comments)
-    
+
     return (
         <section className='articlePageContainer'>
             <h2>{Article.title}</h2>
@@ -76,9 +88,6 @@ export default function ArticlePage(props) {
                 onClick={onCloseCommentsClick}
                 >Close Comments</Button> }
             </div>
-            {Comments.error && 
-            <p className='pageError'>
-            {Comments.error}</p>}
             <ul className='commentsContainer'>
                 {Comments.length > 0 
                 && Comments.map(element => 
@@ -91,8 +100,8 @@ export default function ArticlePage(props) {
                 id={element.id}
                 />)}
             </ul>
-            {Comments.length % 12 === 0 
-            && Comments.length > 0 ?
+            {error && <p>{error.error}</p>}
+            {arrOfChecks ?
             <div className='moreComments'>
                 <Button 
                 variant='contained'
