@@ -22,10 +22,6 @@ export default function ArticlePage(props) {
         .catch(error => console.log(error))
     }, [])
 
-    // useEffect(() => {
-
-    // }, [Comments])
-
     const onViewCommentsClick = () => {
         setTouched(!touched)
 
@@ -48,6 +44,7 @@ export default function ArticlePage(props) {
         .then(res => setComments([...Comments, ...res]))
         .catch(error => console.log(error))
     }
+    console.log(Comments)
     
     return (
         <section className='articlePageContainer'>
@@ -88,6 +85,7 @@ export default function ArticlePage(props) {
                 <CommentCard 
                 key={element.id}
                 username={element.username}
+                date_commented={element.date_commented}
                 user_id={element.user_id}
                 text={element.text}
                 id={element.id}
