@@ -54,8 +54,22 @@
     margin: 0px auto 40px auto;
 }
 
+.articlePageError {
+    text-align: center;
+    font-weight: 600;
+    color: crimson;
+    margin-bottom: 70px;
+}
+
 .moreComments {
     margin-bottom: 70px;
+}
+
+.pagePublishDate {
+    padding: 10px;
+    font-size: 15px;
+    color: grey;
+    text-align: center;
 }
 
 @media screen and (min-width: 768px) {

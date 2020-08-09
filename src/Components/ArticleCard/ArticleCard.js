@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import avatar from '../../illustrations/01.png'
 import '../../Styles/ArticleCard.css'
 import Upvote from '../Upvote/Upvote'
+import moment from 'moment'
 
 export default function ArticleCard(props) {
     return (
@@ -17,6 +18,9 @@ export default function ArticleCard(props) {
                 <div className='contentContainer'>
                     <h3 className='cardH3'>{props.title}</h3>
                     <span className='cardUsername'>By {props.username}</span>
+                    <span className='publishDate'>
+                        Published {moment.utc(`${props.date_published}`).format('MMMM Do YYYY')}
+                    </span>
                 </div>
                 <div className='articleLinkDiv'>
                     <Upvote 

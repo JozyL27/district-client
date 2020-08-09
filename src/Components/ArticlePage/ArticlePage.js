@@ -5,6 +5,7 @@ import Upvote from '../Upvote/Upvote'
 import Button from '@material-ui/core/Button'
 import CommentsService from '../../services/comments-service'
 import CommentCard from '../CommentCard/CommentCard'
+import moment from 'moment'
 import '../../Styles/ArticlePage.css'
 
 // view more comments: use spread operator and add existing to new
@@ -56,7 +57,7 @@ export default function ArticlePage(props) {
     [Comments.length > 0, Comments.length % 12 === 0, !error]
     .every(element => element === true)
 
-    console.log(Comments)
+    console.log(Article)
 
     return (
         <section className='articlePageContainer'>
@@ -69,6 +70,10 @@ export default function ArticlePage(props) {
                 />
                 <span>{Article.username}</span>
             </div>
+            <span className='pagePublishDate'>
+                Published {Article.date_published 
+                && moment.utc(`${Article.date_published}`).format('MMMM Do YYYY')}
+            </span>
             <p className='pageContent'>{Article.content}</p>
             <div className='pageVoteContainer'>
                 <Upvote 
@@ -100,7 +105,8 @@ export default function ArticlePage(props) {
                 id={element.id}
                 />)}
             </ul>
-            {error && <p>{error.error}</p>}
+            {error && 
+            <p className='articlePageError'>{error.error}</p>}
             {arrOfChecks ?
             <div className='moreComments'>
                 <Button 
