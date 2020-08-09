@@ -9,11 +9,13 @@ import Main from '../Main/Main'
 import NotFoundPage from '../../Routes/NotFoundPage/NotFoundPage'
 import Explore from '../Explore/Explore'
 import ArticlePage from '../ArticlePage/ArticlePage'
+import '../../Styles/App.css'
 
 function App() {
   return (
+    <>
+    <Header />
     <div className="App">
-      <Header />
       <Switch>
         <Route 
         exact
@@ -49,6 +51,7 @@ function App() {
         />
       </Switch>
     </div>
+    </>
   );
 }
 
