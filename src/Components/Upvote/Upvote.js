@@ -35,12 +35,21 @@ export default function Upvote(props) {
         <>
             <div className={'upvoteContainer ' + ( props.styleName || '')}>
                 {TokenService.hasAuthToken() ?
-                <img 
-                src={upArrow} 
-                alt='arrow'
-                className='upArrow'
-                onClick={handleUpvoteClick}
-                /> :
+                <Tippy
+                content={response.error ? response.error : 'Upvote'}
+                delay={100}
+                interactive={true}
+                interactiveBorder={20}
+                appendTo={() => document.body}
+                >
+                    <img 
+                    src={upArrow} 
+                    alt='arrow'
+                    className='upArrow'
+                    onClick={handleUpvoteClick}
+                    />
+                </Tippy>
+                 :
                 <Tippy
                 content="Must be signed in to upvote"
                 delay={100}
@@ -55,10 +64,9 @@ export default function Upvote(props) {
                     />
                 </Tippy>}
                 <span>{upvotes}</span>
-
-                {response.error && <p 
+                {/* {response.error && <p 
                 className='error'>
-                {response.error}</p>}
+                {response.error}</p>} */}
             </div>
         </>
     )
