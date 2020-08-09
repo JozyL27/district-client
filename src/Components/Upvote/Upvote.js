@@ -64,9 +64,6 @@ export default function Upvote(props) {
                     />
                 </Tippy>}
                 <span>{upvotes}</span>
-                {/* {response.error && <p 
-                className='error'>
-                {response.error}</p>} */}
             </div>
         </>
     )

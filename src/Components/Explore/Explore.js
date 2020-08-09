@@ -80,6 +80,7 @@ export default class Explore extends Component {
                     style={article.style}
                     upvotes={article.upvotes}
                     username={article.username}
+                    date_published={article.date_published}
                     />)}
                 </ul>
                 <NavArrows 

@@ -22,9 +22,11 @@ const CommentCard = (props) => {
                     <span className='commentUsername'>{props.username}</span>
                 </div>
                 <div className='buttonsAndContent'>
-                    <div>
+                    <div className='contentAndPublish'>
                         <p className='commentContent'>{props.text}</p>
-                        {/* <span>{moment(props.date_commented)}</span> */}
+                        <span className='commentPublishDate'>{moment.utc(`${props.date_commented}`)
+                        .format('MMMM Do YYYY')}
+                        </span>
                     </div>
                     { user.id === props.user_id ? 
                     <div className='commentButtons'>

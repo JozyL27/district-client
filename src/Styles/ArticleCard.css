@@ -82,7 +82,9 @@
     padding: 10px;
 }
 
-.error {
-    max-width: 100px;
-    color: maroon;
+.publishDate {
+    text-align: center;
+    font-size: 14px;
+    padding: 5px;
+    color: grey;
 }
