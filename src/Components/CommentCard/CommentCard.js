@@ -34,14 +34,11 @@ const CommentCard = (props) => {
         .then(res => {
             res.error && setError(res.error)
             setEditing(!editing)
-
-            // better way to update?
             res.error ? 
             setText(props.text)
             : setText(text)
         })
     }
-    console.log(error)
  
     return (
         <>

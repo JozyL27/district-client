@@ -37,7 +37,6 @@
 
 .commentContent {
     text-align: center;
-    /* padding: 15px; */
     max-width: 200px;
     overflow-y: auto;
     max-height: 100px;
