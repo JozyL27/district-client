@@ -19,9 +19,16 @@ const CommentCard = (props) => {
     }
 
     const handleCancelButton = () => {
+        // setError(null)
+        // setEditing(!editing)
+        // setText(props.text)
+
+        CommentsService.getCommentById(props.id)
+        .then(res => {
         setError(null)
         setEditing(!editing)
-        setText(props.text)
+        setText(res.text)
+        })
     }
 
     const handleChange = (event) => {

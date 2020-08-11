@@ -40,6 +40,18 @@ const CommentsService = {
             Promise.reject(error)
         }
     },
+    async getCommentById(commentId) {
+        try {
+
+            let res = 
+            await fetch(`${config.API_ENDPOINT}/comments/${commentId}`)
+
+            const data = res.json()
+            return data
+        } catch(error) {
+            Promise.reject(error)
+        }
+    }
 }
 
 export default CommentsService

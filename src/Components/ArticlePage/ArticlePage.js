@@ -64,7 +64,6 @@ export default function ArticlePage(props) {
             Comments.filter(el => el.id !== commentId)
             setComments(newCommentList)
         })
-        .catch(error => console.log(error))
     }
 
     return (
