@@ -26,7 +26,18 @@ const CommentsService = {
 
             return res.ok ? "Comment updated" : res.json()
         } catch(error) {
-            return Promise.reject(error)
+            Promise.reject(error)
+        }
+    },
+    async deleteComment(commentId) {
+        try {
+
+            await fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
+                method: 'DELETE'
+            })
+
+        } catch(error) {
+            Promise.reject(error)
         }
     },
 }

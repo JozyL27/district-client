@@ -19,6 +19,7 @@ const CommentCard = (props) => {
     }
 
     const handleCancelButton = () => {
+        setError(null)
         setEditing(!editing)
         setText(props.text)
     }
@@ -91,7 +92,8 @@ const CommentCard = (props) => {
                             Cancel
                         </Button> :
                         <Button 
-                        variant='text' 
+                        variant='text'
+                        onClick={() => {props.onDeleteClick(props.id)}} 
                         >Delete</Button>}
                     </div> : 
                     <span 
@@ -100,6 +102,9 @@ const CommentCard = (props) => {
                     </span>}
                 </div>
             </li>
+            {error && 
+            <p className='error'>{error}
+            </p>}
         </>
     )
 }
