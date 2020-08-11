@@ -72,9 +72,6 @@ const CommentCard = (props) => {
                         <span className='commentPublishDate'>{moment.utc(`${props.date_commented}`)
                         .format('MMMM Do YYYY')}
                         </span>
-                        {error && 
-                        <p className='error'>{error}
-                        </p>}
                     </div>
                     { user.id === props.user_id ? 
                     <div className='commentButtons'>
@@ -108,9 +105,9 @@ const CommentCard = (props) => {
                     </span>}
                 </div>
             </li>
-            {/* {error && 
+            {error && 
             <p className='error'>{error}
-            </p>} */}
+            </p>}
         </>
     )
 }
