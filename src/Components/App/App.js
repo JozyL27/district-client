@@ -14,43 +14,43 @@ import '../../Styles/App.css'
 function App() {
   return (
     <>
-    <Header />
-    <div className="App">
-      <Switch>
-        <Route 
-        exact
-        path='/'
-        component={Landing}
-        />
-        <Route 
-        exact
-        path='/login'
-        component={LoginPage}
-        />
-        <Route 
-        exact
-        path='/signup'
-        component={SignupPage}
-        />
-        <Route 
-        exact
-        path='/main'
-        component={Main}
-        />
-        <Route 
-        exact
-        path='/explore'
-        component={Explore}
-        />
-        <Route 
-        path='/article/:articleId'
-        component={ArticlePage}
-        />
-        <Route 
-        component={NotFoundPage}
-        />
-      </Switch>
-    </div>
+      <Header />
+      <div className="App">
+        <Switch>
+          <Route 
+          exact
+          path='/'
+          component={Landing}
+          />
+          <Route 
+          exact
+          path='/login'
+          component={LoginPage}
+          />
+          <Route 
+          exact
+          path='/signup'
+          component={SignupPage}
+          />
+          <Route 
+          exact
+          path='/main'
+          component={Main}
+          />
+          <Route 
+          exact
+          path='/explore'
+          component={Explore}
+          />
+          <Route 
+          path='/article/:articleId'
+          component={ArticlePage}
+          />
+          <Route 
+          component={NotFoundPage}
+          />
+        </Switch>
+      </div>
     </>
   );
 }

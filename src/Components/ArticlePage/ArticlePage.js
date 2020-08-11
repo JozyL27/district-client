@@ -57,7 +57,14 @@ export default function ArticlePage(props) {
     [Comments.length > 0, Comments.length % 12 === 0, !error]
     .every(element => element === true)
 
-    console.log(Article)
+    const handleDeleteComment = (commentId) => {
+        CommentsService.deleteComment(commentId)
+        .then(() => {
+            const newCommentList = 
+            Comments.filter(el => el.id !== commentId)
+            setComments(newCommentList)
+        })
+    }
 
     return (
         <section className='articlePageContainer'>
@@ -103,6 +110,7 @@ export default function ArticlePage(props) {
                 user_id={element.user_id}
                 text={element.text}
                 id={element.id}
+                onDeleteClick={handleDeleteComment}
                 />)}
             </ul>
             {error && 
