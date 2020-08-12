@@ -67,6 +67,8 @@ export default function ArticlePage(props) {
     }
 
     const onAddCommentClick = () => {
+        setError(null)
+        
         const { articleId } = props.match.params
         CommentsService.getArticleComments(articleId, Page)
         .then(res => res.error ? 
