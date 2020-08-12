@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import UserContext from '../../Context/UserContext'
+import CommentService from '../../services/comments-service'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -13,6 +15,7 @@ import Button from '@material-ui/core/Button'
 const AddComment = (props) => {
     const [ Text, setText ] = useState('')
     let [ Open, setOpen ] = useState(false)
+    const userContext = useContext(UserContext)
 
     const handleAddCommentButton = () => {
         setOpen(!Open)
@@ -23,10 +26,19 @@ const AddComment = (props) => {
     }
 
     const handleSendButton = () => {
-        props.onAddCommentClick()
-        setOpen(!Open)
+        const newComment = {
+            text: Text,
+            article_id: props.articleId,
+            user_id: userContext.user.id
+        }
+        CommentService.addComment(newComment)
+        .then(res => {
+            console.log(res)
+            props.onAddCommentClick()
+            setOpen(!Open)
+        })
     }
-
+ 
     return (
         <section className='addCommentSection'>
             <div className='addCommentButton'>

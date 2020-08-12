@@ -111,6 +111,7 @@ export default function ArticlePage(props) {
                     {touched ? 
                     <AddComment 
                     onAddCommentClick={ onAddCommentClick }
+                    articleId={props.match.params.articleId}
                     />
                     : null}
                 </div>
