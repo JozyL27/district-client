@@ -10,12 +10,20 @@ import AddIcon from '@material-ui/icons/Add'
 import '../../Styles/AddComment.css'
 import Button from '@material-ui/core/Button'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
     root: {
         color: 'crimson',
         margin: '0 auto'
+    },
+    InputAdornment: {
+        position: 'relative',
+        right: '0',
+        top: '35px',
+        padding: '5px',
+        color: 'grey'
     }
 })
 
@@ -24,6 +32,7 @@ const AddComment = (props) => {
     const classes = useStyles()
 
     const [ Text, setText ] = useState('')
+    let [ Chars, setChars ] = useState(0)
     const [ Error, setError] = useState(null)
     let [ Open, setOpen ] = useState(false)
     const userContext = useContext(UserContext)
@@ -31,10 +40,12 @@ const AddComment = (props) => {
     const handleAddCommentButton = () => {
         setError(null)
         setOpen(!Open)
+        setChars(0)
     }
 
     const handleTextArea = (event) => {
         setText(event.target.value)
+        setChars(event.target.value.length)
     }
 
     const handleSendButton = () => {
@@ -89,6 +100,10 @@ const AddComment = (props) => {
                     variant='outlined'
                     value={Text}
                     onChange={handleTextArea}
+                    InputProps={{
+                    endAdornment: <InputAdornment 
+                    position='end' className={classes.InputAdornment}>{Chars}</InputAdornment>,
+                      }}            
                     />
                 </DialogContent>
                 <DialogActions>
