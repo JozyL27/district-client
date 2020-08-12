@@ -6,11 +6,11 @@ import Button from '@material-ui/core/Button'
 import CommentsService from '../../services/comments-service'
 import CommentCard from '../CommentCard/CommentCard'
 import moment from 'moment'
+import AddComment from '../AddComment/AddComment'
 import '../../Styles/ArticlePage.css'
 
 // view more comments: use spread operator and add existing to new
 // sending in 12 comments per page, render button if array length is 12
-// add comments button, create edit comment component
 
 export default function ArticlePage(props) {
     const [ Article, setArticle ] = useState({})
@@ -66,6 +66,14 @@ export default function ArticlePage(props) {
         })
     }
 
+    const onAddCommentClick = () => {
+        const { articleId } = props.match.params
+        CommentsService.getArticleComments(articleId, Page)
+        .then(res => res.error ? 
+            setError(res) : 
+            setComments(res))
+    }
+
     return (
         <section className='articlePageContainer'>
             <h2>{Article.title}</h2>
@@ -88,17 +96,24 @@ export default function ArticlePage(props) {
                 articleId={Article.id || 1}
                 styleName='pageUpvote'
                 />
-                {!touched ?
-                <Button 
-                variant='contained'
-                color="primary"
-                onClick={onViewCommentsClick}
-                >View Comments</Button> :
-                <Button 
-                variant='contained'
-                color="secondary"
-                onClick={onCloseCommentsClick}
-                >Close Comments</Button> }
+                <div className='viewAndAdd'>
+                    {!touched ?
+                    <Button 
+                    variant='contained'
+                    color="primary"
+                    onClick={onViewCommentsClick}
+                    >View Comments</Button> :
+                    <Button 
+                    variant='contained'
+                    color="secondary"
+                    onClick={onCloseCommentsClick}
+                    >Close Comments</Button>}
+                    {touched ? 
+                    <AddComment 
+                    onAddCommentClick={ onAddCommentClick }
+                    />
+                    : null}
+                </div>
             </div>
             <ul className='commentsContainer'>
                 {Comments.length > 0 
