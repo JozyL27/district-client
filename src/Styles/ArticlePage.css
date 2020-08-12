@@ -72,6 +72,19 @@
     text-align: center;
 }
 
+.viewAndAdd {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 120px;
+    max-width: 300px;
+}
+
+.addCommentButton {
+    margin-top: 30px;
+}
+
 @media screen and (min-width: 768px) {
     .pageContent {
         font-size: 20px;
