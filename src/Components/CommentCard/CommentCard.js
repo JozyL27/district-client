@@ -36,11 +36,14 @@ const CommentCard = (props) => {
 
         CommentsService.editComment(props.id, text)
         .then(res => {
-            res.error && setError(res.error)
-            setEditing(!editing)
-            res.error ? 
-            setText(props.text)
-            : setText(text)
+            if(res.error) {
+                setError(res.error)
+                setEditing(true)
+                setText(props.text)
+            } else {
+                setText(text)
+                setEditing(!editing)
+            }
         })
     }
  
