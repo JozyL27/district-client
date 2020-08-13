@@ -1,20 +1,27 @@
 import React from 'react'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
+import Button from '@material-ui/core/Button'
 
 
 const NavArrows = (props) => {
+    console.log(props)
     return (
         <>
             <div className={'navArrowContainer ' + 
             ( props.styleName || '')}>
-                <span>
+                <Button 
+                disabled={props.page <= 1 ? true : false}
+                onClick={props.onBackArrowClick}
+                >
                     <NavigateBeforeIcon />
-                </span>
+                </Button>
 
-                <span>
+                <Button
+                onClick={props.onNextArrowClick}
+                >
                     <NavigateNextIcon />
-                </span>
+                </Button>
             </div>
         </>
     )

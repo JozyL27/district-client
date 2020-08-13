@@ -23,6 +23,18 @@ export default class Explore extends Component {
         .then(data => this.setState({ articles: data }))
     }
 
+    handleNextArrow = () => {
+        let { page } = this.state
+        const newPageValue = page += 1
+        this.setState({ page: newPageValue })
+    }
+
+    handleBackArrow = () => {
+        let { page } = this.state
+        const newPageValue = page -= 1
+        this.setState({ page: newPageValue })
+    }
+
     componentDidMount() {
         ArticlesService.getPopularArticles()
         .then(data => this.setState({ articles: data }))
@@ -43,8 +55,8 @@ export default class Explore extends Component {
     }
 
     render() {
-        const { articles, category } = this.state
-        console.log(this.state.articles)
+        const { articles, category, page } = this.state
+        console.log(page)
         return (
             <section className='exploreContainer'>
                 <div className='exploreImgContainer'>
@@ -85,6 +97,9 @@ export default class Explore extends Component {
                 </ul>
                 <NavArrows 
                 styleName='exploreNavArrows'
+                page={page}
+                onNextArrowClick={this.handleNextArrow}
+                onBackArrowClick={this.handleBackArrow}
                 />
             </section>
         )
