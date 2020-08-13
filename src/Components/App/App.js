@@ -5,7 +5,7 @@ import Landing from '../Landing/Landing'
 import SignupPage from '../../Routes/SignupPage/SignupPage'
 import LoginPage from '../../Routes/LoginPage/LoginPage'
 import Header from '../Header/Header'
-import Main from '../Main/Main'
+import Feed from '../Feed/Feed'
 import NotFoundPage from '../../Routes/NotFoundPage/NotFoundPage'
 import Explore from '../Explore/Explore'
 import ArticlePage from '../ArticlePage/ArticlePage'
@@ -34,8 +34,8 @@ function App() {
           />
           <Route 
           exact
-          path='/main'
-          component={Main}
+          path='/feed'
+          component={Feed}
           />
           <Route 
           exact

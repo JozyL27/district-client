@@ -53,6 +53,14 @@ export default class BurgerMenu extends Component {
             <>
                 <li className='burgerLi'>
                     <Link 
+                    to='/feed' 
+                    className='burgerLink'
+                    >
+                    Feed
+                    </Link>
+                </li>
+                <li className='burgerLi'>
+                    <Link 
                     to='/login' 
                     className='burgerLink'
                     onClick={this.handleLogoutClick}
