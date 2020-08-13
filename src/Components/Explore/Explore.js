@@ -23,6 +23,46 @@ export default class Explore extends Component {
         .then(data => this.setState({ articles: data }))
     }
 
+    handleNextArrow = () => {
+        let { page, category } = this.state
+        const newPageValue = page += 1
+        this.setState({ page: newPageValue })
+
+        if(category.length < 1) {
+            ArticlesService.getPopularArticles(page)
+            .then(articles => 
+                articles.error ? this.setState({ error: articles.error })
+                : this.setState({ articles })
+                )
+        } else {
+            ArticlesService.getArticlesByCategory(category, page)
+            .then(articles => 
+                articles.error ? this.setState({ error: articles.error, articles: [] })
+                : this.setState({ articles })
+                )
+        }
+    }
+
+    handleBackArrow = () => {
+        let { page, category } = this.state
+        const newPageValue = page -= 1
+        this.setState({ page: newPageValue })
+
+        if(category.length < 1) {
+            ArticlesService.getPopularArticles(page)
+            .then(articles => 
+                articles.error ? this.setState({ error: articles.error })
+                : this.setState({ articles })
+                )
+        } else {
+            ArticlesService.getArticlesByCategory(category, page)
+            .then(articles => 
+                articles.error ? this.setState({ error: articles.error, articles: [] })
+                : this.setState({ articles })
+                )
+        }
+    }
+
     componentDidMount() {
         ArticlesService.getPopularArticles()
         .then(data => this.setState({ articles: data }))
@@ -32,8 +72,12 @@ export default class Explore extends Component {
         let { category, page } = this.state
         
         if (prevState.category !== category && category.length > 0) {
+            this.setState({error: null})
             ArticlesService.getArticlesByCategory(category, page)
-            .then(data => this.setState({ articles: data }))
+            .then(articles => 
+                articles.error ? this.setState({ error: articles.error, articles: [] })
+                : this.setState({ articles })
+                )
         }
     }
 
@@ -43,8 +87,8 @@ export default class Explore extends Component {
     }
 
     render() {
-        const { articles, category } = this.state
-        console.log(this.state.articles)
+        const { articles, category, page, error } = this.state
+
         return (
             <section className='exploreContainer'>
                 <div className='exploreImgContainer'>
@@ -69,7 +113,7 @@ export default class Explore extends Component {
                     Reset
                     </button>
                 </div>
-                {articles.error && <p>{articles.error}</p>}
+                {error && <p>{error}</p>}
                 <ul className='articlesContainer'>
                     {articles.length > 0 && articles.map(article => 
                     <ArticleCard 
@@ -85,6 +129,11 @@ export default class Explore extends Component {
                 </ul>
                 <NavArrows 
                 styleName='exploreNavArrows'
+                page={page}
+                onNextArrowClick={this.handleNextArrow}
+                onBackArrowClick={this.handleBackArrow}
+                error={error}
+                articleArrayLength={articles.length}
                 />
             </section>
         )
