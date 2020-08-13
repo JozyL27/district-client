@@ -4,7 +4,7 @@ import UserContext from '../../Context/UserContext'
 import { Link } from 'react-router-dom'
 
 
-export default class Main extends Component {
+export default class Feed extends Component {
     static contextType = UserContext
 
     handleClick = () => {

@@ -41,6 +41,14 @@ export default function Menu() {
                 </li>
                 <li className='navLink'>
                     <Link 
+                    to='/myProfile'
+                    className='menuLink'
+                    >
+                    Profile
+                    </Link>
+                </li>
+                <li className='navLink'>
+                    <Link 
                     to='/login'
                     className='menuLink'
                     onClick={handleLogoutClick}

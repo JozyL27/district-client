@@ -9,6 +9,7 @@ import Feed from '../Feed/Feed'
 import NotFoundPage from '../../Routes/NotFoundPage/NotFoundPage'
 import Explore from '../Explore/Explore'
 import ArticlePage from '../ArticlePage/ArticlePage'
+import ProfilePage from '../ProfilePage/ProfilePage'
 import '../../Styles/App.css'
 
 function App() {
@@ -45,6 +46,11 @@ function App() {
           <Route 
           path='/article/:articleId'
           component={ArticlePage}
+          />
+          <Route
+          exact 
+          path='/myProfile'
+          component={ProfilePage}
           />
           <Route 
           component={NotFoundPage}
