@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button'
 
 
 const NavArrows = (props) => {
-    console.log(props)
+    
     return (
         <>
             <div className={'navArrowContainer ' + 
@@ -19,6 +19,8 @@ const NavArrows = (props) => {
 
                 <Button
                 onClick={props.onNextArrowClick}
+                disabled={props.error || props.articleArrayLength < 9 ?
+                true : false}
                 >
                     <NavigateNextIcon />
                 </Button>
