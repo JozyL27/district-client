@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import UserContext from '../../Context/UserContext'
 import UserService from '../../services/user-service'
 import ArticlesService from '../../services/article-service'
-import TextField from '@material-ui/core/TextField'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
@@ -14,7 +13,7 @@ import avatar from '../../illustrations/01.png'
 
 export default class ProfilePage extends Component {
     static contextType = UserContext
-    state = { articles: [], userInfo: {}, error: null, page: 1 }
+    state = { articles: [], userInfo: {}, error: null, page: 1, isEditing: false }
 
     componentDidMount() {
         const { user } = this.context || {}
@@ -32,9 +31,19 @@ export default class ProfilePage extends Component {
         })
     }
 
+    handleEditButton = () => {
+        let { isEditing } = this.state
+        this.setState({ isEditing: !isEditing })
+    }
+
+    handleCancelButton = () => {
+        let { isEditing } = this.state
+        this.setState({ isEditing: !isEditing })
+    }
+
     render() {
-        const { userInfo, articles, page } = this.state || {}
-        console.log(this.state.articles)
+        const { userInfo, articles, page, isEditing } = this.state || {}
+        console.log(this.state.isEditing)
         return (
             <section className='profilePageContainer'>
                 <div className='userInfoContainer'>
@@ -45,15 +54,40 @@ export default class ProfilePage extends Component {
                     />
                     <div className='bioContainer'>
                         <span className='profileUsername'>{userInfo.username}</span>
-                        {/* {userInfo.bio && <p className='profileBio'>{userInfo.bio}</p>} */}
-                        <p className='profileBio'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.</p>
+                        {userInfo.bio && <p className='profileBio'>{userInfo.bio}</p>}
                     </div>
                 </div>
+                {!isEditing ?
                 <div className='profileButtonContainer'>
-                    <Button variant='contained' color='primary'>
+                    <Button 
+                    variant='contained' 
+                    color='primary'
+                    onClick={this.handleEditButton}
+                    >
                         Edit Profile
                     </Button>
                 </div>
+                : 
+                <>
+                    <div>
+                        <Button 
+                        variant='contained' 
+                        color='secondary'
+                        onClick={this.handleCancelButton}
+                        >
+                            Cancel
+                        </Button>
+                    </div>
+                    <div>
+                        <Button 
+                        variant='contained'
+                        color='primary'
+                        >
+                            Save
+                        </Button>
+                    </div>
+                </>
+                }
                 <div className='profileFabContainer'>
                     <Fab>
                         <AddIcon />
