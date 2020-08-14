@@ -10,12 +10,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 50px;
     max-width: 700px;
 }
 
 .profileAvatar {
     max-height: 200px;
+    margin-bottom: 25px;
     border-radius: 50%;
     background: #ffffff;
     box-shadow:  -32px 32px 64px #bfbfbf, 
@@ -63,9 +63,14 @@
 @media screen and (min-width: 768px) {
     .userInfoContainer {
         flex-direction: row;
+        margin-bottom: 50px;
     }
 
     .profilePageContainer {
-        margin-top: 130px;
+        margin-top: 100px;
+    }
+
+    .profileAvatar {
+        margin-bottom: 0px;
     }
 }

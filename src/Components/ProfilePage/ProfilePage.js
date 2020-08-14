@@ -9,11 +9,13 @@ import ArticleCard from '../ArticleCard/ArticleCard'
 import NavArrows from '../NavArrows/NavArrows'
 import '../../Styles/ProfilePage.css'
 import avatar from '../../illustrations/01.png'
+import EditProfileCard from '../EditProfileCard/EditProfileCard'
 
 
 export default class ProfilePage extends Component {
     static contextType = UserContext
-    state = { articles: [], userInfo: {}, error: null, page: 1, isEditing: false }
+    state = { articles: [], userInfo: {}, 
+    error: null, page: 1, isEditing: false, bio: '', username: '' }
 
     componentDidMount() {
         const { user } = this.context || {}
@@ -21,7 +23,8 @@ export default class ProfilePage extends Component {
         UserService.getAuthorInfo(user.id)
         .then(res => {
             res.error ? this.setState({ error: res.error })
-            : this.setState({ userInfo: res })
+            : this.setState({ userInfo: res, bio: res.bio, 
+                username: res.username })
 
             ArticlesService.getMyArticles(user.id, page)
             .then(res => res.error ?
@@ -41,52 +44,46 @@ export default class ProfilePage extends Component {
         this.setState({ isEditing: !isEditing })
     }
 
+    onBioChange = (event) => {
+        event.preventDefualt()
+        console.log(event.target.value)
+    }
+
     render() {
-        const { userInfo, articles, page, isEditing } = this.state || {}
-        console.log(this.state.isEditing)
+        const { userInfo, articles, page, 
+            isEditing, bio, username } = this.state || {}
         return (
             <section className='profilePageContainer'>
-                <div className='userInfoContainer'>
-                    <img 
-                    src={avatar} 
-                    alt='avatar' 
-                    className='profileAvatar'
-                    />
-                    <div className='bioContainer'>
-                        <span className='profileUsername'>{userInfo.username}</span>
-                        {userInfo.bio && <p className='profileBio'>{userInfo.bio}</p>}
-                    </div>
-                </div>
                 {!isEditing ?
-                <div className='profileButtonContainer'>
-                    <Button 
-                    variant='contained' 
-                    color='primary'
-                    onClick={this.handleEditButton}
-                    >
-                        Edit Profile
-                    </Button>
-                </div>
-                : 
                 <>
-                    <div>
+                    <div className='userInfoContainer'>
+                        <img 
+                        src={avatar} 
+                        alt='avatar' 
+                        className='profileAvatar'
+                        />
+                        <div className='bioContainer'>
+                            <span className='profileUsername'>{userInfo.username}</span>
+                            {userInfo.bio && <p className='profileBio'>{userInfo.bio}</p>}
+                        </div>
+                    </div>
+                    <div className='profileButtonContainer'>
                         <Button 
                         variant='contained' 
-                        color='secondary'
-                        onClick={this.handleCancelButton}
-                        >
-                            Cancel
-                        </Button>
-                    </div>
-                    <div>
-                        <Button 
-                        variant='contained'
                         color='primary'
+                        onClick={this.handleEditButton}
                         >
-                            Save
+                            Edit Profile
                         </Button>
                     </div>
                 </>
+                : 
+                <EditProfileCard 
+                avatar={avatar}
+                username={username}
+                bio={bio}
+                handleCancelButton={this.handleCancelButton}
+                />
                 }
                 <div className='profileFabContainer'>
                     <Fab>
