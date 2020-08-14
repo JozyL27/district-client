@@ -45,6 +45,18 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
+    async getMyArticles(userId, pageNumber) {
+        try {
+            let res = await
+            fetch(`${config.API_ENDPOINT}/articles/userarticles/${userId}?page=${pageNumber}`)
+            .catch(error => Promise.reject(error))
+
+            const data = res.json()
+            return data
+        } catch(error) {
+            Promise.reject(error)
+        }
+    },
 }
 
 export default ArticlesService

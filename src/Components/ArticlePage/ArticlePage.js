@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ArticlesService from '../../services/article-service'
+import TokenService from '../../services/token-service'
 import avatar from '../../illustrations/01.png'
 import Upvote from '../Upvote/Upvote'
 import Button from '@material-ui/core/Button'
@@ -110,7 +111,7 @@ export default function ArticlePage(props) {
                     color="secondary"
                     onClick={onCloseCommentsClick}
                     >Close Comments</Button>}
-                    {touched ? 
+                    {touched && TokenService.hasAuthToken() ? 
                     <AddComment 
                     onAddCommentClick={ onAddCommentClick }
                     articleId={props.match.params.articleId}
