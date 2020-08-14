@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import UserContext from '../../Context/UserContext'
 import UserService from '../../services/user-service'
 import ArticlesService from '../../services/article-service'
-import TextField from '@material-ui/core/TextField'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
@@ -10,11 +9,13 @@ import ArticleCard from '../ArticleCard/ArticleCard'
 import NavArrows from '../NavArrows/NavArrows'
 import '../../Styles/ProfilePage.css'
 import avatar from '../../illustrations/01.png'
+import EditProfileCard from '../EditProfileCard/EditProfileCard'
 
 
 export default class ProfilePage extends Component {
     static contextType = UserContext
-    state = { articles: [], userInfo: {}, error: null, page: 1 }
+    state = { articles: [], userInfo: {}, 
+    error: null, page: 1, isEditing: false, bio: '', username: '' }
 
     componentDidMount() {
         const { user } = this.context || {}
@@ -22,7 +23,8 @@ export default class ProfilePage extends Component {
         UserService.getAuthorInfo(user.id)
         .then(res => {
             res.error ? this.setState({ error: res.error })
-            : this.setState({ userInfo: res })
+            : this.setState({ userInfo: res, bio: res.bio, 
+                username: res.username })
 
             ArticlesService.getMyArticles(user.id, page)
             .then(res => res.error ?
@@ -32,28 +34,57 @@ export default class ProfilePage extends Component {
         })
     }
 
+    handleEditButton = () => {
+        let { isEditing } = this.state
+        this.setState({ isEditing: !isEditing })
+    }
+
+    handleCancelButton = () => {
+        let { isEditing } = this.state
+        this.setState({ isEditing: !isEditing })
+    }
+
+    onBioChange = (event) => {
+        event.preventDefualt()
+        console.log(event.target.value)
+    }
+
     render() {
-        const { userInfo, articles, page } = this.state || {}
-        console.log(this.state.articles)
+        const { userInfo, articles, page, 
+            isEditing, bio, username } = this.state || {}
         return (
             <section className='profilePageContainer'>
-                <div className='userInfoContainer'>
-                    <img 
-                    src={avatar} 
-                    alt='avatar' 
-                    className='profileAvatar'
-                    />
-                    <div className='bioContainer'>
-                        <span className='profileUsername'>{userInfo.username}</span>
-                        {/* {userInfo.bio && <p className='profileBio'>{userInfo.bio}</p>} */}
-                        <p className='profileBio'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.</p>
+                {!isEditing ?
+                <>
+                    <div className='userInfoContainer'>
+                        <img 
+                        src={avatar} 
+                        alt='avatar' 
+                        className='profileAvatar'
+                        />
+                        <div className='bioContainer'>
+                            <span className='profileUsername'>{userInfo.username}</span>
+                            {userInfo.bio && <p className='profileBio'>{userInfo.bio}</p>}
+                        </div>
                     </div>
-                </div>
-                <div className='profileButtonContainer'>
-                    <Button variant='contained' color='primary'>
-                        Edit Profile
-                    </Button>
-                </div>
+                    <div className='profileButtonContainer'>
+                        <Button 
+                        variant='contained' 
+                        color='primary'
+                        onClick={this.handleEditButton}
+                        >
+                            Edit Profile
+                        </Button>
+                    </div>
+                </>
+                : 
+                <EditProfileCard 
+                avatar={avatar}
+                username={username}
+                bio={bio}
+                handleCancelButton={this.handleCancelButton}
+                />
+                }
                 <div className='profileFabContainer'>
                     <Fab>
                         <AddIcon />

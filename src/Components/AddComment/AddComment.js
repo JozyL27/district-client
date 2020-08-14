@@ -97,7 +97,7 @@ const AddComment = (props) => {
                     fullWidth
                     multiline
                     rows={5}
-                    variant='outlined'
+                    variant='filled'
                     value={Text}
                     onChange={handleTextArea}
                     InputProps={{

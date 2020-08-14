@@ -1,0 +1,12 @@
+.profileButtonsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.profileButtonsContainer > div {
+    padding: 20px;
+}
+
+.editUsername, .editBio {
+    padding: 10px;
+}
