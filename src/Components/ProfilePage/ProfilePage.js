@@ -36,12 +36,14 @@ export default class ProfilePage extends Component {
 
     handleEditButton = () => {
         let { isEditing } = this.state
-        this.setState({ isEditing: !isEditing })
+        this.setState({ isEditing: !isEditing, error: null })
     }
 
     handleCancelButton = () => {
         let { isEditing, userInfo } = this.state
-        this.setState({ isEditing: !isEditing, bio: userInfo.bio })
+        this.setState({ isEditing: !isEditing, 
+            bio: userInfo.bio, username: userInfo.username, 
+            error: null })
     }
 
     handleChange = (event) => {
@@ -50,9 +52,33 @@ export default class ProfilePage extends Component {
         })
     }
 
+    handleSaveButton = () => {
+        let { username, bio, isEditing } = this.state
+        const { user } = this.context
+        const newUserInfo = { username, bio }
+
+        UserService.updateUserInfo(user.id, newUserInfo)
+        .then(res => {
+            if(res.error) {
+                this.setState({ error: res.error })
+            } else {
+                UserService.getAuthorInfo(user.id)
+                .then(res => {
+                    this.setState({
+                        isEditing: !isEditing,
+                        username: res.username,
+                        bio: res.bio,
+                        userInfo: res,
+                        error: null
+                    })
+                })
+            }
+        })
+    }
+
     render() {
         const { userInfo, articles, page, 
-            isEditing, bio, username } = this.state || {}
+            isEditing, bio, username, error } = this.state || {}
             console.log(bio, username)
         return (
             <section className='profilePageContainer'>
@@ -86,8 +112,10 @@ export default class ProfilePage extends Component {
                 bio={bio}
                 handleBioChange={this.handleChange}
                 handleCancelButton={this.handleCancelButton}
+                handleSaveButton={this.handleSaveButton}
                 />
                 }
+                {error && <p>{error}</p>}
                 <div className='profileFabContainer'>
                     <Fab>
                         <AddIcon />

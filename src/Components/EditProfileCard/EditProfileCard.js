@@ -53,6 +53,7 @@ const EditProfileCard = (props) => {
                     <Button 
                     variant='contained'
                     color='primary'
+                    onClick={props.handleSaveButton}
                     >
                         Save
                     </Button>
