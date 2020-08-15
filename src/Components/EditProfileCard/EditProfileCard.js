@@ -16,22 +16,27 @@ const EditProfileCard = (props) => {
                 <div className='bioContainer'>
                     <div className='editUsername'>
                         <TextField 
+                        id='username'
                         label='Username'
                         variant='outlined'
                         value={props.username}
+                        required
+                        name='username'
+                        onChange={props.handleBioChange}
                         />
                     </div>
-                    {props.bio && 
                     <div className='editBio'>
                         <TextField 
+                        id='bio'
                         label='Bio'
                         multiline
                         rows={5}
                         variant='outlined'
                         value={props.bio}
+                        onChange={props.handleBioChange}
+                        name='bio'
                         />
                     </div>
-                    }
                 </div>
             </div>
             <div className='profileButtonsContainer'>

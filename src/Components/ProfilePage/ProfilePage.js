@@ -40,18 +40,20 @@ export default class ProfilePage extends Component {
     }
 
     handleCancelButton = () => {
-        let { isEditing } = this.state
-        this.setState({ isEditing: !isEditing })
+        let { isEditing, userInfo } = this.state
+        this.setState({ isEditing: !isEditing, bio: userInfo.bio })
     }
 
-    onBioChange = (event) => {
-        event.preventDefualt()
-        console.log(event.target.value)
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     render() {
         const { userInfo, articles, page, 
             isEditing, bio, username } = this.state || {}
+            console.log(bio, username)
         return (
             <section className='profilePageContainer'>
                 {!isEditing ?
@@ -82,6 +84,7 @@ export default class ProfilePage extends Component {
                 avatar={avatar}
                 username={username}
                 bio={bio}
+                handleBioChange={this.handleChange}
                 handleCancelButton={this.handleCancelButton}
                 />
                 }
