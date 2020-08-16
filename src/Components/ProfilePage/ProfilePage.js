@@ -52,6 +52,49 @@ export default class ProfilePage extends Component {
         })
     }
 
+    handleNextArrow = () => {
+        let { page } = this.state
+        const { user } = this.context
+        const newPageValue = page += 1
+        this.setState({ page: newPageValue })
+
+        ArticlesService.getMyArticles(user.id, page)
+        .then(res => res.error ?
+            this.setState({ error: res.error, articles: [] })
+            : this.setState({ articles: res })
+            )
+    }
+
+    handleBackArrow = () => {
+        let { page } = this.state
+        const { user } = this.context
+        const newPageValue = page -= 1
+        this.setState({ page: newPageValue, error: null })
+
+        ArticlesService.getMyArticles(user.id, page)
+        .then(res => res.error ?
+            this.setState({ error: res.error})
+            : this.setState({ articles: res })
+            )
+    }
+
+    handleDeleteArticleButton = (id) => {
+        let { articles, page } = this.state
+        const { user } = this.context
+        // const newArticlesValue = articles
+        // .filter(article => article.id !== id)
+        // this.setState({ articles: newArticlesValue })
+
+        ArticlesService.deleteArticle(id)
+        .then(() => {
+            ArticlesService.getMyArticles(user.id, page)
+            .then(res => res.error ?
+                this.setState({ error: res.error})
+                : this.setState({ articles: res })
+                )
+        })
+    }
+
     handleSaveButton = () => {
         let { username, bio, isEditing } = this.state
         const { user } = this.context
@@ -79,7 +122,7 @@ export default class ProfilePage extends Component {
     render() {
         const { userInfo, articles, page, 
             isEditing, bio, username, error } = this.state || {}
-            console.log(bio, username)
+
         return (
             <section className='profilePageContainer'>
                 {!isEditing ?
@@ -131,15 +174,20 @@ export default class ProfilePage extends Component {
                         title={article.title}
                         upvotes={article.upvotes}
                         date_published={article.date_published}
+                        author={article.author}
+                        onDeleteClick={this.handleDeleteArticleButton}
                         />
                         )
                     })}
                 </ul>
-                {articles.length === 9 &&
                 <NavArrows 
                 styleName='profileNavArrows'
                 page={page}
-                />}
+                onNextArrowClick={this.handleNextArrow}
+                onBackArrowClick={this.handleBackArrow}
+                articleArrayLength={articles.length}
+                error={error}
+                />
             </section>
         )
     }
