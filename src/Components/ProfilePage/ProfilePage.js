@@ -36,22 +36,93 @@ export default class ProfilePage extends Component {
 
     handleEditButton = () => {
         let { isEditing } = this.state
-        this.setState({ isEditing: !isEditing })
+        this.setState({ isEditing: !isEditing, error: null })
     }
 
     handleCancelButton = () => {
-        let { isEditing } = this.state
-        this.setState({ isEditing: !isEditing })
+        let { isEditing, userInfo } = this.state
+        this.setState({ isEditing: !isEditing, 
+            bio: userInfo.bio, username: userInfo.username, 
+            error: null })
     }
 
-    onBioChange = (event) => {
-        event.preventDefualt()
-        console.log(event.target.value)
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleNextArrow = () => {
+        let { page } = this.state
+        const { user } = this.context
+        const newPageValue = page += 1
+        this.setState({ page: newPageValue })
+
+        ArticlesService.getMyArticles(user.id, page)
+        .then(res => res.error ?
+            this.setState({ error: res.error, articles: [] })
+            : this.setState({ articles: res })
+            )
+    }
+
+    handleBackArrow = () => {
+        let { page } = this.state
+        const { user } = this.context
+        const newPageValue = page -= 1
+        this.setState({ page: newPageValue, error: null })
+
+        ArticlesService.getMyArticles(user.id, page)
+        .then(res => res.error ?
+            this.setState({ error: res.error})
+            : this.setState({ articles: res })
+            )
+    }
+
+    handleDeleteArticleButton = (id) => {
+        let { articles, page } = this.state
+        const { user } = this.context
+        // const newArticlesValue = articles
+        // .filter(article => article.id !== id)
+        // this.setState({ articles: newArticlesValue })
+
+        ArticlesService.deleteArticle(id)
+        .then(() => {
+            ArticlesService.getMyArticles(user.id, page)
+            .then(res => res.error ?
+                this.setState({ error: res.error})
+                : this.setState({ articles: res })
+                )
+        })
+    }
+
+    handleSaveButton = () => {
+        let { username, bio, isEditing } = this.state
+        const { user } = this.context
+        const newUserInfo = { username, bio }
+
+        UserService.updateUserInfo(user.id, newUserInfo)
+        .then(res => {
+            if(res.error) {
+                this.setState({ error: res.error })
+            } else {
+                UserService.getAuthorInfo(user.id)
+                .then(res => {
+                    this.setState({
+                        isEditing: !isEditing,
+                        username: res.username,
+                        bio: res.bio,
+                        userInfo: res,
+                        error: null
+                    })
+                })
+            }
+        })
     }
 
     render() {
         const { userInfo, articles, page, 
-            isEditing, bio, username } = this.state || {}
+            isEditing, bio, username, error } = this.state || {}
+
         return (
             <section className='profilePageContainer'>
                 {!isEditing ?
@@ -82,9 +153,12 @@ export default class ProfilePage extends Component {
                 avatar={avatar}
                 username={username}
                 bio={bio}
+                handleBioChange={this.handleChange}
                 handleCancelButton={this.handleCancelButton}
+                handleSaveButton={this.handleSaveButton}
                 />
                 }
+                {error && <p>{error}</p>}
                 <div className='profileFabContainer'>
                     <Fab>
                         <AddIcon />
@@ -100,15 +174,20 @@ export default class ProfilePage extends Component {
                         title={article.title}
                         upvotes={article.upvotes}
                         date_published={article.date_published}
+                        author={article.author}
+                        onDeleteClick={this.handleDeleteArticleButton}
                         />
                         )
                     })}
                 </ul>
-                {articles.length === 9 &&
                 <NavArrows 
                 styleName='profileNavArrows'
                 page={page}
-                />}
+                onNextArrowClick={this.handleNextArrow}
+                onBackArrowClick={this.handleBackArrow}
+                articleArrayLength={articles.length}
+                error={error}
+                />
             </section>
         )
     }

@@ -88,6 +88,7 @@ export default class Explore extends Component {
 
     render() {
         const { articles, category, page, error } = this.state
+        console.log(articles)
 
         return (
             <section className='exploreContainer'>
@@ -125,6 +126,7 @@ export default class Explore extends Component {
                     upvotes={article.upvotes}
                     username={article.username}
                     date_published={article.date_published}
+                    author={article.author}
                     />)}
                 </ul>
                 <NavArrows 

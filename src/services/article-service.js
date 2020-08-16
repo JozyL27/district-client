@@ -57,6 +57,16 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
+    async deleteArticle(ArticleId) {
+        try {
+            await fetch(`${config.API_ENDPOINT}/articles/${ArticleId}`, {
+                method: 'DELETE'
+            })
+            
+        } catch(error) {
+            Promise.reject(error)
+        }
+    },
 }
 
 export default ArticlesService

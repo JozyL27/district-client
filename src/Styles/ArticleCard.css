@@ -26,7 +26,7 @@
 .userContainer {
     display: flex;
     align-items: flex-start;
-    flex-direction: column;
+    padding: 5px;
 }
 
 .cardUsername {
