@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import UserContext from '../../Context/UserContext'
 import UserService from '../../services/user-service'
 import ArticlesService from '../../services/article-service'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 import ArticleCard from '../ArticleCard/ArticleCard'
 import NavArrows from '../NavArrows/NavArrows'
 import '../../Styles/ProfilePage.css'
 import avatar from '../../illustrations/01.png'
 import EditProfileCard from '../EditProfileCard/EditProfileCard'
+import AddArticle from '../AddArticle/AddArticle'
 
 
 export default class ProfilePage extends Component {
@@ -79,11 +78,8 @@ export default class ProfilePage extends Component {
     }
 
     handleDeleteArticleButton = (id) => {
-        let { articles, page } = this.state
+        let { page } = this.state
         const { user } = this.context
-        // const newArticlesValue = articles
-        // .filter(article => article.id !== id)
-        // this.setState({ articles: newArticlesValue })
 
         ArticlesService.deleteArticle(id)
         .then(() => {
@@ -117,6 +113,10 @@ export default class ProfilePage extends Component {
                 })
             }
         })
+    }
+
+    handleAddArticleButton = () => {
+        console.log('in parent')
     }
 
     render() {
@@ -159,11 +159,9 @@ export default class ProfilePage extends Component {
                 />
                 }
                 {error && <p>{error}</p>}
-                <div className='profileFabContainer'>
-                    <Fab>
-                        <AddIcon />
-                    </Fab>
-                </div>
+                <AddArticle 
+                addArticle={this.handleAddArticleButton}
+                />
                 <ul className='profileArticles'>
                     {articles.length > 0 && articles.map(article => {
                         return (
