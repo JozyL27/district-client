@@ -32,9 +32,25 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddArticle = (props) => {
     const classes = useStyles()
     const [ open, setOpen ] = useState(false)
+    const [ title, setTitle ] = useState('')
+    const [ content, setContent ] = useState('')
+
 
     const onAddArticleClick = () => {
         setOpen(!open)
+    }
+
+    const onCreateArticleClick = () => {
+        setOpen(false)
+        console.log(title, content)
+    }
+
+    const onTitleChange = (event) => {
+        setTitle(event.target.value)
+    }
+
+    const onContentChange = (event) => {
+        setContent(event.target.value)
     }
 
     return (
@@ -62,24 +78,36 @@ const AddArticle = (props) => {
                             <Typography variant='h6' className={classes.title}>
                                 New Article
                             </Typography>
-                            <Button autoFocus color='inherit' >
+                            <Button autoFocus color='inherit' onClick={onCreateArticleClick}>
                                 Create Article
                             </Button>
                         </Toolbar>
                     </AppBar>
                     <form className='addArticleForm'>
                         <TextField 
+                        id='title'
+                        label='Title'
+                        name='title'
                         margin='normal'
                         variant='outlined'
+                        type='text'
+                        onChange={onTitleChange}
+                        value={title}
+                        required
                         fullWidth
                         />
                         <TextField 
+                        id='content'
+                        label='Content'
+                        name='content'
                         margin='normal'
                         variant='outlined'
+                        type='text'
+                        onChange={onContentChange}
+                        value={content}
                         multiline
-                        rows={10}
+                        rows={20}
                         fullWidth
-                        // className={classes.textFields}
                         />
                     </form>
                 </Dialog>
