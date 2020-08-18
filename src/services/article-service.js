@@ -1,5 +1,4 @@
 import config from '../config'
-import AddArticle from '../Components/AddArticle/AddArticle'
 
 const ArticlesService = {
    async getArticleCategories() {
@@ -68,7 +67,7 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
-    async AddArticle() {},
+    async AddNewArticle() {},
 }
 
 export default ArticlesService
