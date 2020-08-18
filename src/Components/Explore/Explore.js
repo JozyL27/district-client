@@ -26,12 +26,12 @@ export default class Explore extends Component {
     handleNextArrow = () => {
         let { page, category } = this.state
         const newPageValue = page += 1
-        this.setState({ page: newPageValue })
+        this.setState({ page: newPageValue, error: null })
 
         if(category.length < 1) {
             ArticlesService.getPopularArticles(page)
             .then(articles => 
-                articles.error ? this.setState({ error: articles.error })
+                articles.error ? this.setState({ error: articles.error, articles: [] })
                 : this.setState({ articles })
                 )
         } else {
@@ -46,7 +46,7 @@ export default class Explore extends Component {
     handleBackArrow = () => {
         let { page, category } = this.state
         const newPageValue = page -= 1
-        this.setState({ page: newPageValue })
+        this.setState({ page: newPageValue, error: null })
 
         if(category.length < 1) {
             ArticlesService.getPopularArticles(page)
