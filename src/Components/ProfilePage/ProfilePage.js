@@ -116,7 +116,14 @@ export default class ProfilePage extends Component {
     }
 
     handleAddArticleButton = () => {
-        console.log('in parent')
+        const { user } = this.context || {}
+        const { page } = this.state
+        
+        ArticlesService.getMyArticles(user.id, page)
+        .then(res => res.error ?
+            this.setState({ error: res.error})
+            : this.setState({ articles: res })
+            )
     }
 
     render() {

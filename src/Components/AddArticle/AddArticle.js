@@ -46,7 +46,7 @@ const AddArticle = (props) => {
     }
 
     const onCreateArticleClick = () => {
-        const { userInfo } = props
+        const { userInfo, addArticle } = props
         const newArticle = {
             title: title,
             content: content,
@@ -61,6 +61,7 @@ const AddArticle = (props) => {
                 setOpen(true)
             } else {
                 setOpen(false)
+                addArticle()
             }
         })
     }
@@ -107,6 +108,7 @@ const AddArticle = (props) => {
                             </Button>
                         </Toolbar>
                     </AppBar>
+                    {error && <p>{error}</p>}
                     <form className='addArticleForm'>
                         <TextField 
                         id='title'
