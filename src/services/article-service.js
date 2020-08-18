@@ -67,7 +67,23 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
-    async AddNewArticle() {},
+    async AddNewArticle(newArticle) {
+        try {
+            let res = await fetch(`${config.API_ENDPOINT}/articles`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(newArticle)
+            })
+            .catch(error => Promise.reject(error))
+
+            const data = res.json()
+            return data
+        } catch(error) {
+            Promise.reject(error)
+        }
+    },
 }
 
 export default ArticlesService
