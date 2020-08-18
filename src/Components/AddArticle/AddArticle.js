@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
 import CategoryFilter from '../CategoryFilter/CategoryFilter'
+import ArticlesService from '../../services/article-service'
 import '../../Styles/AddArticle.css'
 import { Toolbar, Button } from '@material-ui/core'
 
@@ -36,15 +37,32 @@ const AddArticle = (props) => {
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
     const [ category, setCategory ] = useState('')
+    const [ error, setError ] = useState('')
 
 
     const onAddArticleClick = () => {
+        setError(null)
         setOpen(!open)
     }
 
     const onCreateArticleClick = () => {
-        setOpen(false)
-        console.log(title, content, category)
+        const { userInfo } = props
+        const newArticle = {
+            title: title,
+            content: content,
+            style: category,
+            author: userInfo.id
+        }
+
+        ArticlesService.AddNewArticle(newArticle)
+        .then(res => {
+            if(res.error) {
+                setError(res.error)
+                setOpen(true)
+            } else {
+                setOpen(false)
+            }
+        })
     }
 
     const onTitleChange = (event) => {

@@ -161,6 +161,7 @@ export default class ProfilePage extends Component {
                 {error && <p>{error}</p>}
                 <AddArticle 
                 addArticle={this.handleAddArticleButton}
+                userInfo={this.context.user}
                 />
                 <ul className='profileArticles'>
                     {articles.length > 0 && articles.map(article => {
