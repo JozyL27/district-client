@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
+import CategoryFilter from '../CategoryFilter/CategoryFilter'
 import '../../Styles/AddArticle.css'
 import { Toolbar, Button } from '@material-ui/core'
 
@@ -34,6 +35,7 @@ const AddArticle = (props) => {
     const [ open, setOpen ] = useState(false)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
+    const [ category, setCategory ] = useState('')
 
 
     const onAddArticleClick = () => {
@@ -42,7 +44,7 @@ const AddArticle = (props) => {
 
     const onCreateArticleClick = () => {
         setOpen(false)
-        console.log(title, content)
+        console.log(title, content, category)
     }
 
     const onTitleChange = (event) => {
@@ -51,6 +53,10 @@ const AddArticle = (props) => {
 
     const onContentChange = (event) => {
         setContent(event.target.value)
+    }
+
+    const onCategoryChange = (value) => {
+        setCategory(value)
     }
 
     return (
@@ -108,6 +114,10 @@ const AddArticle = (props) => {
                         multiline
                         rows={20}
                         fullWidth
+                        />
+                        <CategoryFilter 
+                        handleCategoryChange={onCategoryChange}
+                        category={category}
                         />
                     </form>
                 </Dialog>

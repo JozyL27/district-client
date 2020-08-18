@@ -67,6 +67,7 @@ const ArticlesService = {
             Promise.reject(error)
         }
     },
+    async AddNewArticle() {},
 }
 
 export default ArticlesService
