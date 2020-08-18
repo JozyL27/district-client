@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import CloseIcon from '@material-ui/icons/Close'
+import TextField from '@material-ui/core/TextField'
 import '../../Styles/AddArticle.css'
 import { Toolbar, Button } from '@material-ui/core'
 
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
         marginLeft: theme.spacing(2),
         flex: 1,
+    },
+    textFields: {
+        // padding: '20px',
     }
 }))
 
@@ -63,6 +67,21 @@ const AddArticle = (props) => {
                             </Button>
                         </Toolbar>
                     </AppBar>
+                    <form className='addArticleForm'>
+                        <TextField 
+                        margin='normal'
+                        variant='outlined'
+                        fullWidth
+                        />
+                        <TextField 
+                        margin='normal'
+                        variant='outlined'
+                        multiline
+                        rows={10}
+                        fullWidth
+                        // className={classes.textFields}
+                        />
+                    </form>
                 </Dialog>
             </div>
         </>
