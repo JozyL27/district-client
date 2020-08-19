@@ -21,9 +21,11 @@ export default class ProfilePage extends Component {
     isEditing: false,
     bio: "",
     username: "",
+    tabValue: 0,
   };
 
   componentDidMount() {
+    this.setState({ error: null, tabValue: 0 });
     const { user } = this.context || {};
     const { page } = this.state;
     UserService.getAuthorInfo(user.id).then((res) => {
@@ -136,9 +138,38 @@ export default class ProfilePage extends Component {
     );
   };
 
+  handleChange = (event, newValue) => {
+    this.setState({ tabValue: newValue });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { tabValue, page } = this.state;
+    const { user } = this.context;
+    if (prevState.tabValue !== tabValue) {
+      this.setState({ page: 1 });
+      if (tabValue === 0) {
+        ArticlesService.getMyArticles(user.id, page).then((res) =>
+          res.error
+            ? this.setState({ error: res.error })
+            : this.setState({ articles: res })
+        );
+      } else {
+        console.log("get my upvoted articles!");
+      }
+    }
+  }
+
   render() {
-    const { userInfo, articles, page, isEditing, bio, username, error } =
-      this.state || {};
+    const {
+      userInfo,
+      articles,
+      page,
+      isEditing,
+      bio,
+      username,
+      error,
+      tabValue,
+    } = this.state || {};
 
     return (
       <section className="profilePageContainer">
@@ -176,7 +207,11 @@ export default class ProfilePage extends Component {
           addArticle={this.handleAddArticleButton}
           userInfo={this.context.user}
         />
-        <TabNavigation margin="normal" />
+        <TabNavigation
+          margin="normal"
+          value={tabValue}
+          handleChange={this.handleChange}
+        />
         <ul className="profileArticles">
           {articles.length > 0 &&
             articles.map((article) => {
