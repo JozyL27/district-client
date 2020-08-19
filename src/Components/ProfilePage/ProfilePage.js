@@ -9,6 +9,7 @@ import "../../Styles/ProfilePage.css";
 import avatar from "../../illustrations/01.png";
 import EditProfileCard from "../EditProfileCard/EditProfileCard";
 import AddArticle from "../AddArticle/AddArticle";
+import TabNavigation from "../Utils/TabNavigation";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -175,6 +176,7 @@ export default class ProfilePage extends Component {
           addArticle={this.handleAddArticleButton}
           userInfo={this.context.user}
         />
+        <TabNavigation margin="normal" />
         <ul className="profileArticles">
           {articles.length > 0 &&
             articles.map((article) => {
