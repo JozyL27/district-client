@@ -67,29 +67,45 @@ export default class ProfilePage extends Component {
   };
 
   handleNextArrow = () => {
-    let { page } = this.state;
+    let { page, tabValue } = this.state;
     const { user } = this.context;
     const newPageValue = (page += 1);
     this.setState({ page: newPageValue });
 
-    ArticlesService.getMyArticles(user.id, page).then((res) =>
-      res.error
-        ? this.setState({ error: res.error, articles: [] })
-        : this.setState({ articles: res })
-    );
+    if (tabValue === 0) {
+      ArticlesService.getMyArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error, articles: [] })
+          : this.setState({ articles: res })
+      );
+    } else {
+      ArticlesService.getUpvotedArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    }
   };
 
   handleBackArrow = () => {
-    let { page } = this.state;
+    let { page, tabValue } = this.state;
     const { user } = this.context;
     const newPageValue = (page -= 1);
     this.setState({ page: newPageValue, error: null });
 
-    ArticlesService.getMyArticles(user.id, page).then((res) =>
-      res.error
-        ? this.setState({ error: res.error })
-        : this.setState({ articles: res })
-    );
+    if (tabValue === 0) {
+      ArticlesService.getMyArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    } else {
+      ArticlesService.getUpvotedArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    }
   };
 
   handleDeleteArticleButton = (id) => {
@@ -154,7 +170,11 @@ export default class ProfilePage extends Component {
             : this.setState({ articles: res })
         );
       } else {
-        console.log("get my upvoted articles!");
+        ArticlesService.getUpvotedArticles(user.id, page).then((res) =>
+          res.error
+            ? this.setState({ error: res.error })
+            : this.setState({ articles: res })
+        );
       }
     }
   }
@@ -219,7 +239,9 @@ export default class ProfilePage extends Component {
                 <ArticleCard
                   id={article.id}
                   key={article.id}
-                  username={userInfo.username}
+                  username={
+                    tabValue === 1 ? article.username : userInfo.username
+                  }
                   title={article.title}
                   upvotes={article.upvotes}
                   date_published={article.date_published}
