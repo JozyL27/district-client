@@ -180,6 +180,18 @@ export default class ProfilePage extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState({
+      articles: [],
+      userInfo: {},
+      error: null,
+      page: 1,
+      isEditing: false,
+      bio: "",
+      username: "",
+    });
+  }
+
   render() {
     const {
       userInfo,
