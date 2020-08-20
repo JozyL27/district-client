@@ -82,6 +82,18 @@ const ArticlesService = {
       Promise.reject(error);
     }
   },
+  async getUpvotedArticles(userId, pageNumber) {
+    try {
+      let res = await fetch(
+        `${config.API_ENDPOINT}/articles/upvoted/${userId}?page=${pageNumber}`
+      ).catch((error) => Promise.reject(error));
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      Promise.reject(error);
+    }
+  },
 };
 
 export default ArticlesService;

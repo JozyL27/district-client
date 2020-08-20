@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   textFields: {
-    // padding: '20px',
+    marginBottom: "30px",
   },
 }));
 
@@ -141,7 +141,7 @@ const AddArticle = (props) => {
               label="Title"
               name="title"
               margin="normal"
-              variant="filled"
+              variant="outlined"
               type="text"
               onChange={onTitleChange}
               value={title}
@@ -153,13 +153,14 @@ const AddArticle = (props) => {
               label="Content"
               name="content"
               margin="normal"
-              variant="filled"
+              variant="outlined"
               type="text"
               onChange={onContentChange}
               value={content}
               multiline
               rows={20}
               fullWidth
+              className={classes.textFields}
             />
             <CategoryFilter
               handleCategoryChange={onCategoryChange}

@@ -21,10 +21,12 @@ export default class ProfilePage extends Component {
     isEditing: false,
     bio: "",
     username: "",
+    tabValue: 0,
   };
 
   componentDidMount() {
-    const { user } = this.context || {};
+    this.setState({ error: null, tabValue: 0, page: 1 });
+    const { user } = this.context;
     const { page } = this.state;
     UserService.getAuthorInfo(user.id).then((res) => {
       res.error
@@ -65,29 +67,45 @@ export default class ProfilePage extends Component {
   };
 
   handleNextArrow = () => {
-    let { page } = this.state;
+    let { page, tabValue } = this.state;
     const { user } = this.context;
     const newPageValue = (page += 1);
     this.setState({ page: newPageValue });
 
-    ArticlesService.getMyArticles(user.id, page).then((res) =>
-      res.error
-        ? this.setState({ error: res.error, articles: [] })
-        : this.setState({ articles: res })
-    );
+    if (tabValue === 0) {
+      ArticlesService.getMyArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error, articles: [] })
+          : this.setState({ articles: res })
+      );
+    } else {
+      ArticlesService.getUpvotedArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    }
   };
 
   handleBackArrow = () => {
-    let { page } = this.state;
+    let { page, tabValue } = this.state;
     const { user } = this.context;
     const newPageValue = (page -= 1);
     this.setState({ page: newPageValue, error: null });
 
-    ArticlesService.getMyArticles(user.id, page).then((res) =>
-      res.error
-        ? this.setState({ error: res.error })
-        : this.setState({ articles: res })
-    );
+    if (tabValue === 0) {
+      ArticlesService.getMyArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    } else {
+      ArticlesService.getUpvotedArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    }
   };
 
   handleDeleteArticleButton = (id) => {
@@ -126,7 +144,7 @@ export default class ProfilePage extends Component {
   };
 
   handleAddArticleButton = () => {
-    const { user } = this.context || {};
+    const { user } = this.context;
     const { page } = this.state;
 
     ArticlesService.getMyArticles(user.id, page).then((res) =>
@@ -136,9 +154,42 @@ export default class ProfilePage extends Component {
     );
   };
 
+  handleChange = (event, newValue) => {
+    this.setState({ tabValue: newValue, page: 1 });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { tabValue, page } = this.state;
+    const { user } = this.context;
+
+    if (prevState.tabValue !== tabValue) {
+      if (tabValue === 0) {
+        ArticlesService.getMyArticles(user.id, page).then((res) =>
+          res.error
+            ? this.setState({ error: res.error, articles: [] })
+            : this.setState({ articles: res })
+        );
+      } else {
+        ArticlesService.getUpvotedArticles(user.id, page).then((res) =>
+          res.error
+            ? this.setState({ error: res.error, articles: [] })
+            : this.setState({ articles: res })
+        );
+      }
+    }
+  }
+
   render() {
-    const { userInfo, articles, page, isEditing, bio, username, error } =
-      this.state || {};
+    const {
+      userInfo,
+      articles,
+      page,
+      isEditing,
+      bio,
+      username,
+      error,
+      tabValue,
+    } = this.state;
 
     return (
       <section className="profilePageContainer">
@@ -176,7 +227,7 @@ export default class ProfilePage extends Component {
           addArticle={this.handleAddArticleButton}
           userInfo={this.context.user}
         />
-        <TabNavigation margin="normal" />
+        <TabNavigation value={tabValue} handleChange={this.handleChange} />
         <ul className="profileArticles">
           {articles.length > 0 &&
             articles.map((article) => {
@@ -184,7 +235,9 @@ export default class ProfilePage extends Component {
                 <ArticleCard
                   id={article.id}
                   key={article.id}
-                  username={userInfo.username}
+                  username={
+                    tabValue === 1 ? article.username : userInfo.username
+                  }
                   title={article.title}
                   upvotes={article.upvotes}
                   date_published={article.date_published}
