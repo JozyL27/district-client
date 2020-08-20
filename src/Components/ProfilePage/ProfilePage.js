@@ -28,6 +28,7 @@ export default class ProfilePage extends Component {
     this.setState({ error: null, tabValue: 0, page: 1 });
     const { user } = this.context;
     const { page } = this.state;
+
     UserService.getAuthorInfo(user.id).then((res) => {
       res.error
         ? this.setState({ error: res.error })
@@ -155,7 +156,7 @@ export default class ProfilePage extends Component {
   };
 
   handleChange = (event, newValue) => {
-    this.setState({ tabValue: newValue, page: 1 });
+    this.setState({ tabValue: newValue, page: 1, error: null });
   };
 
   componentDidUpdate(prevProps, prevState) {
