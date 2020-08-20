@@ -10,7 +10,7 @@ export default class Explore extends Component {
   state = { category: "", articles: [], page: 1, error: null };
 
   setCategory = (value) => {
-    this.setState({ category: value });
+    this.setState({ category: value, page: 1 });
   };
 
   handleResetClick = () => {
