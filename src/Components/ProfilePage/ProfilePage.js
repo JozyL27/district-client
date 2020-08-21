@@ -6,10 +6,10 @@ import Button from "@material-ui/core/Button";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import NavArrows from "../NavArrows/NavArrows";
 import "../../Styles/ProfilePage.css";
-import avatar from "../../illustrations/01.png";
 import EditProfileCard from "../EditProfileCard/EditProfileCard";
 import AddArticle from "../AddArticle/AddArticle";
 import TabNavigation from "../Utils/TabNavigation";
+import ProfileAvatar from "../Utils/ProfileAvatar";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -203,18 +203,13 @@ export default class ProfilePage extends Component {
       error,
       tabValue,
     } = this.state;
-    console.log(userInfo);
 
     return (
       <section className="profilePageContainer">
         {!isEditing ? (
           <>
             <div className="userInfoContainer">
-              <img
-                src={userInfo.avatar}
-                alt="avatar"
-                className="profileAvatar"
-              />
+              <ProfileAvatar avatar={userInfo.avatar} />
               <div className="bioContainer">
                 <span className="profileUsername">{userInfo.username}</span>
                 {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
@@ -232,7 +227,7 @@ export default class ProfilePage extends Component {
           </>
         ) : (
           <EditProfileCard
-            avatar={avatar}
+            avatar={userInfo.avatar}
             username={username}
             bio={bio}
             handleBioChange={this.handleChange}
