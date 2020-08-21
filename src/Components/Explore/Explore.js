@@ -142,6 +142,7 @@ export default class Explore extends Component {
                 date_published={article.date_published}
                 author={article.author}
                 onDeleteClick={this.handleDeleteArticleButton}
+                avatar={article.avatar}
               />
             ))}
         </ul>
