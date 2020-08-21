@@ -5,9 +5,9 @@ import ArticleCard from "../ArticleCard/ArticleCard";
 import NavArrows from "../NavArrows/NavArrows";
 import UserContext from "../../Context/UserContext";
 import "../../Styles/ProfilePage.css";
-import avatar from "../../illustrations/01.png";
 import TabNavigation from "../Utils/TabNavigation";
 import { Redirect } from "react-router-dom";
+import ProfileAvatar from "../Utils/ProfileAvatar";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -147,7 +147,7 @@ export default class ProfilePage extends Component {
     return (
       <section className="profilePageContainer">
         <div className="userInfoContainer">
-          <img src={avatar} alt="avatar" className="profileAvatar" />
+          <ProfileAvatar avatar={userInfo.avatar} />
           <div className="bioContainer">
             <span className="profileUsername">{userInfo.username}</span>
             {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
@@ -170,6 +170,7 @@ export default class ProfilePage extends Component {
                   date_published={article.date_published}
                   author={article.author}
                   onDeleteClick={this.handleDeleteArticleButton}
+                  avatar={article.avatar}
                 />
               );
             })}
