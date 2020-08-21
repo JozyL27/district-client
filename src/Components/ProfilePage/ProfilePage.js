@@ -203,13 +203,18 @@ export default class ProfilePage extends Component {
       error,
       tabValue,
     } = this.state;
+    console.log(userInfo);
 
     return (
       <section className="profilePageContainer">
         {!isEditing ? (
           <>
             <div className="userInfoContainer">
-              <img src={avatar} alt="avatar" className="profileAvatar" />
+              <img
+                src={userInfo.avatar}
+                alt="avatar"
+                className="profileAvatar"
+              />
               <div className="bioContainer">
                 <span className="profileUsername">{userInfo.username}</span>
                 {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
@@ -256,6 +261,7 @@ export default class ProfilePage extends Component {
                   date_published={article.date_published}
                   author={article.author}
                   onDeleteClick={this.handleDeleteArticleButton}
+                  avatar={tabValue === 1 ? article.avatar : userInfo.avatar}
                 />
               );
             })}
