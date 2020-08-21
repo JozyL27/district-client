@@ -170,7 +170,7 @@ export default class ProfilePage extends Component {
                   date_published={article.date_published}
                   author={article.author}
                   onDeleteClick={this.handleDeleteArticleButton}
-                  avatar={article.avatar}
+                  avatar={userInfo.avatar}
                 />
               );
             })}
