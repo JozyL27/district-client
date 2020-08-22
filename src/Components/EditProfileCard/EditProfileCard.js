@@ -1,6 +1,8 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ProfileAvatar from "../Utils/ProfileAvatar";
 import "../../Styles/EditProfileCard.css";
 
@@ -8,7 +10,27 @@ const EditProfileCard = (props) => {
   return (
     <>
       <div className="userInfoContainer">
-        <ProfileAvatar avatar={props.avatar} />
+        <div className="avatarContainer">
+          <ProfileAvatar
+            avatar={props.newAvatar.length > 1 ? props.newAvatar : props.avatar}
+          />
+          <input
+            accept="image/*"
+            id="icon-button-file"
+            type="file"
+            className="editProfileInput"
+            onChange={props.handleAvatarChange}
+          />
+          <label htmlFor="icon-button-file">
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </div>
         <div className="bioContainer">
           <div className="editUsername">
             <TextField

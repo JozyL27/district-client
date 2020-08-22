@@ -22,6 +22,9 @@ export default class ProfilePage extends Component {
     bio: "",
     username: "",
     tabValue: 0,
+    avatar: "",
+    newAvatar: "",
+    loading: false,
   };
 
   componentDidMount() {
@@ -36,6 +39,7 @@ export default class ProfilePage extends Component {
             userInfo: res,
             bio: res.bio,
             username: res.username,
+            avatar: res.avatar,
           });
 
       ArticlesService.getMyArticles(user.id, page).then((res) =>
@@ -57,11 +61,13 @@ export default class ProfilePage extends Component {
       isEditing: !isEditing,
       bio: userInfo.bio,
       username: userInfo.username,
+      avatar: userInfo.avatar,
+      newAvatar: "",
       error: null,
     });
   };
 
-  handleChange = (event) => {
+  handleBioChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -123,9 +129,12 @@ export default class ProfilePage extends Component {
   };
 
   handleSaveButton = () => {
-    let { username, bio, isEditing } = this.state;
+    let { username, bio, isEditing, newAvatar } = this.state;
     const { user } = this.context;
     const newUserInfo = { username, bio };
+    if (newAvatar.length > 1) {
+      newUserInfo.avatar = newAvatar;
+    }
 
     UserService.updateUserInfo(user.id, newUserInfo).then((res) => {
       if (res.error) {
@@ -137,6 +146,7 @@ export default class ProfilePage extends Component {
             username: res.username,
             bio: res.bio,
             userInfo: res,
+            avatar: res.avatar,
             error: null,
           });
         });
@@ -155,8 +165,24 @@ export default class ProfilePage extends Component {
     );
   };
 
-  handleChange = (event, newValue) => {
+  handleTabChange = (event, newValue) => {
     this.setState({ tabValue: newValue, page: 1, error: null });
+  };
+
+  handleAvatarChange = (event) => {
+    const files = Array.from(event.target.files);
+    this.setState({ loading: true });
+
+    const formData = new FormData();
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+    UserService.addUserAvatar(formData).then((avatar) => {
+      this.setState({
+        newAvatar: avatar,
+        loading: false,
+      });
+    });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -202,6 +228,8 @@ export default class ProfilePage extends Component {
       username,
       error,
       tabValue,
+      avatar,
+      newAvatar,
     } = this.state;
 
     return (
@@ -209,7 +237,7 @@ export default class ProfilePage extends Component {
         {!isEditing ? (
           <>
             <div className="userInfoContainer">
-              <ProfileAvatar avatar={userInfo.avatar} />
+              <ProfileAvatar avatar={avatar} />
               <div className="bioContainer">
                 <span className="profileUsername">{userInfo.username}</span>
                 {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
@@ -227,12 +255,14 @@ export default class ProfilePage extends Component {
           </>
         ) : (
           <EditProfileCard
-            avatar={userInfo.avatar}
+            avatar={avatar}
+            newAvatar={newAvatar}
             username={username}
             bio={bio}
-            handleBioChange={this.handleChange}
+            handleBioChange={this.handleBioChange}
             handleCancelButton={this.handleCancelButton}
             handleSaveButton={this.handleSaveButton}
+            handleAvatarChange={this.handleAvatarChange}
           />
         )}
         {error && <p>{error}</p>}
@@ -240,7 +270,7 @@ export default class ProfilePage extends Component {
           addArticle={this.handleAddArticleButton}
           userInfo={this.context.user}
         />
-        <TabNavigation value={tabValue} handleChange={this.handleChange} />
+        <TabNavigation value={tabValue} handleChange={this.handleTabChange} />
         <ul className="profileArticles">
           {articles.length > 0 &&
             articles.map((article) => {

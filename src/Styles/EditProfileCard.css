@@ -1,12 +1,23 @@
 .profileButtonsContainer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .profileButtonsContainer > div {
-    padding: 20px;
+  padding: 20px;
 }
 
-.editUsername, .editBio {
-    padding: 10px;
+.editUsername,
+.editBio {
+  padding: 10px;
+}
+
+.editProfileInput {
+  display: none;
+}
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
