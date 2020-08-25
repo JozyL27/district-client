@@ -171,17 +171,21 @@ export default class ProfilePage extends Component {
 
   handleAvatarChange = (event) => {
     const files = Array.from(event.target.files);
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: null });
 
     const formData = new FormData();
     files.forEach((file, i) => {
       formData.append(i, file);
     });
     UserService.addUserAvatar(formData).then((avatar) => {
-      this.setState({
-        newAvatar: avatar,
-        loading: false,
-      });
+      if (avatar.error) {
+        this.setState({ error: avatar.error, loading: false });
+      } else {
+        this.setState({
+          newAvatar: avatar,
+          loading: false,
+        });
+      }
     });
   };
 
@@ -230,6 +234,7 @@ export default class ProfilePage extends Component {
       tabValue,
       avatar,
       newAvatar,
+      loading,
     } = this.state;
 
     return (
@@ -263,6 +268,7 @@ export default class ProfilePage extends Component {
             handleCancelButton={this.handleCancelButton}
             handleSaveButton={this.handleSaveButton}
             handleAvatarChange={this.handleAvatarChange}
+            loading={loading}
           />
         )}
         {error && <p>{error}</p>}

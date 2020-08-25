@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ProfileAvatar from "../Utils/ProfileAvatar";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "../../Styles/EditProfileCard.css";
 
 const EditProfileCard = (props) => {
@@ -11,9 +12,15 @@ const EditProfileCard = (props) => {
     <>
       <div className="userInfoContainer">
         <div className="avatarContainer">
-          <ProfileAvatar
-            avatar={props.newAvatar.length > 1 ? props.newAvatar : props.avatar}
-          />
+          {props.loading === true ? (
+            <CircularProgress />
+          ) : (
+            <ProfileAvatar
+              avatar={
+                props.newAvatar.length > 1 ? props.newAvatar : props.avatar
+              }
+            />
+          )}
           <input
             accept="image/*"
             id="icon-button-file"
