@@ -7,6 +7,7 @@ const FollowerCount = (props) => {
   const { user_id } = props;
   const [followers, setFollowers] = useState([]);
   useEffect(() => {
+    setFollowers([]);
     FollowerService.getFollowerCount(user_id).then((res) => setFollowers(res));
   }, []);
 
@@ -20,7 +21,7 @@ const FollowerCount = (props) => {
             </Link>
           </span>
           <span className="followerSpan">
-            <Link className="followerLink">
+            <Link className="followerLink" to={`/followers/${user_id}`}>
               Followers: {followers[1].followers_count}
             </Link>
           </span>
