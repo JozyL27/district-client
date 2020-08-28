@@ -25,6 +25,18 @@ const FollowerService = {
       console.error(error);
     }
   },
+  async getFollowing(user_id, page) {
+    try {
+      let res = await fetch(
+        `${config.API_ENDPOINT}/followers/userfollowing/${user_id}?page=${page}`
+      ).catch((error) => Promise.reject(error));
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default FollowerService;

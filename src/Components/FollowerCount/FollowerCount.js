@@ -6,9 +6,19 @@ import "../../Styles/FollowerCount.css";
 const FollowerCount = (props) => {
   const { user_id } = props;
   const [followers, setFollowers] = useState([]);
+
   useEffect(() => {
-    setFollowers([]);
-    FollowerService.getFollowerCount(user_id).then((res) => setFollowers(res));
+    let isCancelled = false;
+    FollowerService.getFollowerCount(user_id).then((res) => {
+      if (!isCancelled) {
+        setFollowers(res);
+      }
+    });
+
+    return () => {
+      isCancelled = true;
+      setFollowers([]);
+    };
   }, []);
 
   return (
@@ -16,7 +26,7 @@ const FollowerCount = (props) => {
       {followers.length > 1 && (
         <>
           <span className="followerSpan">
-            <Link className="followerLink">
+            <Link className="followerLink" to={`/following/${user_id}`}>
               Following: {followers[0].following_count}
             </Link>
           </span>

@@ -13,6 +13,7 @@ import ProfilePage from "../ProfilePage/ProfilePage";
 import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import MessagesPage from "../../Routes/MessagesPage/MessagesPage";
 import FollowersPage from "../../Routes/FollowersPage/FollowersPage";
+import FollowingPage from "../../Routes/FollowingPage/FollowingPage";
 import "../../Styles/App.css";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/myProfile" component={ProfilePage} />
           <Route exact path="/message" component={MessagesPage} />
           <Route path="/followers/:userId" component={FollowersPage} />
+          <Route path="/following/:userId" component={FollowingPage} />
           <Route path="/article/:articleId" component={ArticlePage} />
           <Route path="/profile/:userId" component={UserProfilePage} />
           <Route component={NotFoundPage} />
