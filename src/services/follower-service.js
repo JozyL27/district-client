@@ -1,0 +1,18 @@
+import config from "../config";
+
+const FollowerService = {
+  async getFollowerCount(user_id) {
+    try {
+      let res = await fetch(
+        `${config.API_ENDPOINT}/followers/count/${user_id}`
+      ).catch((error) => Promise.reject(error));
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+};
+
+export default FollowerService;

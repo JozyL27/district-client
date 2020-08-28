@@ -1,0 +1,14 @@
+.followersContainer {
+  display: flex;
+  align-items: center;
+}
+
+.followerSpan {
+  padding: 10px;
+  font-weight: 500;
+}
+
+.followerLink {
+  text-decoration: none;
+  color: grey;
+}
