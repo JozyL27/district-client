@@ -10,6 +10,7 @@ import EditProfileCard from "../EditProfileCard/EditProfileCard";
 import AddArticle from "../AddArticle/AddArticle";
 import TabNavigation from "../Utils/TabNavigation";
 import ProfileAvatar from "../Utils/ProfileAvatar";
+import FollowerCount from "../FollowerCount/FollowerCount";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -248,6 +249,7 @@ export default class ProfilePage extends Component {
                 {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
               </div>
             </div>
+            <FollowerCount user_id={this.context.user.id} />
             <div className="profileButtonContainer">
               <Button
                 variant="contained"

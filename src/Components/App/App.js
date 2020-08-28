@@ -11,6 +11,7 @@ import Explore from "../Explore/Explore";
 import ArticlePage from "../ArticlePage/ArticlePage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import UserProfilePage from "../UserProfilePage/UserProfilePage";
+import MessagesPage from "../../Routes/MessagesPage/MessagesPage";
 import "../../Styles/App.css";
 
 function App() {
@@ -24,8 +25,9 @@ function App() {
           <Route exact path="/signup" component={SignupPage} />
           <Route exact path="/feed" component={Feed} />
           <Route exact path="/explore" component={Explore} />
-          <Route path="/article/:articleId" component={ArticlePage} />
           <Route exact path="/myProfile" component={ProfilePage} />
+          <Route exact path="/message" component={MessagesPage} />
+          <Route path="/article/:articleId" component={ArticlePage} />
           <Route path="/profile/:userId" component={UserProfilePage} />
           <Route component={NotFoundPage} />
         </Switch>

@@ -19,18 +19,19 @@ export default UserContext;
 export class UserProvider extends Component {
   constructor(props) {
     super(props);
-    const state = { user: {}, error: null };
+    const state = { user: {}, error: null, socket: null };
 
     const jwtPayload = TokenService.parseAuthToken();
-    const socket = io(config.SOCKET_CONNECTION);
 
-    if (jwtPayload)
+    if (jwtPayload) {
+      const socket = io(config.SOCKET_CONNECTION);
       state.user = {
         id: jwtPayload.user_id,
         email: jwtPayload.email,
         username: jwtPayload.sub,
       };
-    state.socket = socket.connect();
+      state.socket = socket.connect();
+    }
 
     this.state = state;
   }
