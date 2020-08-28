@@ -8,6 +8,7 @@ import "../../Styles/ProfilePage.css";
 import TabNavigation from "../Utils/TabNavigation";
 import { Redirect } from "react-router-dom";
 import ProfileAvatar from "../Utils/ProfileAvatar";
+import FollowerCount from "../FollowerCount/FollowerCount";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -139,6 +140,7 @@ export default class ProfilePage extends Component {
 
   render() {
     const { userInfo, articles, page, error, tabValue, redirect } = this.state;
+    const { userId } = this.props.match.params;
 
     if (redirect) {
       return <Redirect to="/myProfile" />;
@@ -151,6 +153,7 @@ export default class ProfilePage extends Component {
           <div className="bioContainer">
             <span className="profileUsername">{userInfo.username}</span>
             {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
+            <FollowerCount user_id={userId} />
           </div>
         </div>
         <TabNavigation value={tabValue} handleChange={this.handleChange} />
