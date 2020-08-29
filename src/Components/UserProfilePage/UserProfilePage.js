@@ -9,6 +9,7 @@ import TabNavigation from "../Utils/TabNavigation";
 import { Redirect } from "react-router-dom";
 import ProfileAvatar from "../Utils/ProfileAvatar";
 import FollowerCount from "../FollowerCount/FollowerCount";
+import FollowButton from "../FollowButton/FollowButton";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -154,6 +155,7 @@ export default class ProfilePage extends Component {
             <span className="profileUsername">{userInfo.username}</span>
             {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
             <FollowerCount user_id={userId} />
+            <FollowButton user_profile_id={userId} />
           </div>
         </div>
         <TabNavigation value={tabValue} handleChange={this.handleChange} />

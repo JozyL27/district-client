@@ -1,0 +1,13 @@
+.followerLi {
+  list-style: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.followerSpan {
+  padding: 10px;
+}
+.followerSpan:hover {
+  cursor: default;
+}
