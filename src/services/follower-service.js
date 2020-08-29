@@ -49,6 +49,35 @@ const FollowerService = {
       console.error(error);
     }
   },
+  async unfollow(user_id, followerInfo) {
+    try {
+      await fetch(`${config.API_ENDPOINT}/followers/${user_id}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(followerInfo),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async followUser(newFollowerFields) {
+    try {
+      let res = await fetch(`${config.API_ENDPOINT}/followers`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newFollowerFields),
+      });
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default FollowerService;

@@ -17,6 +17,29 @@ const FollowButton = (props) => {
   const { user } = userContext;
   const classes = useStyles();
 
+  const handleUnfollowClick = () => {
+    const userToUnfollow = {
+      follower_id: user_profile_id,
+    };
+    FollowerService.unfollow(user.id, userToUnfollow).then(() => {
+      FollowerService.alreadyFollowing(user.id, user_profile_id).then((res) =>
+        setIsFollowing(res.message)
+      );
+    });
+  };
+
+  const handleFollowClick = () => {
+    const newFollowerFields = {
+      user_id: user.id,
+      follower_id: user_profile_id,
+    };
+    FollowerService.followUser(newFollowerFields).then(() => {
+      FollowerService.alreadyFollowing(user.id, user_profile_id).then((res) =>
+        setIsFollowing(res.message)
+      );
+    });
+  };
+
   useEffect(() => {
     FollowerService.alreadyFollowing(user.id, user_profile_id).then((res) =>
       setIsFollowing(res.message)
@@ -31,6 +54,7 @@ const FollowButton = (props) => {
           variant="contained"
           size="small"
           className={classes.root}
+          onClick={handleUnfollowClick}
         >
           Unfollow
         </Button>
@@ -40,6 +64,7 @@ const FollowButton = (props) => {
           variant="contained"
           size="small"
           className={classes.root}
+          onClick={handleFollowClick}
         >
           Follow
         </Button>
