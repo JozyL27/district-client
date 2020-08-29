@@ -37,6 +37,18 @@ const FollowerService = {
       console.error(error);
     }
   },
+  async alreadyFollowing(user_id, follower_id) {
+    try {
+      let res = await fetch(
+        `${config.API_ENDPOINT}/followers/${user_id}?follower_id=${follower_id}`
+      );
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default FollowerService;

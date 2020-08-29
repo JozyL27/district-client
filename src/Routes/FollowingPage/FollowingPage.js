@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FollowerService from "../../services/follower-service";
 import FollowerCard from "../../Components/FollowerCard/FollowerCard";
+import "../../Styles/FollowersPage.css";
 
 const FollowingPage = (props) => {
   const { userId } = props.match.params;
@@ -13,10 +14,10 @@ const FollowingPage = (props) => {
   }, []);
 
   return (
-    <section>
-      <h2>Following</h2>
+    <section className="followerPageSection">
+      <h2 className="followerH2">Following</h2>
       {Error && <p>{Error}</p>}
-      <ul>
+      <ul className="followerPageUl">
         {Following.length > 0 &&
           Following.map((user) => (
             <FollowerCard
