@@ -14,6 +14,7 @@ import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import MessagesPage from "../../Routes/MessagesPage/MessagesPage";
 import FollowersPage from "../../Routes/FollowersPage/FollowersPage";
 import FollowingPage from "../../Routes/FollowingPage/FollowingPage";
+import Conversation from "../Conversation/Conversation";
 import PrivateRoute from "../../Routes/PrivateRoute/PrivateRoute";
 import PublicRoute from "../../Routes/PublicRoute/PublicRoute";
 import "../../Styles/App.css";
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/explore" component={Explore} />
           <PrivateRoute exact path="/myProfile" component={ProfilePage} />
           <PrivateRoute exact path="/message" component={MessagesPage} />
+          <Route path="/conversation/:convoPartner" component={Conversation} />
           <Route path="/followers/:userId" component={FollowersPage} />
           <Route path="/following/:userId" component={FollowingPage} />
           <Route path="/article/:articleId" component={ArticlePage} />
