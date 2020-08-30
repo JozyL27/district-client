@@ -49,9 +49,9 @@ const FollowerService = {
       console.error(error);
     }
   },
-  async unfollow(user_id, followerInfo) {
+  async unfollow(followerInfo) {
     try {
-      await fetch(`${config.API_ENDPOINT}/followers/${user_id}`, {
+      await fetch(`${config.API_ENDPOINT}/followers`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",

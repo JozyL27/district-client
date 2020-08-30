@@ -14,6 +14,9 @@ import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import MessagesPage from "../../Routes/MessagesPage/MessagesPage";
 import FollowersPage from "../../Routes/FollowersPage/FollowersPage";
 import FollowingPage from "../../Routes/FollowingPage/FollowingPage";
+import Conversation from "../Conversation/Conversation";
+import PrivateRoute from "../../Routes/PrivateRoute/PrivateRoute";
+import PublicRoute from "../../Routes/PublicRoute/PublicRoute";
 import "../../Styles/App.css";
 
 function App() {
@@ -23,12 +26,13 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignupPage} />
-          <Route exact path="/feed" component={Feed} />
+          <PublicRoute exact path="/login" component={LoginPage} />
+          <PublicRoute exact path="/signup" component={SignupPage} />
+          <PrivateRoute exact path="/feed" component={Feed} />
           <Route exact path="/explore" component={Explore} />
-          <Route exact path="/myProfile" component={ProfilePage} />
-          <Route exact path="/message" component={MessagesPage} />
+          <PrivateRoute exact path="/myProfile" component={ProfilePage} />
+          <PrivateRoute exact path="/message" component={MessagesPage} />
+          <Route path="/conversation/:convoPartner" component={Conversation} />
           <Route path="/followers/:userId" component={FollowersPage} />
           <Route path="/following/:userId" component={FollowingPage} />
           <Route path="/article/:articleId" component={ArticlePage} />

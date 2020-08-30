@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import UserService from "../../services/user-service";
 import ArticlesService from "../../services/article-service";
 import ArticleCard from "../ArticleCard/ArticleCard";
@@ -10,6 +11,7 @@ import { Redirect } from "react-router-dom";
 import ProfileAvatar from "../Utils/ProfileAvatar";
 import FollowerCount from "../FollowerCount/FollowerCount";
 import FollowButton from "../FollowButton/FollowButton";
+import ChatIcon from "@material-ui/icons/Chat";
 
 export default class ProfilePage extends Component {
   static contextType = UserContext;
@@ -150,7 +152,12 @@ export default class ProfilePage extends Component {
     return (
       <section className="profilePageContainer">
         <div className="userInfoContainer">
-          <ProfileAvatar avatar={userInfo.avatar} />
+          <div className="avatarMessageContainer">
+            <ProfileAvatar avatar={userInfo.avatar} />
+            <Link className="chatLink" to={`/conversation/${userId}`}>
+              <ChatIcon />
+            </Link>
+          </div>
           <div className="bioContainer">
             <span className="profileUsername">{userInfo.username}</span>
             {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
