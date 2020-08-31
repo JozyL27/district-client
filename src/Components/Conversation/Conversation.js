@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import UserContext from "../../Context/UserContext";
+import Messages from "../Messages/Messages";
+import "../../Styles/Conversation.css";
 
 class Conversation extends Component {
   static contextType = UserContext;
@@ -14,7 +16,6 @@ class Conversation extends Component {
   componentDidMount() {
     const { socket, user } = this.context;
     const { convoPartner } = this.props.match.params;
-    console.log(socket, user, convoPartner);
 
     if (socket) {
       socket.emit("newUser", user.id);
@@ -22,9 +23,8 @@ class Conversation extends Component {
         userId: user.id,
         receiverId: convoPartner,
       });
+      this.handleSocketListeners();
     }
-    this.handleSocketListeners();
-    this.setState({ user: user.id, partner: convoPartner });
   }
 
   handleSocketListeners = () => {
@@ -57,23 +57,43 @@ class Conversation extends Component {
       sender_id: user.id,
       receiver_id: convoPartner,
     });
+    this.setState({ message: "" });
   };
 
   handleMessageChange = (event) => {
     this.setState({ message: event.target.value });
   };
 
+  componentWillUnmount() {
+    this.setState({
+      messages: [],
+      conversation_id: 0,
+      user: null,
+      partner: null,
+      message: "",
+    });
+  }
+
   render() {
-    const { messages, message } = this.state;
+    const { messages, message, conversation_id } = this.state;
+    const { user } = this.context;
+    const { convoPartner } = this.props.match.params;
+
+    console.log(messages, message, conversation_id);
     return (
-      <section>
-        <p>messages</p>
-        <ul>
+      <section className="conversationContainer">
+        <h2>messages</h2>
+        <ul className="messagesContainer">
           {messages.length > 0 &&
             messages.map((message) => (
-              <li key={message.id}>
-                <span>{message.message}</span>
-              </li>
+              <Messages
+                id={message.id}
+                key={message.id}
+                message={message.message}
+                user={user.id}
+                partner={convoPartner}
+                sender_id={message.sender_id}
+              />
             ))}
         </ul>
         <form onSubmit={this.handleSubmitMessage}>
