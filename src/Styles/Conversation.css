@@ -1,0 +1,17 @@
+.messagesContainer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 70%;
+  max-width: 95%;
+  min-height: 500px;
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+.conversationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
