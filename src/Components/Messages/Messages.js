@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserService from "../../services/user-service";
 import Avatar from "@material-ui/core/Avatar";
+import { Link } from "react-router-dom";
 import "../../Styles/Messages.css";
 
 const Messages = (props) => {
@@ -17,17 +18,19 @@ const Messages = (props) => {
   if (props.sender_id === props.user) {
     return (
       <li key={props.id} className="messageContainer">
-        <Avatar src={user.avatar} />
-        <span>{user.username}</span>
-        <p>{props.message}</p>
+        <Link to="/myProfile">
+          <Avatar src={user.avatar} />
+        </Link>
+        <p className="message">{props.message}</p>
       </li>
     );
   } else {
     return (
-      <li key={props.id} className="messageContainer">
-        <Avatar src={chatPartner.avatar} />
-        <span>{chatPartner.username}</span>
-        <p>{props.message}</p>
+      <li key={props.id} className="partnerMessageContainer">
+        <Link to={`/profile/${props.partner}`}>
+          <Avatar src={chatPartner.avatar} />
+        </Link>
+        <p className="message">{props.message}</p>
       </li>
     );
   }
