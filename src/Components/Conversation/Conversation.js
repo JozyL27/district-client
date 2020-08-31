@@ -82,7 +82,7 @@ class Conversation extends Component {
     console.log(messages, message, conversation_id);
     return (
       <section className="conversationContainer">
-        <h2>messages</h2>
+        <h2 className="convoH2">messages</h2>
         <ul className="messagesContainer">
           {messages.length > 0 &&
             messages.map((message) => (
