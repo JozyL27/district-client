@@ -13,6 +13,7 @@ import FollowerCount from "../FollowerCount/FollowerCount";
 import FollowButton from "../FollowButton/FollowButton";
 import ChatIcon from "@material-ui/icons/Chat";
 
+// hide message button if logged out
 export default class ProfilePage extends Component {
   static contextType = UserContext;
 
