@@ -12,3 +12,5 @@ export default {
       ? process.env.REACT_APP_SOCKET_CONNECTION
       : "http://localhost:8000",
 };
+
+console.log("config");
