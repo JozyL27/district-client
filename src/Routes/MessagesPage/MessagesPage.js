@@ -1,15 +1,55 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../../Context/UserContext";
+import MessageService from "../../services/messages-service";
+import Avatar from "@material-ui/core/Avatar";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import "../../Styles/MessagesPage.css";
 
 const MessagesPage = () => {
   const userContext = useContext(UserContext);
-
+  const [conversations, setConversations] = useState([]);
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const { user } = userContext;
+    MessageService.getUserConversations(user.id, page).then((res) =>
+      res.error ? setError(res.error) : setConversations(res)
+    );
+  }, []);
+  console.log(conversations);
   return (
-    <section>
-      <div className="messagesHeader">
-        <h2>Messages</h2>
-        <ul>{/* convo container goes here */}</ul>
-      </div>
+    <section className="msgPageContainer">
+      <h2>Messages</h2>
+      {error && <p>{error}</p>}
+      <ul className="msgPageUl">
+        {conversations.length > 0 &&
+          conversations.map((item) => (
+            <li key={item.id} className="msgPageLi">
+              <div className="msgPageDiv">
+                <Link to={`/profile/${item.user2id}`} className="msgPageLink">
+                  <Avatar src={item.lastMessage.avatar} />
+                </Link>
+                <span className="msgPageUsername">
+                  {item.lastMessage.username}
+                </span>
+              </div>
+              <div className="msgPageDiv msgContainer">
+                <Link
+                  to={`/conversation/${item.user2id}`}
+                  className="msgPageLink"
+                >
+                  <p className="msgPageP">{item.lastMessage.message}</p>
+                  <span>
+                    {moment
+                      .utc(`${item.lastMessage.date_created}`)
+                      .format("MMMM Do YYYY")}
+                  </span>
+                </Link>
+              </div>
+            </li>
+          ))}
+      </ul>
     </section>
   );
 };
