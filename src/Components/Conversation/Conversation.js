@@ -79,10 +79,8 @@ class Conversation extends Component {
     const { user } = this.context;
     const { convoPartner } = this.props.match.params;
 
-    console.log(messages, message, conversation_id);
     return (
       <section className="conversationContainer">
-        <h2 className="convoH2">messages</h2>
         <ul className="messagesContainer">
           {messages.length > 0 &&
             messages.map((message) => (
