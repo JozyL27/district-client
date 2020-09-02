@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import UserContext from "../../Context/UserContext";
 import Messages from "../Messages/Messages";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import "../../Styles/Conversation.css";
 
 class Conversation extends Component {
@@ -75,7 +77,7 @@ class Conversation extends Component {
   }
 
   render() {
-    const { messages, message, conversation_id } = this.state;
+    const { messages, message } = this.state;
     const { user } = this.context;
     const { convoPartner } = this.props.match.params;
 
@@ -94,12 +96,23 @@ class Conversation extends Component {
               />
             ))}
         </ul>
-        <form onSubmit={this.handleSubmitMessage}>
-          <textarea onChange={this.handleMessageChange} value={message} />
-          <button onSubmit={this.handleSubmitMessage} alt="send">
-            {" "}
-            send{" "}
-          </button>
+        <form onSubmit={this.handleSubmitMessage} className="msgForm">
+          <TextField
+            onChange={this.handleMessageChange}
+            value={message}
+            variant="outlined"
+            label="message"
+            multiline
+            margin="normal"
+          />
+          <Button
+            onSubmit={this.handleSubmitMessage}
+            variant="contained"
+            color="primary"
+            size="small"
+          >
+            send
+          </Button>
         </form>
       </section>
     );
