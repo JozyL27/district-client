@@ -1,91 +1,91 @@
 .commentAvatar {
-    max-height: 40px;
-    width: auto;
+  max-height: 40px;
+  width: auto;
 }
 
 .commentContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-    margin: 15px auto 15px auto;
-    
-    border-radius: 20px;
-    box-shadow: .5rem .6rem 1.8rem #888888;
-    max-width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  margin: 15px auto 15px auto;
+
+  border-radius: 10px;
+  box-shadow: 0.5rem 0.6rem 1.8rem #888888;
+  max-width: 90%;
 }
 
 .avatarCommentContainer {
-    padding: 10px;
-    margin-right: 45px;
-    display: none;
+  padding: 10px;
+  margin-right: 45px;
+  display: none;
 }
 
 .commentButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    margin-left: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin-left: 45px;
 }
 
 .buttonsAndContent {
-    display: flex;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
 
 .commentContent {
-    text-align: center;
-    max-width: 200px;
-    overflow-y: auto;
-    max-height: 100px;
-    line-height: 1.4;
+  text-align: center;
+  max-width: 200px;
+  overflow-y: auto;
+  max-height: 100px;
+  line-height: 1.4;
 }
 
 .commentUsername {
-    padding: 10px;
-    font-weight: 500;
+  padding: 10px;
+  font-weight: 500;
 }
 
 .commentSpan {
-    padding: 10px;
-    font-weight: 500;
+  padding: 10px;
+  font-weight: 500;
 }
 
 .contentAndPublish {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .commentPublishDate {
-    padding: 10px;
-    font-size: 14px;
-    color: grey;
-    text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: grey;
+  text-align: center;
 }
 
 .error {
-    font-weight: 600;
-    color: crimson;
-    text-align: center;
-    padding: 10px;
+  font-weight: 600;
+  color: crimson;
+  text-align: center;
+  padding: 10px;
 }
 
 @media screen and (min-width: 768px) {
-    .avatarCommentContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  .avatarCommentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .commentSpan {
-        display: none;
-    }
+  .commentSpan {
+    display: none;
+  }
 
-    .commentContent {
-        max-width: 350px;
-    }
+  .commentContent {
+    max-width: 350px;
+  }
 }

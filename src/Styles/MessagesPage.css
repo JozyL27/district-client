@@ -40,8 +40,8 @@
 }
 
 .msgPageP {
-  max-height: 100px;
-  overflow-y: auto;
+  max-height: 60px;
+  overflow: hidden;
   text-align: center;
 }
 
@@ -53,4 +53,10 @@
 .msgPageLink {
   text-decoration: none;
   color: rgb(129, 129, 129);
+}
+
+.msgPageDate {
+  font-size: 13px;
+  display: block;
+  text-align: center;
 }
