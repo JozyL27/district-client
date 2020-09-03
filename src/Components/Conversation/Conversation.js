@@ -97,16 +97,14 @@ class Conversation extends Component {
             ))}
         </ul>
         <form onSubmit={this.handleSubmitMessage} className="msgForm">
-          <div>
-            <TextField
-              onChange={this.handleMessageChange}
-              value={message}
-              variant="outlined"
-              label="message"
-              multiline
-              margin="normal"
-            />
-          </div>
+          <TextField
+            onChange={this.handleMessageChange}
+            value={message}
+            variant="outlined"
+            label="message"
+            multiline
+            margin="normal"
+          />
           <Button
             onSubmit={this.handleSubmitMessage}
             variant="contained"
