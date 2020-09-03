@@ -1,96 +1,100 @@
 .articlePageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
 }
 
 .pageContent {
-    max-width: 650px;
-    text-align: center;
-    line-height: 1.5;
-    margin-top: 60px;
-    font-weight: 400;
-    font-size: 16px;
-    padding: 15px;
+  max-width: 650px;
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 60px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 15px;
 }
 
 .articlePageAvatar {
-    max-height: 40px;
+  max-height: 40px;
 }
 
 .authorInfo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.authorInfo > :first-child {
+  margin-right: 10px;
 }
 
 .pageVoteContainer {
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  flex-direction: column;
 }
 
 .pageUpvote {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .pageError {
-    color: rgb(201, 10, 10);
-    font-size: 18px;
-    font-weight: 500;
+  color: rgb(201, 10, 10);
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .commentsContainer {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    padding: 10px;
-    max-width: 90%;
-    margin: 0px auto 40px auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10px;
+  max-width: 90%;
+  margin: 0px auto 40px auto;
 }
 
 .articlePageError {
-    text-align: center;
-    font-weight: 600;
-    color: crimson;
-    margin-bottom: 70px;
+  text-align: center;
+  font-weight: 600;
+  color: crimson;
+  margin-bottom: 70px;
 }
 
 .moreComments {
-    margin-bottom: 70px;
+  margin-bottom: 70px;
 }
 
 .pagePublishDate {
-    padding: 10px;
-    font-size: 15px;
-    color: grey;
-    text-align: center;
+  padding: 10px;
+  font-size: 15px;
+  color: grey;
+  text-align: center;
 }
 
 .viewAndAdd {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    max-height: 120px;
-    max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 120px;
+  max-width: 300px;
 }
 
 .addCommentButton {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 @media screen and (min-width: 768px) {
-    .pageContent {
-        font-size: 20px;
-    }
+  .pageContent {
+    font-size: 20px;
+  }
 
-    .articlePageContainer > h2 {
-        font-size: 30px;
-    }
+  .articlePageContainer > h2 {
+    font-size: 30px;
+  }
 }

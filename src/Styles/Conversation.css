@@ -31,5 +31,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 15px;
+}
+
+.msgForm > :nth-child(2) {
+  margin-bottom: 20px;
 }
