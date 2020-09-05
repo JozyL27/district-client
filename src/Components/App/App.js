@@ -5,7 +5,7 @@ import Landing from "../Landing/Landing";
 import SignupPage from "../../Routes/SignupPage/SignupPage";
 import LoginPage from "../../Routes/LoginPage/LoginPage";
 import Header from "../Header/Header";
-import Feed from "../Feed/Feed";
+import Feed from "../../Routes/Feed/Feed";
 import NotFoundPage from "../../Routes/NotFoundPage/NotFoundPage";
 import Explore from "../Explore/Explore";
 import ArticlePage from "../ArticlePage/ArticlePage";
