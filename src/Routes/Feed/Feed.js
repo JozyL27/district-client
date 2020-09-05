@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserContext from "../../Context/UserContext";
 import ArticlesService from "../../services/article-service";
 import ArticleCard from "../../Components/ArticleCard/ArticleCard";
+import "../../Styles/Feed.css";
 
 export default class Feed extends Component {
   static contextType = UserContext;
@@ -26,8 +27,8 @@ export default class Feed extends Component {
     const { articles } = this.state;
     console.log(articles);
     return (
-      <section>
-        <ul>
+      <section className="feedContainer">
+        <ul className="articleFeedContainer">
           {articles.length > 0 &&
             articles.map((article) => (
               <ArticleCard

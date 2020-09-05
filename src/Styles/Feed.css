@@ -1,0 +1,19 @@
+.feedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.articleFeedContainer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.articleFeedContainer > li {
+  min-width: 400px;
+  max-width: 500px;
+}
