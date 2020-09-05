@@ -94,6 +94,18 @@ const ArticlesService = {
       Promise.reject(error);
     }
   },
+  async getUserFeedArticles(user_id, pageNumber) {
+    try {
+      let res = await fetch(
+        `${config.API_ENDPOINT}/articles/feed/${user_id}?page=${pageNumber}`
+      ).catch((error) => Promise.reject(error));
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default ArticlesService;
