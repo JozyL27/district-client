@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 150px auto 20px auto;
 }
 
 .articleFeedContainer {
@@ -10,10 +11,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
-}
-
-.articleFeedContainer > li {
-  min-width: 400px;
-  max-width: 500px;
+  width: 100%;
 }
