@@ -106,9 +106,9 @@ export default class BurgerMenu extends Component {
         >
           <ProfileAvatar avatar={userInfo.avatar} />
           {TokenService.hasAuthToken() ? (
-            <p>{userInfo.username}</p>
+            <p className="burgerUsername">{userInfo.username}</p>
           ) : (
-            <p>Guest</p>
+            <p className="burgerUsername">Guest</p>
           )}
           <ul className="burgerUl">
             <li className="burgerLi">

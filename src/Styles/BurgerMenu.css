@@ -4,6 +4,14 @@
   list-style: none;
 }
 
+.burgerUsername {
+  outline: none;
+  font-weight: 500;
+  color: darkgrey;
+  text-align: center;
+  cursor: default;
+}
+
 .burgerUl:focus {
   outline: none;
 }
@@ -12,6 +20,7 @@
   padding: 5px;
   color: black;
   font-weight: 500;
+  margin-left: 25px;
 }
 
 .burgerLink {
@@ -76,7 +85,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  /* background: rgb(243, 241, 241);   */
   background: white;
   padding: 40px;
   font-size: 1.15em;
