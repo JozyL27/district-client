@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserContext from "../../Context/UserContext";
 import ArticlesService from "../../services/article-service";
 import ArticleCard from "../../Components/ArticleCard/ArticleCard";
+import AddArticle from "../../Components/AddArticle/AddArticle";
 import "../../Styles/Feed.css";
 
 export default class Feed extends Component {
@@ -11,6 +12,30 @@ export default class Feed extends Component {
     articles: [],
     page: 1,
     error: null,
+  };
+
+  handleAddArticleButton = () => {
+    const { user } = this.context;
+    const { page } = this.state;
+
+    ArticlesService.getUserFeedArticles(user.id, page).then((res) =>
+      res.error
+        ? this.setState({ error: res.error })
+        : this.setState({ articles: res })
+    );
+  };
+
+  handleDeleteArticleButton = (id) => {
+    let { page } = this.state;
+    const { user } = this.context;
+
+    ArticlesService.deleteArticle(id).then(() => {
+      ArticlesService.getUserFeedArticles(user.id, page).then((res) =>
+        res.error
+          ? this.setState({ error: res.error })
+          : this.setState({ articles: res })
+      );
+    });
   };
 
   componentDidMount() {
@@ -25,9 +50,11 @@ export default class Feed extends Component {
 
   render() {
     const { articles, error } = this.state;
+    const { user } = this.context;
     return (
       <section className="feedContainer">
         {error && <p>{error}</p>}
+        <AddArticle addArticle={this.handleAddArticleButton} userInfo={user} />
         <ul className="articleFeedContainer">
           {articles.length > 0 &&
             articles.map((article) => (
@@ -39,6 +66,7 @@ export default class Feed extends Component {
                 username={article.userInfo && article.userInfo.username}
                 author={article.author}
                 date_published={article.date_published}
+                onDeleteClick={this.handleDeleteArticleButton}
               />
             ))}
         </ul>
