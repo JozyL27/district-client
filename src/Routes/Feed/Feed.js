@@ -24,10 +24,10 @@ export default class Feed extends Component {
   }
 
   render() {
-    const { articles } = this.state;
-    console.log(articles);
+    const { articles, error } = this.state;
     return (
       <section className="feedContainer">
+        {error && <p>{error}</p>}
         <ul className="articleFeedContainer">
           {articles.length > 0 &&
             articles.map((article) => (
