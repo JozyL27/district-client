@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import TokenService from "../services/token-service";
+import UserService from "../services/user-service";
 import io from "socket.io-client";
 import config from "../config";
 
 const UserContext = React.createContext({
   user: {},
-  error: null,
+  userInfo: {},
   socket: null,
-  setError: () => {},
-  clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
@@ -19,7 +18,7 @@ export default UserContext;
 export class UserProvider extends Component {
   constructor(props) {
     super(props);
-    const state = { user: {}, error: null, socket: null };
+    const state = { user: {}, error: null, socket: null, userInfo: {} };
 
     const jwtPayload = TokenService.parseAuthToken();
 
@@ -31,18 +30,13 @@ export class UserProvider extends Component {
         username: jwtPayload.sub,
       };
       state.socket = socket.connect();
+      UserService.getAuthorInfo(state.user.id).then((res) =>
+        this.setState({ userInfo: res })
+      );
     }
 
     this.state = state;
   }
-
-  setError = (error) => {
-    this.setState({ error });
-  };
-
-  clearError = () => {
-    this.setState({ error: null });
-  };
 
   setUser = (user) => {
     this.setState({ user });
@@ -58,22 +52,24 @@ export class UserProvider extends Component {
       username: jwtPayload.sub,
     });
     this.setState({ socket: socket.connect() });
+
+    UserService.getAuthorInfo(this.state.user.id).then((res) =>
+      this.setState({ userInfo: res })
+    );
   };
 
   processLogout = () => {
     TokenService.clearAuthToken();
     this.setUser({});
     this.state.socket.disconnect();
-    this.setState({ socket: null });
+    this.setState({ socket: null, userInfo: {} });
   };
 
   render() {
     const values = {
       user: this.state.user,
-      error: this.state.error,
+      userInfo: this.state.userInfo,
       socket: this.state.socket,
-      setError: this.setError,
-      clearError: this.clearError,
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,

@@ -102,7 +102,6 @@ class Conversation extends Component {
             value={message}
             variant="outlined"
             label="message"
-            // multiline
             margin="normal"
           />
           <Button
