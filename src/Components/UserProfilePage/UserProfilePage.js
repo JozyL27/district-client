@@ -186,14 +186,16 @@ export default class ProfilePage extends Component {
               );
             })}
         </ul>
-        <NavArrows
-          styleName="profileNavArrows"
-          page={page}
-          onNextArrowClick={this.handleNextArrow}
-          onBackArrowClick={this.handleBackArrow}
-          articleArrayLength={articles.length}
-          error={error}
-        />
+        {articles.length > 0 && (
+          <NavArrows
+            styleName="profileNavArrows"
+            page={page}
+            onNextArrowClick={this.handleNextArrow}
+            onBackArrowClick={this.handleBackArrow}
+            articleArrayLength={articles.length}
+            error={error}
+          />
+        )}
       </section>
     );
   }
