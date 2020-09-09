@@ -273,12 +273,12 @@ export default class ProfilePage extends Component {
             loading={loading}
           />
         )}
-        {error && <p>{error}</p>}
         <AddArticle
           addArticle={this.handleAddArticleButton}
           userInfo={this.context.user}
         />
         <TabNavigation value={tabValue} handleChange={this.handleTabChange} />
+        {error && <p className="error">{error}</p>}
         <ul className="profileArticles">
           {articles.length > 0 &&
             articles.map((article) => {

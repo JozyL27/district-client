@@ -5,9 +5,10 @@ import ArticlesService from "../../services/article-service";
 import ArticleCard from "../ArticleCard/ArticleCard";
 import art from "../../illustrations/01.png";
 import NavArrows from "../NavArrows/NavArrows";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default class Explore extends Component {
-  state = { category: "", articles: [], page: 1, error: null };
+  state = { category: "", articles: [], page: 1, error: null, loading: false };
 
   setCategory = (value) => {
     this.setState({ category: value, page: 1 });
@@ -82,8 +83,11 @@ export default class Explore extends Component {
   };
 
   componentDidMount() {
+    this.setState({ loading: true });
     ArticlesService.getPopularArticles().then((data) =>
-      this.setState({ articles: data })
+      data.error
+        ? this.setState({ error: data.error, loading: false })
+        : this.setState({ articles: data, loading: false, error: null })
     );
   }
 
@@ -105,7 +109,7 @@ export default class Explore extends Component {
   }
 
   render() {
-    const { articles, category, page, error } = this.state;
+    const { articles, category, page, error, loading } = this.state;
 
     return (
       <section className="exploreContainer">
@@ -129,7 +133,7 @@ export default class Explore extends Component {
         </div>
         {error && <p>{error}</p>}
         <ul className="articlesContainer">
-          {articles.length > 0 &&
+          {articles.length > 0 && !error ? (
             articles.map((article) => (
               <ArticleCard
                 id={article.id}
@@ -144,7 +148,10 @@ export default class Explore extends Component {
                 onDeleteClick={this.handleDeleteArticleButton}
                 avatar={article.avatar}
               />
-            ))}
+            ))
+          ) : loading && !error ? (
+            <CircularProgress color="secondary" />
+          ) : null}
         </ul>
         <NavArrows
           styleName="exploreNavArrows"

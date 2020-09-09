@@ -3,6 +3,7 @@ import UserContext from "../../Context/UserContext";
 import ArticlesService from "../../services/article-service";
 import ArticleCard from "../../Components/ArticleCard/ArticleCard";
 import AddArticle from "../../Components/AddArticle/AddArticle";
+import Button from "@material-ui/core/Button";
 import "../../Styles/Feed.css";
 
 export default class Feed extends Component {
@@ -38,6 +39,18 @@ export default class Feed extends Component {
     });
   };
 
+  onViewMoreClick = () => {
+    const { user } = this.context;
+    let { page, articles } = this.state;
+    this.setState({ page: (page += 1) });
+
+    ArticlesService.getUserFeedArticles(user.id, page).then((res) =>
+      res.error
+        ? this.setState({ error: res.error })
+        : this.setState({ articles: [...articles, ...res] })
+    );
+  };
+
   componentDidMount() {
     const { user } = this.context;
     const { page } = this.state;
@@ -51,6 +64,12 @@ export default class Feed extends Component {
   render() {
     const { articles, error } = this.state;
     const { user, userInfo } = this.context;
+    const arrOfChecks = [
+      articles.length > 0,
+      articles.length % 9 === 0,
+      !error,
+    ].every((element) => element === true);
+
     return (
       <section className="feedContainer">
         {userInfo && <h3>{userInfo.username}'s Feed</h3>}
@@ -72,6 +91,17 @@ export default class Feed extends Component {
               ))
             : null}
         </ul>
+        {arrOfChecks ? (
+          <div className="viewMoreArticles">
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={this.onViewMoreClick}
+            >
+              View More
+            </Button>
+          </div>
+        ) : null}
       </section>
     );
   }

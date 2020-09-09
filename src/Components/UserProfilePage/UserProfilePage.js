@@ -163,7 +163,7 @@ export default class ProfilePage extends Component {
           </div>
         </div>
         <TabNavigation value={tabValue} handleChange={this.handleChange} />
-        {error && <p>{error}</p>}
+        {error && <p className="error">{error}</p>}
         <ul className="profileArticles">
           {articles.length > 0 &&
             articles.map((article) => {
