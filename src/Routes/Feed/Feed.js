@@ -21,7 +21,7 @@ export default class Feed extends Component {
     ArticlesService.getUserFeedArticles(user.id, page).then((res) =>
       res.error
         ? this.setState({ error: res.error })
-        : this.setState({ articles: res })
+        : this.setState({ articles: res, error: null })
     );
   };
 
@@ -50,25 +50,27 @@ export default class Feed extends Component {
 
   render() {
     const { articles, error } = this.state;
-    const { user } = this.context;
+    const { user, userInfo } = this.context;
     return (
       <section className="feedContainer">
-        {error && <p>{error}</p>}
+        {userInfo && <h3>{userInfo.username}'s Feed</h3>}
         <AddArticle addArticle={this.handleAddArticleButton} userInfo={user} />
+        {error && <p>{error}</p>}
         <ul className="articleFeedContainer">
-          {articles.length > 0 &&
-            articles.map((article) => (
-              <ArticleCard
-                key={article.article_id}
-                avatar={article.userInfo && article.userInfo.avatar}
-                id={article.article_id}
-                title={article.title}
-                username={article.userInfo && article.userInfo.username}
-                author={article.author}
-                date_published={article.date_published}
-                onDeleteClick={this.handleDeleteArticleButton}
-              />
-            ))}
+          {articles.length > 0 && !error
+            ? articles.map((article) => (
+                <ArticleCard
+                  key={article.article_id || article.id}
+                  avatar={article.userInfo && article.userInfo.avatar}
+                  id={article.article_id || article.id}
+                  title={article.title}
+                  username={article.userInfo && article.userInfo.username}
+                  author={article.author}
+                  date_published={article.date_published}
+                  onDeleteClick={this.handleDeleteArticleButton}
+                />
+              ))
+            : null}
         </ul>
       </section>
     );
