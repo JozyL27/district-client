@@ -162,12 +162,12 @@ export default class ProfilePage extends Component {
     ArticlesService.getMyArticles(user.id, page).then((res) =>
       res.error
         ? this.setState({ error: res.error })
-        : this.setState({ articles: res })
+        : this.setState({ articles: res, error: null })
     );
   };
 
   handleTabChange = (event, newValue) => {
-    this.setState({ tabValue: newValue, page: 1, error: null });
+    this.setState({ tabValue: newValue, page: 1, error: null, articles: [] });
   };
 
   handleAvatarChange = (event) => {
@@ -280,24 +280,25 @@ export default class ProfilePage extends Component {
         <TabNavigation value={tabValue} handleChange={this.handleTabChange} />
         {error && <p className="error">{error}</p>}
         <ul className="profileArticles">
-          {articles.length > 0 &&
-            articles.map((article) => {
-              return (
-                <ArticleCard
-                  id={article.id}
-                  key={article.id}
-                  username={
-                    tabValue === 1 ? article.username : userInfo.username
-                  }
-                  title={article.title}
-                  upvotes={article.upvotes}
-                  date_published={article.date_published}
-                  author={article.author}
-                  onDeleteClick={this.handleDeleteArticleButton}
-                  avatar={tabValue === 1 ? article.avatar : userInfo.avatar}
-                />
-              );
-            })}
+          {articles.length > 0 && !error
+            ? articles.map((article) => {
+                return (
+                  <ArticleCard
+                    id={article.id}
+                    key={article.id}
+                    username={
+                      tabValue === 1 ? article.username : userInfo.username
+                    }
+                    title={article.title}
+                    upvotes={article.upvotes}
+                    date_published={article.date_published}
+                    author={article.author}
+                    onDeleteClick={this.handleDeleteArticleButton}
+                    avatar={tabValue === 1 ? article.avatar : userInfo.avatar}
+                  />
+                );
+              })
+            : null}
         </ul>
         {articles.length > 0 && (
           <NavArrows
