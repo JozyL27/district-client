@@ -9,7 +9,6 @@ import TabNavigation from "../Utils/TabNavigation";
 import { Redirect } from "react-router-dom";
 import ProfileAvatar from "../Utils/ProfileAvatar";
 import FollowerCount from "../FollowerCount/FollowerCount";
-import FollowButton from "../FollowButton/FollowButton";
 import MessageButton from "../MessageButton/MessageButton";
 
 export default class ProfilePage extends Component {
@@ -159,7 +158,6 @@ export default class ProfilePage extends Component {
             {userInfo.bio && <p className="profileBio">{userInfo.bio}</p>}
             <FollowerCount user_id={userId} />
             <div className="bioButtonsContainer">
-              <FollowButton user_profile_id={userId} />
               <MessageButton userId={userId} />
             </div>
           </div>

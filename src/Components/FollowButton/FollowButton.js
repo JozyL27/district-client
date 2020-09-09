@@ -28,6 +28,7 @@ const FollowButton = (props) => {
       FollowerService.alreadyFollowing(user.id, user_profile_id).then((res) =>
         setIsFollowing(res.message)
       );
+      props.onFollowClick();
     });
   };
 
@@ -43,6 +44,7 @@ const FollowButton = (props) => {
         FollowerService.alreadyFollowing(user.id, user_profile_id).then((res) =>
           res.error ? setError(res.error) : setIsFollowing(res.message)
         );
+        props.onFollowClick();
       }
     });
   };
