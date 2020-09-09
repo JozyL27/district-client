@@ -1,6 +1,7 @@
 .followersContainer {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .followerSpan {
@@ -11,4 +12,9 @@
 .followerLink {
   text-decoration: none;
   color: grey;
+}
+
+.followerCountContainer {
+  display: flex;
+  align-items: center;
 }
