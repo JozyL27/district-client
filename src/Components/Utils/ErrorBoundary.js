@@ -12,7 +12,7 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <p>Loading Failed! Try and reload the page.</p>;
+      return <p className="error">Loading Failed! Try and reload the page.</p>;
     }
 
     return this.props.children;

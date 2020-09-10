@@ -6,8 +6,6 @@ import SignupPage from "../../Routes/SignupPage/SignupPage";
 import LoginPage from "../../Routes/LoginPage/LoginPage";
 import Header from "../Header/Header";
 import Explore from "../Explore/Explore";
-import ArticlePage from "../ArticlePage/ArticlePage";
-import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import PrivateRoute from "../../Routes/PrivateRoute/PrivateRoute";
 import PublicRoute from "../../Routes/PublicRoute/PublicRoute";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -28,6 +26,10 @@ const FollowingPage = lazy(() =>
   import("../../Routes/FollowingPage/FollowingPage")
 );
 const Conversation = lazy(() => import("../Conversation/Conversation"));
+const ArticlePage = lazy(() => import("../ArticlePage/ArticlePage"));
+const UserProfilePage = lazy(() =>
+  import("../UserProfilePage/UserProfilePage")
+);
 
 function App() {
   return (

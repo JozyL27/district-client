@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import UserContext from "../../Context/UserContext";
 import FollowerService from "../../services/follower-service";
 import FollowButton from "../FollowButton/FollowButton";
+import TokenService from "../../services/token-service";
 import { Link } from "react-router-dom";
 import "../../Styles/FollowerCount.css";
 
@@ -47,9 +48,9 @@ const FollowerCount = (props) => {
           </span>
         </div>
       )}
-      {Number(user.id) !== user_id && (
+      {Number(user.id) !== user_id && TokenService.hasAuthToken() ? (
         <FollowButton user_profile_id={user_id} onFollowClick={onFollowClick} />
-      )}
+      ) : null}
     </div>
   );
 };
