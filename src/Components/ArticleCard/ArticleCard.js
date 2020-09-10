@@ -35,6 +35,7 @@ const ArticleCard = (props) => {
             onClick={() => {
               props.onDeleteClick(props.id);
             }}
+            color="secondary"
           >
             <DeleteIcon fontSize="small" />
           </IconButton>
