@@ -38,7 +38,7 @@ export default class ProfilePage extends Component {
         ? this.setState({ error: res.error })
         : this.setState({
             userInfo: res,
-            bio: res.bio,
+            bio: res.bio === null ? "" : res.bio,
             username: res.username,
             avatar: res.avatar,
           });
@@ -150,6 +150,7 @@ export default class ProfilePage extends Component {
             avatar: res.avatar,
             error: null,
           });
+          this.context.updateUserInfo();
         });
       }
     });

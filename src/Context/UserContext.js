@@ -11,6 +11,7 @@ const UserContext = React.createContext({
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
+  updateUserInfo: () => {},
 });
 
 export default UserContext;
@@ -58,6 +59,12 @@ export class UserProvider extends Component {
     );
   };
 
+  updateUserInfo = () => {
+    UserService.getAuthorInfo(this.state.user.id).then((res) =>
+      this.setState({ userInfo: res })
+    );
+  };
+
   processLogout = () => {
     TokenService.clearAuthToken();
     this.setUser({});
@@ -73,6 +80,7 @@ export class UserProvider extends Component {
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
+      updateUserInfo: this.updateUserInfo,
     };
     return (
       <UserContext.Provider value={values}>
