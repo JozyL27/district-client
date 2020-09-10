@@ -19,7 +19,10 @@
 .avatarCommentContainer {
   padding: 10px;
   margin-right: 45px;
-  display: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* display: none; */
 }
 
 .commentButtons {
@@ -73,6 +76,10 @@
   color: crimson;
   text-align: center;
   padding: 10px;
+}
+
+.commentSpan {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
