@@ -20,7 +20,7 @@ const MessagesPage = () => {
   return (
     <section className="msgPageContainer">
       <h2>Messages</h2>
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
       <ul className="msgPageUl">
         {conversations.length > 0 &&
           conversations.map((item) => (

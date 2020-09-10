@@ -9,7 +9,7 @@ export default function PrivateRoute({ component, ...props }) {
       {...props}
       render={(componentProps) =>
         TokenService.hasAuthToken() ? (
-          <Component {...props} />
+          <Component {...props} {...componentProps} />
         ) : (
           <Redirect
             to={{

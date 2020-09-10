@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Components/App/App';
-import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from 'react-router-dom';
-import { UserProvider } from './Context/UserContext'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./Components/App/App";
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter } from "react-router-dom";
+import { UserProvider } from "./Context/UserContext";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -12,7 +12,7 @@ ReactDOM.render(
       <App />
     </UserProvider>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
