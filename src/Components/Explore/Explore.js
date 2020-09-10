@@ -131,7 +131,7 @@ export default class Explore extends Component {
             Reset
           </button>
         </div>
-        {error && <p>{error}</p>}
+        {error && <p className="error">{error}</p>}
         <ul className="articlesContainer">
           {articles.length > 0 && !error ? (
             articles.map((article) => (

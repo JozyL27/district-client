@@ -10,15 +10,19 @@
   padding: 20px;
   margin: 15px auto 15px auto;
 
-  border-radius: 10px;
-  box-shadow: 0.5rem 0.6rem 1.8rem #888888;
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  border-radius: 5px;
   max-width: 90%;
+  margin-top: 20px;
 }
 
 .avatarCommentContainer {
   padding: 10px;
   margin-right: 45px;
-  display: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* display: none; */
 }
 
 .commentButtons {
@@ -72,6 +76,10 @@
   color: crimson;
   text-align: center;
   padding: 10px;
+}
+
+.commentSpan {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
