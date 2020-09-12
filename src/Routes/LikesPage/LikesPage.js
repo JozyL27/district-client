@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import UpvoteService from "../../services/upvote-service";
 import Upvoters from "../../Components/Upvoters/Upvoters";
 import Button from "@material-ui/core/Button";
+import "../../Styles/LikesPage.css";
 
 const LikesPage = (props) => {
   const { articleId } = props.match.params;
@@ -26,9 +27,10 @@ const LikesPage = (props) => {
   }, []);
 
   return (
-    <section>
+    <section className="likesPageContainer">
       <h2>Upvoted By</h2>
-      <ul>
+      {error && <p className="error">{error}</p>}
+      <ul className="likesPageUl">
         {users.length > 0 && !error
           ? users.map((user) => (
               <Upvoters

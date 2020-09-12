@@ -1,0 +1,29 @@
+.likesPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.likesPageUl {
+  margin: 0;
+  padding: 0;
+}
+
+.likesPageUl > li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 20px auto 20px auto;
+}
+.likesPageUl > li > span {
+  padding: 10px;
+  cursor: default;
+  font-weight: 500;
+}
+
+.error {
+  font-weight: 500;
+  color: crimson;
+  cursor: default;
+}
