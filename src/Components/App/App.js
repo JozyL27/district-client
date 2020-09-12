@@ -30,7 +30,9 @@ const ArticlePage = lazy(() => import("../ArticlePage/ArticlePage"));
 const UserProfilePage = lazy(() =>
   import("../UserProfilePage/UserProfilePage")
 );
-const LikesPage = lazy(() => import("../../Routes/LikesPage/LikesPage"));
+const UpvotersPage = lazy(() =>
+  import("../../Routes/UpvotersPage/UpvotersPage")
+);
 
 function App() {
   return (
@@ -51,7 +53,7 @@ function App() {
                 path="/conversation/:convoPartner"
                 component={Conversation}
               />
-              <Route path="/likes/:articleId" component={LikesPage} />
+              <Route path="/Upvoters/:articleId" component={UpvotersPage} />
               <Route path="/followers/:userId" component={FollowersPage} />
               <Route path="/following/:userId" component={FollowingPage} />
               <Route path="/article/:articleId" component={ArticlePage} />

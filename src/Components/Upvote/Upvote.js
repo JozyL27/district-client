@@ -63,7 +63,7 @@ export default function Upvote(props) {
           </Tippy>
         )}
         <Link
-          to={`/likes/${props.articleId}`}
+          to={`/Upvoters/${props.articleId}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <span>{upvotes}</span>

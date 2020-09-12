@@ -4,7 +4,7 @@ import Upvoters from "../../Components/Upvoters/Upvoters";
 import Button from "@material-ui/core/Button";
 import "../../Styles/LikesPage.css";
 
-const LikesPage = (props) => {
+const UpvotersPage = (props) => {
   const { articleId } = props.match.params;
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -53,4 +53,4 @@ const LikesPage = (props) => {
   );
 };
 
-export default LikesPage;
+export default UpvotersPage;
