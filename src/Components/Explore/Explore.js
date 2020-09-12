@@ -119,7 +119,7 @@ export default class Explore extends Component {
         <h2 className="exploreH2">
           {category.length > 1
             ? `Explore The Most Popular ${category}`
-            : "Explore The Most Popular"}{" "}
+            : `Explore The Most Popular`}{" "}
           Articles
         </h2>
         <div className="filterContainer">

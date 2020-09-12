@@ -8,7 +8,7 @@ import Header from "../Header/Header";
 import Explore from "../Explore/Explore";
 import PrivateRoute from "../../Routes/PrivateRoute/PrivateRoute";
 import PublicRoute from "../../Routes/PublicRoute/PublicRoute";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Loading from "../Utils/Loading";
 import ErrorBoundary from "../Utils/ErrorBoundary";
 import "../../Styles/App.css";
 const MessagesPage = lazy(() =>
@@ -30,6 +30,9 @@ const ArticlePage = lazy(() => import("../ArticlePage/ArticlePage"));
 const UserProfilePage = lazy(() =>
   import("../UserProfilePage/UserProfilePage")
 );
+const UpvotersPage = lazy(() =>
+  import("../../Routes/UpvotersPage/UpvotersPage")
+);
 
 function App() {
   return (
@@ -37,7 +40,7 @@ function App() {
       <Header />
       <div className="App">
         <ErrorBoundary>
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<Loading />}>
             <Switch>
               <Route exact path="/" component={Landing} />
               <PublicRoute exact path="/login" component={LoginPage} />
@@ -50,6 +53,7 @@ function App() {
                 path="/conversation/:convoPartner"
                 component={Conversation}
               />
+              <Route path="/Upvoters/:articleId" component={UpvotersPage} />
               <Route path="/followers/:userId" component={FollowersPage} />
               <Route path="/following/:userId" component={FollowingPage} />
               <Route path="/article/:articleId" component={ArticlePage} />

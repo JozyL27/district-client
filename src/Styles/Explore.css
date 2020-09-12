@@ -73,3 +73,11 @@
 .exploreNavArrows {
   margin-bottom: 50px;
 }
+
+.loadingContainer {
+  margin: 150px auto 0px auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
