@@ -52,7 +52,7 @@ export default class Login extends Component {
       <>
         <form onSubmit={this.onSubmit} className="loginForm">
           <p className="loginPara">Login</p>
-          {error && <p>{error || error.message}</p>}
+          {error && <p className="error">{error || error.message}</p>}
           <TextField
             id="username"
             label="username"
