@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 const ConversationCard = (props) => {
   return (
@@ -48,3 +49,13 @@ const ConversationCard = (props) => {
 };
 
 export default ConversationCard;
+
+ConversationCard.propTypes = {
+  lastMessage: PropTypes.object,
+  username: PropTypes.string,
+  conversation_id: PropTypes.number,
+  user1id: PropTypes.number,
+  user2id: PropTypes.number,
+  currentUser_id: PropTypes.number,
+  avatar: PropTypes.string,
+};

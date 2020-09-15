@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CommentsService from "../../services/comments-service";
 import moment from "moment";
+import PropTypes from "prop-types";
 import "./CommentCard.css";
 
 const CommentCard = (props) => {
@@ -111,3 +112,13 @@ const CommentCard = (props) => {
 };
 
 export default CommentCard;
+
+CommentCard.propTypes = {
+  username: PropTypes.string,
+  onDeleteClick: PropTypes.func,
+  id: PropTypes.number,
+  date_commented: PropTypes.string,
+  user_id: PropTypes.number,
+  author: PropTypes.number,
+  avatar: PropTypes.string,
+};

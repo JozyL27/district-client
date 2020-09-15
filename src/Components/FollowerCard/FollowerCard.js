@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import "../../Styles/FollowerCard.css";
 
 const FollowerCard = (props) => {
@@ -16,3 +17,9 @@ const FollowerCard = (props) => {
 };
 
 export default FollowerCard;
+
+FollowerCard.propTypes = {
+  avatar: PropTypes.string,
+  username: PropTypes.string,
+  id: PropTypes.number,
+};
