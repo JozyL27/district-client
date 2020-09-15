@@ -106,6 +106,19 @@ const ArticlesService = {
       console.error(error);
     }
   },
+  async addImageToArticle(image) {
+    try {
+      let res = await fetch(`${config.API_ENDPOINT}/articles/images`, {
+        method: "POST",
+        body: image,
+      }).catch((error) => Promise.reject(error));
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      Promise.reject(error);
+    }
+  },
 };
 
 export default ArticlesService;
