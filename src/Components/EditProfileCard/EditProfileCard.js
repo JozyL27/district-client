@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import ProfileAvatar from "../Utils/ProfileAvatar";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import PropTypes from "prop-types";
 import "../../Styles/EditProfileCard.css";
 
 const EditProfileCard = (props) => {
@@ -89,3 +90,12 @@ const EditProfileCard = (props) => {
 };
 
 export default EditProfileCard;
+
+EditProfileCard.propTypes = {
+  handleSaveButton: PropTypes.func,
+  handleCancelButton: PropTypes.func,
+  handleBioChange: PropTypes.func,
+  username: PropTypes.string,
+  handleAvatarChange: PropTypes.func,
+  loading: PropTypes.bool,
+};

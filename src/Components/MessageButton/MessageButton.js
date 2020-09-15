@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import MessageIcon from "@material-ui/icons/Message";
 import Fab from "@material-ui/core/Fab";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(() => ({
   msgIcon: {
@@ -27,3 +28,7 @@ const MessageButton = (props) => {
 };
 
 export default MessageButton;
+
+MessageButton.propTypes = {
+  userId: PropTypes.number,
+};

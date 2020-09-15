@@ -9,6 +9,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import UserContext from "../../Context/UserContext";
 import TokenService from "../../services/token-service";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   root: {
@@ -64,3 +65,12 @@ const ArticleCard = (props) => {
 };
 
 export default ArticleCard;
+
+ArticleCard.propTypes = {
+  id: PropTypes.number,
+  avatar: PropTypes.string,
+  date_published: PropTypes.string,
+  title: PropTypes.string,
+  username: PropTypes.string,
+  author: PropTypes.number,
+};
