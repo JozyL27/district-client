@@ -41,6 +41,8 @@ const AddArticle = (props) => {
   const [category, setCategory] = useState("");
   const [error, setError] = useState(null);
   const [openError, setOpenError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
 
   const onAddArticleClick = () => {
     setError(null);
@@ -49,6 +51,7 @@ const AddArticle = (props) => {
     setCategory("");
     setTitle("");
     setContent("");
+    setImage("");
   };
 
   const onCreateArticleClick = () => {
@@ -68,6 +71,26 @@ const AddArticle = (props) => {
       } else {
         setOpen(false);
         addArticle();
+      }
+    });
+  };
+
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData();
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+    ArticlesService.addImageToArticle(formData).then((image) => {
+      if (image.error) {
+        setError(image.error);
+        setLoading(false);
+      } else {
+        setImage(image);
+        setLoading(false);
       }
     });
   };
@@ -166,6 +189,19 @@ const AddArticle = (props) => {
               handleCategoryChange={onCategoryChange}
               category={category}
             />
+            <input
+              accept="image/*"
+              id="contained-button-file"
+              // multiple
+              type="file"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="contained-button-file">
+              <Button variant="contained" color="primary" component="span">
+                Upload
+              </Button>
+            </label>
+            {image.length > 1 ? <img src={image} /> : null}
           </form>
         </Dialog>
       </div>
