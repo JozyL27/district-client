@@ -71,6 +71,7 @@ export default function ArticlePage(props) {
       res.error ? setError(res) : setComments(res)
     );
   };
+  console.log(Article);
 
   return (
     <section className="articlePageContainer">
@@ -86,7 +87,12 @@ export default function ArticlePage(props) {
         {Article.date_published &&
           moment.utc(`${Article.date_published}`).format("MMMM Do YYYY")}
       </span>
-      <p className="pageContent">{Article.content}</p>
+      <div className="contentAndImages">
+        <p className="pageContent">{Article.content}</p>
+        {Article.image_one && (
+          <img src={Article.image_one} alt="article" className="articleImage" />
+        )}
+      </div>
       <div className="pageVoteContainer">
         <Upvote
           upvotes={Article.upvotes}

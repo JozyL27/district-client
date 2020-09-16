@@ -14,6 +14,7 @@ import ArticlesService from "../../services/article-service";
 import "../../Styles/AddArticle.css";
 import { Toolbar, Button } from "@material-ui/core";
 import ErrorHandler from "../Utils/ErrorHandler";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
   textFields: {
     marginBottom: "30px",
+  },
+  imageButton: {
+    padding: "12px",
+    marginBottom: "30px",
+    marginTop: "30px",
+  },
+  loading: {
+    margin: "20px auto 20px auto",
   },
 }));
 
@@ -52,6 +61,7 @@ const AddArticle = (props) => {
     setTitle("");
     setContent("");
     setImage("");
+    setLoading(false);
   };
 
   const onCreateArticleClick = () => {
@@ -61,6 +71,7 @@ const AddArticle = (props) => {
       content: content,
       style: category,
       author: userInfo.id,
+      image_one: image,
     };
 
     ArticlesService.AddNewArticle(newArticle).then((res) => {
@@ -191,17 +202,38 @@ const AddArticle = (props) => {
             />
             <input
               accept="image/*"
-              id="contained-button-file"
-              // multiple
+              id="icon-button-file"
               type="file"
+              className="editProfileInput"
               onChange={handleImageChange}
             />
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" color="primary" component="span">
-                Upload
-              </Button>
+            <label
+              htmlFor="icon-button-file"
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              {loading ? (
+                <CircularProgress className={classes.loading} />
+              ) : (
+                <Button
+                  color="default"
+                  aria-label="upload picture"
+                  component="span"
+                  variant="outlined"
+                  fullWidth={true}
+                  className={classes.imageButton}
+                >
+                  Add Image
+                </Button>
+              )}
             </label>
-            {image.length > 1 ? <img src={image} /> : null}
+            {image.length > 1 && !error ? (
+              <img src={image} alt="article" className="addArticleImg" />
+            ) : null}
           </form>
         </Dialog>
       </div>
