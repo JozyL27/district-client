@@ -126,6 +126,8 @@ const AddArticle = (props) => {
     setOpenError(false);
   };
 
+  console.log(image);
+
   return (
     <>
       <div className="profileFabContainer">
@@ -204,7 +206,6 @@ const AddArticle = (props) => {
               accept="image/*"
               id="icon-button-file"
               type="file"
-              className="editProfileInput"
               onChange={handleImageChange}
             />
             <label
@@ -216,23 +217,21 @@ const AddArticle = (props) => {
                 alignItems: "center",
               }}
             >
-              {loading ? (
-                <CircularProgress className={classes.loading} />
-              ) : (
-                <Button
-                  color="default"
-                  aria-label="upload picture"
-                  component="span"
-                  variant="outlined"
-                  fullWidth={true}
-                  className={classes.imageButton}
-                >
-                  Add Image
-                </Button>
-              )}
+              <Button
+                color="default"
+                aria-label="upload picture"
+                component="span"
+                variant="outlined"
+                fullWidth={true}
+                className={classes.imageButton}
+              >
+                Add Image
+              </Button>
             </label>
-            {image.length > 1 && !error ? (
+            {image.length > 1 && !loading ? (
               <img src={image} alt="article" className="addArticleImg" />
+            ) : loading ? (
+              <CircularProgress className={classes.loading} />
             ) : null}
           </form>
         </Dialog>
