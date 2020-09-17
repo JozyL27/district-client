@@ -14,6 +14,7 @@ import ArticlesService from "../../services/article-service";
 import "../../Styles/AddArticle.css";
 import { Toolbar, Button } from "@material-ui/core";
 import ErrorHandler from "../Utils/ErrorHandler";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
   textFields: {
     marginBottom: "30px",
+  },
+  imageButton: {
+    padding: "12px",
+    marginBottom: "30px",
+    marginTop: "30px",
+  },
+  loading: {
+    margin: "20px auto 20px auto",
   },
 }));
 
@@ -41,6 +50,8 @@ const AddArticle = (props) => {
   const [category, setCategory] = useState("");
   const [error, setError] = useState(null);
   const [openError, setOpenError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
 
   const onAddArticleClick = () => {
     setError(null);
@@ -49,6 +60,8 @@ const AddArticle = (props) => {
     setCategory("");
     setTitle("");
     setContent("");
+    setImage("");
+    setLoading(false);
   };
 
   const onCreateArticleClick = () => {
@@ -58,6 +71,7 @@ const AddArticle = (props) => {
       content: content,
       style: category,
       author: userInfo.id,
+      image_one: image,
     };
 
     ArticlesService.AddNewArticle(newArticle).then((res) => {
@@ -68,6 +82,26 @@ const AddArticle = (props) => {
       } else {
         setOpen(false);
         addArticle();
+      }
+    });
+  };
+
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData();
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+    ArticlesService.addImageToArticle(formData).then((image) => {
+      if (image.error) {
+        setError(image.error);
+        setLoading(false);
+      } else {
+        setImage(image);
+        setLoading(false);
       }
     });
   };
@@ -166,6 +200,40 @@ const AddArticle = (props) => {
               handleCategoryChange={onCategoryChange}
               category={category}
             />
+            <input
+              accept="image/*"
+              id="icon-button-file"
+              type="file"
+              className="editProfileInput"
+              onChange={handleImageChange}
+            />
+            <label
+              htmlFor="icon-button-file"
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              {loading ? (
+                <CircularProgress className={classes.loading} />
+              ) : (
+                <Button
+                  color="default"
+                  aria-label="upload picture"
+                  component="span"
+                  variant="outlined"
+                  fullWidth={true}
+                  className={classes.imageButton}
+                >
+                  Add Image
+                </Button>
+              )}
+            </label>
+            {image.length > 1 && !error ? (
+              <img src={image} alt="article" className="addArticleImg" />
+            ) : null}
           </form>
         </Dialog>
       </div>

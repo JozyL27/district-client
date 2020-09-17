@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDom from "react-dom";
-// import renderer from "react-test-renderer";
 import ArticleCard from "./ArticleCard";
 import avatar from "../../illustrations/01.png";
 import { MemoryRouter } from "react-router-dom";
@@ -38,24 +37,4 @@ describe("<ArticleCard />", () => {
     );
     ReactDom.unmountComponentAtNode(div);
   });
-
-  // snapshot test, currently failing due to tippy
-
-  //   it("renders ui as expected", () => {
-  //     const tree = renderer
-  //       .create(
-  //         <MemoryRouter>
-  //           <ArticleCard
-  //             avatar={user.avatar}
-  //             username={user.username}
-  //             id={user.id}
-  //             title={article.title}
-  //             date_published={article.date_publsihed}
-  //             author={article.author}
-  //           />
-  //         </MemoryRouter>
-  //       )
-  //       .toJSON();
-  //     expect(tree).toMatchSnapshot();
-  //   });
 });
