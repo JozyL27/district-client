@@ -24,7 +24,7 @@ const FollowerCount = (props) => {
       isCancelled = true;
       setFollowers([]);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onFollowClick = () => {
     FollowerService.getFollowerCount(user_id).then((res) => {

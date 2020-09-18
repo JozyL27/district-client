@@ -31,7 +31,7 @@ const MessagesPage = () => {
     MessageService.getUserConversations(user.id, page).then((res) =>
       res.error ? setError(res.error) : setConversations(res)
     );
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="msgPageContainer">

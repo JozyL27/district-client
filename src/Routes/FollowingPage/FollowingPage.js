@@ -11,7 +11,7 @@ const FollowingPage = (props) => {
     FollowerService.getFollowing(userId).then((res) =>
       res.error ? setError(res.error) : setFollowing(res)
     );
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="followerPageSection">
