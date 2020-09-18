@@ -24,7 +24,7 @@ const UpvotersPage = (props) => {
     UpvoteService.getUpvoters(articleId, page).then((res) =>
       res.error ? setError(res.error) : setUsers(res)
     );
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className="likesPageContainer">

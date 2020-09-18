@@ -55,7 +55,7 @@ const FollowButton = (props) => {
         setIsFollowing(res.message)
       );
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

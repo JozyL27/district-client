@@ -10,7 +10,7 @@ const Messages = (props) => {
     const users = [props.user, props.partner];
     const usersInfo = users.map((item) => UserService.getAuthorInfo(item));
     Promise.all(usersInfo).then((res) => setUsers(res));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const user = users[0] || {};
   const chatPartner = users[1] || {};

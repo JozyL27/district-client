@@ -30,5 +30,5 @@ const MessageButton = (props) => {
 export default MessageButton;
 
 MessageButton.propTypes = {
-  userId: PropTypes.number,
+  userId: PropTypes.string,
 };

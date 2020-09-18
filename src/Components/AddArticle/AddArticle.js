@@ -126,8 +126,6 @@ const AddArticle = (props) => {
     setOpenError(false);
   };
 
-  console.log(image);
-
   return (
     <>
       <div className="profileFabContainer">

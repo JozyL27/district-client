@@ -23,7 +23,7 @@ export default function ArticlePage(props) {
     ArticlesService.GetArticleById(articleId)
       .then((article) => setArticle(article))
       .catch((error) => setError(error));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onViewCommentsClick = () => {
     setTouched(!touched);
@@ -71,7 +71,6 @@ export default function ArticlePage(props) {
       res.error ? setError(res) : setComments(res)
     );
   };
-  console.log(Article);
 
   return (
     <section className="articlePageContainer">
