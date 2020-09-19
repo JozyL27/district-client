@@ -1,4 +1,5 @@
 import config from "../config";
+import TokenService from "./token-service";
 
 const UserService = {
   async getAuthorInfo(id) {
@@ -32,6 +33,9 @@ const UserService = {
     try {
       let res = await fetch(`${config.API_ENDPOINT}/user/avatar`, {
         method: "POST",
+        headers: {
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
         body: avatar,
       }).catch((error) => Promise.reject(error));
 
