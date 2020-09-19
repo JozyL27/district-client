@@ -1,4 +1,5 @@
 import config from "../config";
+import TokenService from "./token-service";
 
 const ArticlesService = {
   async getArticleCategories() {
@@ -61,6 +62,9 @@ const ArticlesService = {
     try {
       await fetch(`${config.API_ENDPOINT}/articles/${ArticleId}`, {
         method: "DELETE",
+        headers: {
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
       });
     } catch (error) {
       Promise.reject(error);
@@ -72,6 +76,7 @@ const ArticlesService = {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization: `bearer ${TokenService.getAuthToken()}`,
         },
         body: JSON.stringify(newArticle),
       }).catch((error) => Promise.reject(error));
@@ -97,7 +102,13 @@ const ArticlesService = {
   async getUserFeedArticles(user_id, pageNumber) {
     try {
       let res = await fetch(
-        `${config.API_ENDPOINT}/articles/feed/${user_id}?page=${pageNumber}`
+        `${config.API_ENDPOINT}/articles/feed/${user_id}?page=${pageNumber}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: `bearer ${TokenService.getAuthToken()}`,
+          },
+        }
       ).catch((error) => Promise.reject(error));
 
       const data = res.json();
@@ -110,6 +121,9 @@ const ArticlesService = {
     try {
       let res = await fetch(`${config.API_ENDPOINT}/articles/images`, {
         method: "POST",
+        headers: {
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
         body: image,
       }).catch((error) => Promise.reject(error));
 

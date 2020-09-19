@@ -1,4 +1,5 @@
 import config from "../config";
+import TokenService from "./token-service";
 
 const FollowerService = {
   async getFollowerCount(user_id) {
@@ -55,6 +56,7 @@ const FollowerService = {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
+          authorization: `bearer ${TokenService.getAuthToken()}`,
         },
         body: JSON.stringify(followerInfo),
       });
@@ -68,6 +70,7 @@ const FollowerService = {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          authorization: `bearer ${TokenService.getAuthToken()}`,
         },
         body: JSON.stringify(newFollowerFields),
       });

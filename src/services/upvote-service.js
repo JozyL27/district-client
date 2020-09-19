@@ -1,4 +1,5 @@
 import config from "../config";
+import TokenService from "./token-service";
 
 const UpvoteService = {
   addUpvote(newUpvote) {
@@ -6,6 +7,7 @@ const UpvoteService = {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(newUpvote),
     }).then((res) =>
