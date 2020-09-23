@@ -133,7 +133,7 @@ export default class Explore extends Component {
         </div>
         {error && <p className="error">{error}</p>}
         <ul className="articlesContainer">
-          {articles.length > 0 && !error ? (
+          {articles.length > 0 && articles ? (
             articles.map((article) => (
               <ArticleCard
                 id={article.id}
