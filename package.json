@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "cypress": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
     "react-test-renderer": "^16.13.1"
   }
 }
