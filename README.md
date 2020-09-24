@@ -7,7 +7,7 @@
   Cardigan
 </h1>
 
-## https://district-client.vercel.app/explore
+## 🕊 https://district-client.vercel.app/explore
 
 ## 🧐 What's inside?
 
