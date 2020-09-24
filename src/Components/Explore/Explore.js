@@ -3,7 +3,6 @@ import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import "../../Styles/Explore.css";
 import ArticlesService from "../../services/article-service";
 import ArticleCard from "../ArticleCard/ArticleCard";
-import art from "../../illustrations/01.png";
 import NavArrows from "../NavArrows/NavArrows";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -113,9 +112,6 @@ export default class Explore extends Component {
 
     return (
       <section className="exploreContainer">
-        <div className="exploreImgContainer">
-          <img src={art} alt="art" className="exploreArt" />
-        </div>
         <h2 className="exploreH2">
           {category.length > 1
             ? `Explore The Most Popular ${category}`
