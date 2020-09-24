@@ -8,7 +8,7 @@ exports[`<ProfilePage /> renders the UI as expected 1`] = `
     className="userInfoContainer"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-large-9 MuiAvatar-colorDefault"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-large-11 MuiAvatar-colorDefault"
     >
       <svg
         aria-hidden={true}
@@ -184,7 +184,7 @@ exports[`<ProfilePage /> renders the UI as expected 1`] = `
           </button>
         </div>
         <span
-          className="PrivateTabIndicator-root-13 PrivateTabIndicator-colorPrimary-14 MuiTabs-indicator"
+          className="PrivateTabIndicator-root-17 PrivateTabIndicator-colorPrimary-18 MuiTabs-indicator"
           style={
             Object {
               "left": 0,
