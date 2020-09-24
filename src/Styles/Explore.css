@@ -8,6 +8,9 @@
 .exploreImgContainer {
   max-height: 400px;
   margin: 30px auto 0px auto;
+
+  /* exp */
+  display: none;
 }
 
 .exploreArt {
@@ -19,12 +22,18 @@
   font-size: 20px;
   max-width: 80%;
   margin: 30px auto 30px auto;
+
+  /* exp */
+  display: none;
 }
 
 .filterContainer {
   width: 220px;
   display: flex;
   justify-content: space-evenly;
+
+  /* exp */
+  margin: 150px auto 20px auto;
 }
 
 .resetButton {
@@ -63,11 +72,16 @@
   margin-top: 50px;
   margin-bottom: 50px;
 
-  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
-  border-radius: 10px;
+  /* box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  border-radius: 10px; */
   max-width: 90%;
   margin-top: 30px;
   padding: 10px;
+
+  /* exp */
+  max-width: 1200px;
+  box-shadow: none;
+  border-radius: none;
 }
 
 .exploreNavArrows {
@@ -80,4 +94,16 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+/* exp */
+
+@media screen and (min-width: 1300px) {
+  .articlesContainer {
+    /* box-shadow: none;
+    border-radius: none; */
+
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+    border-radius: 10px;
+  }
 }
