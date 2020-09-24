@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://district-client.vercel.app/">
-    <img alt="Portfolio" src="src/images/04.png" width="60" />
+    <img alt="Cardigan" src="src/illustrations/04.png" width="60" />
   </a>
 </p>
 <h1 align="center">
